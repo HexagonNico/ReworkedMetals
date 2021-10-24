@@ -1,0 +1,44 @@
+Wood set        (level=0, uses=59, speed=2.0, damage=0.0, enchant=15)
+Stone set       (level=1, uses=131, speed=4.0, damage=1.0, enchant=5)
+Copper set      (level=1, uses=190, speed=5.0, damage=1.5, enchant=12)
+Bronze set      (level=2, uses=250, speed=6.0, damage=2.0, enchant=15)
+Iron set        (level=2, uses=700, speed=7.0, damage=2.5, enchant=12)
+Gold set        (level=0, uses=32, speed=12.0, damage=0.0, enchant=22)
+Diamond set     (level=3, uses=1561, speed=8.0, damage=3.0, enchant=10)
+Steel set       (level=3, uses=1561, speed=8.0, damage=3.0, enchant=10)
+Netherite set   (level=4, uses=2031, speed=9.0, damage=4.0, enchant=15)
+
+How to get copper tools
+ - Craft smeltery
+ - Smelt copper to get ingot
+ - Use stone anvil to craft tools
+
+How to get bronze tools
+ - Craft smeltery
+ - Smelt copper and tin
+ - Get bronze ingot
+ - Use stone anvil to craft tools
+
+How to get iron tools
+ - Craft furnace
+ - Smelt iron to get ingot
+ - Use stone anvil to craft tools
+
+How to get steel tools:
+ - Craft blast furnace
+ - Smelt iron and charcoal
+ - Get steel ingot
+ - Use iron anvil to craft tools
+
+How to get netherite tools:
+ - Use blast furnace
+ - Smelt netherite scrap and gold
+ - Get netherite ingot
+ - Use iron anvil to craft tools
+
+Crafting stations
+ - Smeltery: craft copper ingot, bronze ingot, glass
+ - Furnace: craft iron ingot, gold ingot
+ - Blast furnace: craft steel ingot, netherite ingot
+ - Stone anvil: craft copper, bronze, iron and gold tools
+ - Iron anvil: craft steel and netherite tools
