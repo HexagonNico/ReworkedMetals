@@ -1,9 +1,6 @@
 package hexagon.reworkedmetals;
 
-import hexagon.reworkedmetals.registry.ModBlockEntities;
-import hexagon.reworkedmetals.registry.ModBlocks;
-import hexagon.reworkedmetals.registry.ModContainers;
-import hexagon.reworkedmetals.registry.ModGuis;
+import hexagon.reworkedmetals.registry.*;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,6 +21,7 @@ public final class ReworkedMetals {
         ModBlocks.REGISTER.register(eventBus);
         ModBlockEntities.REGISTER.register(eventBus);
         ModContainers.REGISTER.register(eventBus);
+        ModRecipes.REGISTER.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
     
