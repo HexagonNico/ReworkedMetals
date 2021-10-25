@@ -1,5 +1,8 @@
 package hexagon.reworkedmetals;
 
+import hexagon.reworkedmetals.registry.ModBlockEntities;
+import hexagon.reworkedmetals.registry.ModBlocks;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -16,9 +19,8 @@ public final class ReworkedMetals {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
-        Registry.ITEMS.register(eventBus);
-        Registry.BLOCKS.register(eventBus);
-        Registry.BLOCK_ENTITIES.register(eventBus);
+        ModBlocks.REGISTER.register(eventBus);
+        ModBlockEntities.REGISTER.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
     

@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.block;
 
-import hexagon.reworkedmetals.Registry;
-import hexagon.reworkedmetals.block.entity.SmelteryBlockEntity;
+import hexagon.reworkedmetals.blockentity.SmelteryBlockEntity;
+import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 
@@ -33,7 +33,7 @@ public class SmelteryBlock extends AbstractFurnaceBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> blockEntity) {
-        return createFurnaceTicker(world, blockEntity, Registry.SMELTERY_BLOCK_ENTITY.get());
+        return createFurnaceTicker(world, blockEntity, ModBlockEntities.SMELTERY.get());
     }
     
     @Override
