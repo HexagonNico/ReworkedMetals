@@ -2,6 +2,8 @@ package hexagon.reworkedmetals;
 
 import hexagon.reworkedmetals.registry.ModBlockEntities;
 import hexagon.reworkedmetals.registry.ModBlocks;
+import hexagon.reworkedmetals.registry.ModContainers;
+import hexagon.reworkedmetals.registry.ModGuis;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,6 +23,7 @@ public final class ReworkedMetals {
         eventBus.addListener(this::clientSetup);
         ModBlocks.REGISTER.register(eventBus);
         ModBlockEntities.REGISTER.register(eventBus);
+        ModContainers.REGISTER.register(eventBus);
         MinecraftForge.EVENT_BUS.register(this);
     }
     
@@ -29,6 +32,6 @@ public final class ReworkedMetals {
     }
     
     private void clientSetup(final FMLClientSetupEvent setupEvent) {
-    
+        ModGuis.register();
     }
 }
