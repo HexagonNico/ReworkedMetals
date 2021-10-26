@@ -2,12 +2,10 @@ package hexagon.reworkedmetals.blockentity;
 
 import hexagon.reworkedmetals.block.SmelteryBlock;
 import hexagon.reworkedmetals.container.SmelteryContainerMenu;
-import hexagon.reworkedmetals.crafting.SmelteryRecipe;
 import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Optional;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -21,6 +19,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -32,22 +31,24 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SmelteryBlockEntity extends BaseContainerBlockEntity {
     
     protected int litTime;
-    protected int cookTime;
-    protected int totalCookTime;
+    protected int totalLitTime;
+    
     protected NonNullList<ItemStack> inventory;
     protected Component customName;
+    
+    protected final ContainerData containerData;
     
     public SmelteryBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SMELTERY.get(), pos, state);
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
+        this.containerData = this.getContainerData();
     }
     
     @Override
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
         this.litTime = compoundTag.getInt("LitTime");
-        this.cookTime = compoundTag.getInt("CookTime");
-        this.totalCookTime = compoundTag.getInt("TotalCookTime");
+        this.totalLitTime = compoundTag.getInt("TotalLitTime");
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if(compoundTag.contains("CustomName")) this.customName = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
         ContainerHelper.loadAllItems(compoundTag, this.inventory);
@@ -57,8 +58,7 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
     public CompoundTag save(CompoundTag compoundTag) {
         super.save(compoundTag);
         compoundTag.putInt("LitTime", this.litTime);
-        compoundTag.putInt("CookTime", this.cookTime);
-        compoundTag.putInt("TotalCookTime", this.totalCookTime);
+        compoundTag.putInt("TotalLitTime", this.totalLitTime);
         ContainerHelper.saveAllItems(compoundTag, this.inventory);
         if(this.customName != null) compoundTag.putString("CustomName", Component.Serializer.toJson(this.customName));
         return compoundTag;
@@ -71,7 +71,7 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
     
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new SmelteryContainerMenu(id, playerInventory, this);
+        return new SmelteryContainerMenu(id, playerInventory, this, this.containerData);
     }
     
     @Override
@@ -127,6 +127,10 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
         this.inventory.clear();
     }
     
+    public ContainerData getData() {
+        return this.containerData;
+    }
+    
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -143,18 +147,48 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
         this.load(pkt.getTag());
     }
     
-    public static void cookingTick(Level level, BlockPos pos, BlockState state, SmelteryBlockEntity smelteryBlockEntity) {
-        ItemStack fuel = smelteryBlockEntity.inventory.get(4);
-        Optional<SmelteryRecipe> recipe = level.getRecipeManager().getRecipeFor(SmelteryRecipe.TYPE, smelteryBlockEntity, level);
-        if(recipe.isPresent() && isValidFuel(fuel) && recipe.get().matches(smelteryBlockEntity, level)) {
-            System.out.println("Recipe is valid!");
-            state.setValue(SmelteryBlock.LIT, true);
-        } else {
-            state.setValue(SmelteryBlock.LIT, false);
-        }
+    private ContainerData getContainerData() {
+        return new ContainerData() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> SmelteryBlockEntity.this.litTime;
+                    case 1 -> SmelteryBlockEntity.this.totalLitTime;
+                    default -> 0;
+                };
+            }
+            
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> SmelteryBlockEntity.this.litTime = value;
+                    case 1 -> SmelteryBlockEntity.this.totalLitTime = value;
+                }
+            }
+            
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
     }
     
-    private static boolean isValidFuel(ItemStack itemStack) {
-        return !itemStack.isEmpty() && itemStack.getItem().equals(Items.COAL);
+    public static void tickFunction(Level level, BlockPos pos, BlockState state, SmelteryBlockEntity smelteryBlockEntity) {
+        if(smelteryBlockEntity.litTime == 0) {
+            ItemStack fuel = smelteryBlockEntity.getItem(4);
+            if(!fuel.isEmpty() && fuel.getItem().equals(Items.COAL)) {
+                smelteryBlockEntity.totalLitTime = 200;
+                smelteryBlockEntity.litTime = 200;
+                state = state.setValue(SmelteryBlock.LIT, true);
+                level.setBlock(pos, state, 3);
+                fuel.shrink(1);
+            } else {
+                smelteryBlockEntity.totalLitTime = 0;
+                state = state.setValue(SmelteryBlock.LIT, false);
+                level.setBlock(pos, state, 3);
+            }
+        } else {
+            smelteryBlockEntity.litTime--;
+        }
     }
 }

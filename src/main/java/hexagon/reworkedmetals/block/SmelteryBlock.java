@@ -98,7 +98,7 @@ public class SmelteryBlock extends BaseEntityBlock {
     
                 @Override
                 public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
-                    return new SmelteryContainerMenu(id, playerInventory, (SmelteryBlockEntity) blockEntity);
+                    return new SmelteryContainerMenu(id, playerInventory, (SmelteryBlockEntity) blockEntity, ((SmelteryBlockEntity) blockEntity).getData());
                 }
     
                 @Override
@@ -135,6 +135,6 @@ public class SmelteryBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.SMELTERY.get(), SmelteryBlockEntity::cookingTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.SMELTERY.get(), SmelteryBlockEntity::tickFunction);
     }
 }

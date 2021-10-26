@@ -19,7 +19,7 @@ public class SmelteryGui extends AbstractContainerScreen<SmelteryContainerMenu> 
         this.leftPos = 0;
         this.topPos = 0;
         this.imageWidth = 176;
-        this.imageHeight = 183;
+        this.imageHeight = 184;
         this.inventoryLabelY = this.imageHeight - 94;
     }
     
@@ -37,5 +37,18 @@ public class SmelteryGui extends AbstractContainerScreen<SmelteryContainerMenu> 
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         this.blit(poseStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        this.renderBurning(poseStack);
+        this.renderProgress(poseStack);
+    }
+    
+    private void renderBurning(PoseStack poseStack) {
+        int lit = (int) (13 * super.menu.litTime());
+        if(lit > 0) {
+            this.blit(poseStack, this.leftPos + 47, this.topPos + 54 + 12 - lit, 176, 12 - lit, 14, lit + 1);
+        }
+    }
+    
+    private void renderProgress(PoseStack poseStack) {
+    
     }
 }
