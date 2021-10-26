@@ -1,0 +1,17 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "minecraft:raw_copper"
+    },
+    {
+      "item": "minecraft:raw_copper"
+    }
+  ],
+  "result": {
+    "item": "minecraft:copper_ingot"
+  },
+  "experience": 0.2,
+  "cooking_time": 200,
+  "tier": 0
+}

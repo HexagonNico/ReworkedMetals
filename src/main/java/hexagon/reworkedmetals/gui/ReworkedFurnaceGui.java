@@ -1,7 +1,9 @@
 package hexagon.reworkedmetals.gui;
 
 import hexagon.reworkedmetals.ReworkedMetals;
-import hexagon.reworkedmetals.container.SmelteryContainerMenu;
+import hexagon.reworkedmetals.container.ReworkedFurnaceMenu;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -10,11 +12,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class SmelteryGui extends AbstractContainerScreen<SmelteryContainerMenu> {
+@ParametersAreNonnullByDefault
+public class ReworkedFurnaceGui extends AbstractContainerScreen<ReworkedFurnaceMenu> {
     
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ReworkedMetals.ID, "textures/gui/smeltery.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ReworkedMetals.ID, "textures/gui/furnace.png");
     
-    public SmelteryGui(SmelteryContainerMenu container, Inventory playerInventory, Component title) {
+    public ReworkedFurnaceGui(ReworkedFurnaceMenu container, Inventory playerInventory, Component title) {
         super(container, playerInventory, title);
         this.leftPos = 0;
         this.topPos = 0;

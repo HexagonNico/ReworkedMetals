@@ -1,12 +1,12 @@
-package hexagon.reworkedmetals.inventory;
+package hexagon.reworkedmetals.container;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class SmelteryResultSlot extends Slot {
+public class ReworkedFurnaceResultSlot extends Slot {
     
-    public SmelteryResultSlot(Container container, int index, int x, int y) {
+    public ReworkedFurnaceResultSlot(Container container, int index, int x, int y) {
         super(container, index, x, y);
     }
     

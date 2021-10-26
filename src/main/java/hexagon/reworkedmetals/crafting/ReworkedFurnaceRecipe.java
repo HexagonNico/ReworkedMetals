@@ -1,9 +1,10 @@
 package hexagon.reworkedmetals.crafting;
 
 import hexagon.reworkedmetals.ReworkedMetals;
-import hexagon.reworkedmetals.blockentity.SmelteryBlockEntity;
+import hexagon.reworkedmetals.blockentity.ReworkedFurnaceBlockEntity;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,6 +12,7 @@ import java.util.stream.IntStream;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -25,9 +27,12 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity> {
     
-    public static final RecipeType<SmelteryRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":smeltery");
+    public static final RecipeType<ReworkedFurnaceRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":smelting");
+    
     public static final Serializer SERIALIZER = new Serializer();
     
     private final ResourceLocation id;
@@ -35,15 +40,17 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
     private final float experience;
-    private int smeltingTime;
+    private final int smeltingTime;
+    private final int tier;
     
-    public SmelteryRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients, ItemStack output, float experience, int smeltingTime) {
+    public ReworkedFurnaceRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients, ItemStack output, float experience, int smeltingTime, int tier) {
         this.id = id;
         this.group = group;
         this.ingredients = ingredients;
         this.output = output;
         this.experience = experience;
         this.smeltingTime = smeltingTime;
+        this.tier = tier;
     }
     
     @Override
@@ -67,7 +74,7 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
     }
     
     @Override
-    public ItemStack assemble(SmelteryBlockEntity recipeWrapper) {
+    public ItemStack assemble(ReworkedFurnaceBlockEntity recipeWrapper) {
         return this.output.copy();
     }
     
@@ -79,8 +86,12 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
         return this.smeltingTime;
     }
     
+    public int getTier() {
+        return this.tier;
+    }
+    
     @Override
-    public boolean matches(SmelteryBlockEntity recipeWrapper, Level level) {
+    public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, Level level) {
         List<ItemStack> inputs = IntStream.range(0, 4)
                 .mapToObj(recipeWrapper::getItem)
                 .filter(itemStack -> !itemStack.isEmpty())
@@ -103,10 +114,10 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
         return SERIALIZER;
     }
     
-    private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SmelteryRecipe> {
+    private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ReworkedFurnaceRecipe> {
     
         @Override
-        public SmelteryRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
+        public ReworkedFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
             String group = GsonHelper.getAsString(jsonObject, "group", "");
             NonNullList<Ingredient> inputItems = NonNullList.create();
             JsonArray ingredients = GsonHelper.getAsJsonArray(jsonObject, "ingredients");
@@ -121,14 +132,15 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
             } else {
                 ItemStack output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(jsonObject, "result"), true);
                 float experience = GsonHelper.getAsFloat(jsonObject, "experience", 0.0F);
-                int cookTime = GsonHelper.getAsInt(jsonObject, "cookingtime", 200);
-                return new SmelteryRecipe(recipeId, group, inputItems, output, experience, cookTime);
+                int cookTime = GsonHelper.getAsInt(jsonObject, "cooking_time", 200);
+                int tier = GsonHelper.getAsInt(jsonObject, "tier", 0);
+                return new ReworkedFurnaceRecipe(recipeId, group, inputItems, output, experience, cookTime, tier);
             }
         }
     
         @Nullable
         @Override
-        public SmelteryRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             String groupIn = buffer.readUtf(32767);
             int i = buffer.readVarInt();
             NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
@@ -138,11 +150,12 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
             ItemStack outputIn = buffer.readItem();
             float experienceIn = buffer.readFloat();
             int cookTimeIn = buffer.readVarInt();
-            return new SmelteryRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn);
+            int tier = buffer.readVarInt();
+            return new ReworkedFurnaceRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn, tier);
         }
     
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, SmelteryRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, ReworkedFurnaceRecipe recipe) {
             buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.ingredients.size());
             for (Ingredient ingredient : recipe.ingredients) {
@@ -151,6 +164,7 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
             buffer.writeItem(recipe.output);
             buffer.writeFloat(recipe.experience);
             buffer.writeVarInt(recipe.smeltingTime);
+            buffer.writeVarInt(recipe.tier);
         }
     }
 }

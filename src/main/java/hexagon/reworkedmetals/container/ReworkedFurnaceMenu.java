@@ -1,8 +1,6 @@
 package hexagon.reworkedmetals.container;
 
-import hexagon.reworkedmetals.blockentity.SmelteryBlockEntity;
-import hexagon.reworkedmetals.inventory.SmelteryFuelSlot;
-import hexagon.reworkedmetals.inventory.SmelteryResultSlot;
+import hexagon.reworkedmetals.blockentity.ReworkedFurnaceBlockEntity;
 import hexagon.reworkedmetals.registry.ModContainers;
 
 import javax.annotation.Nonnull;
@@ -17,13 +15,13 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SmelteryContainerMenu extends AbstractContainerMenu {
+public class ReworkedFurnaceMenu extends AbstractContainerMenu {
     
-    private final SmelteryBlockEntity container;
+    private final ReworkedFurnaceBlockEntity container;
     private final ContainerData containerData;
     
-    public SmelteryContainerMenu(int windowId, Inventory playerInventory, SmelteryBlockEntity container, ContainerData containerData) {
-        super(ModContainers.SMELTERY.get(), windowId);
+    public ReworkedFurnaceMenu(int windowId, Inventory playerInventory, ReworkedFurnaceBlockEntity container, ContainerData containerData) {
+        super(ModContainers.FURNACE.get(), windowId);
         this.container = container;
         this.containerData = containerData;
         checkContainerSize(container, 6);
@@ -35,8 +33,8 @@ public class SmelteryContainerMenu extends AbstractContainerMenu {
             }
         }
         
-        this.addSlot(new SmelteryFuelSlot(container, 4, 47, 71));
-        this.addSlot(new SmelteryResultSlot(container, 5, 118, 26));
+        this.addSlot(new ReworkedFurnaceFuelSlot(container, 4, 47, 71));
+        this.addSlot(new ReworkedFurnaceResultSlot(container, 5, 118, 26));
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 9; j++) {
@@ -50,8 +48,8 @@ public class SmelteryContainerMenu extends AbstractContainerMenu {
         this.addDataSlots(containerData);
     }
     
-    public SmelteryContainerMenu(int windowId, Inventory playerInventory, FriendlyByteBuf buffer) {
-        this(windowId, playerInventory, (SmelteryBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
+    public ReworkedFurnaceMenu(int windowId, Inventory playerInventory, FriendlyByteBuf buffer) {
+        this(windowId, playerInventory, (ReworkedFurnaceBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
     }
     
     @Override
