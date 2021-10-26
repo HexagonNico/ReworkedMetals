@@ -2,10 +2,13 @@ package hexagon.reworkedmetals.blockentity;
 
 import hexagon.reworkedmetals.block.SmelteryBlock;
 import hexagon.reworkedmetals.container.SmelteryContainerMenu;
+import hexagon.reworkedmetals.crafting.SmelteryRecipe;
 import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import java.util.Optional;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -32,10 +35,11 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
     
     protected int litTime;
     protected int totalLitTime;
+    protected int smeltingProgress;
+    protected int totalSmeltingProgress;
+    protected float storedExp; // TODO - Exp
     
     protected NonNullList<ItemStack> inventory;
-    protected Component customName;
-    
     protected final ContainerData containerData;
     
     public SmelteryBlockEntity(BlockPos pos, BlockState state) {
@@ -49,8 +53,10 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
         super.load(compoundTag);
         this.litTime = compoundTag.getInt("LitTime");
         this.totalLitTime = compoundTag.getInt("TotalLitTime");
+        this.smeltingProgress = compoundTag.getInt("SmeltingProgress");
+        this.totalSmeltingProgress = compoundTag.getInt("TotalSmeltingProgress");
+        this.storedExp = compoundTag.getFloat("StoredExp");
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if(compoundTag.contains("CustomName")) this.customName = Component.Serializer.fromJson(compoundTag.getString("CustomName"));
         ContainerHelper.loadAllItems(compoundTag, this.inventory);
     }
     
@@ -59,8 +65,10 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
         super.save(compoundTag);
         compoundTag.putInt("LitTime", this.litTime);
         compoundTag.putInt("TotalLitTime", this.totalLitTime);
+        compoundTag.putInt("SmeltingProgress", this.smeltingProgress);
+        compoundTag.putInt("TotalSmeltingProgress", this.totalSmeltingProgress);
+        compoundTag.putFloat("StoredExp", this.storedExp);
         ContainerHelper.saveAllItems(compoundTag, this.inventory);
-        if(this.customName != null) compoundTag.putString("CustomName", Component.Serializer.toJson(this.customName));
         return compoundTag;
     }
     
@@ -107,8 +115,9 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
         if(item.getCount() > this.getMaxStackSize()) {
             item.setCount(this.getMaxStackSize());
         }
-        if(index == 0 && !flag) {
-            // cooking time = ...
+        if((index == 0 || index == 1 || index == 2 || index == 3) && !flag) {
+            this.totalSmeltingProgress = 0;
+            this.smeltingProgress = 0;
             this.setChanged();
         }
     }
@@ -154,6 +163,8 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
                 return switch (index) {
                     case 0 -> SmelteryBlockEntity.this.litTime;
                     case 1 -> SmelteryBlockEntity.this.totalLitTime;
+                    case 2 -> SmelteryBlockEntity.this.smeltingProgress;
+                    case 3 -> SmelteryBlockEntity.this.totalSmeltingProgress;
                     default -> 0;
                 };
             }
@@ -163,32 +174,58 @@ public class SmelteryBlockEntity extends BaseContainerBlockEntity {
                 switch (index) {
                     case 0 -> SmelteryBlockEntity.this.litTime = value;
                     case 1 -> SmelteryBlockEntity.this.totalLitTime = value;
+                    case 2 -> SmelteryBlockEntity.this.smeltingProgress = value;
+                    case 3 -> SmelteryBlockEntity.this.totalSmeltingProgress = value;
                 }
             }
             
             @Override
             public int getCount() {
-                return 2;
+                return 4;
             }
         };
     }
     
     public static void tickFunction(Level level, BlockPos pos, BlockState state, SmelteryBlockEntity smelteryBlockEntity) {
-        if(smelteryBlockEntity.litTime == 0) {
-            ItemStack fuel = smelteryBlockEntity.getItem(4);
-            if(!fuel.isEmpty() && fuel.getItem().equals(Items.COAL)) {
-                smelteryBlockEntity.totalLitTime = 200;
-                smelteryBlockEntity.litTime = 200;
-                state = state.setValue(SmelteryBlock.LIT, true);
-                level.setBlock(pos, state, 3);
-                fuel.shrink(1);
+        Optional<SmelteryRecipe> recipe = level.getRecipeManager().getRecipeFor(SmelteryRecipe.TYPE, smelteryBlockEntity, level);
+        ItemStack outputSlotItem = smelteryBlockEntity.getItem(5);
+        if(recipe.isPresent() && recipe.get().matches(smelteryBlockEntity, level) && (outputSlotItem.isEmpty() || outputSlotItem.sameItem(recipe.get().getResultItem()))) {
+            if(smelteryBlockEntity.litTime == 0) {
+                ItemStack fuel = smelteryBlockEntity.getItem(4);
+                if(!fuel.isEmpty() && fuel.getItem().equals(Items.COAL)) {
+                    smelteryBlockEntity.totalLitTime = 200;
+                    smelteryBlockEntity.litTime = 200;
+                    state = state.setValue(SmelteryBlock.LIT, true);
+                    level.setBlock(pos, state, 3);
+                    fuel.shrink(1);
+                }
             } else {
-                smelteryBlockEntity.totalLitTime = 0;
-                state = state.setValue(SmelteryBlock.LIT, false);
-                level.setBlock(pos, state, 3);
+                smelteryBlockEntity.totalSmeltingProgress = recipe.get().getSmeltingTime();
+                smelteryBlockEntity.smeltingProgress++;
+                if(smelteryBlockEntity.smeltingProgress == smelteryBlockEntity.totalSmeltingProgress) {
+                    smelteryBlockEntity.getItem(0).shrink(1);
+                    smelteryBlockEntity.getItem(1).shrink(1);
+                    smelteryBlockEntity.getItem(2).shrink(1);
+                    smelteryBlockEntity.getItem(3).shrink(1);
+                    smelteryBlockEntity.smeltingProgress = 0;
+                    if(outputSlotItem.isEmpty()) {
+                        smelteryBlockEntity.setItem(5, recipe.get().assemble(smelteryBlockEntity));
+                    } else {
+                        outputSlotItem.grow(1);
+                    }
+                    smelteryBlockEntity.storedExp += recipe.get().getExperience();
+                }
             }
-        } else {
+        }
+        if(smelteryBlockEntity.litTime > 0) {
             smelteryBlockEntity.litTime--;
+        } else if(smelteryBlockEntity.litTime == 0) {
+            smelteryBlockEntity.totalLitTime = 0;
+            smelteryBlockEntity.smeltingProgress--;
+            if(smelteryBlockEntity.smeltingProgress == 0)
+                smelteryBlockEntity.totalSmeltingProgress = 0;
+            state = state.setValue(SmelteryBlock.LIT, false);
+            level.setBlock(pos, state, 3);
         }
     }
 }

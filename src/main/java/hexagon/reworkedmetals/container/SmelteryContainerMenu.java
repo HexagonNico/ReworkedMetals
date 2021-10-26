@@ -51,7 +51,7 @@ public class SmelteryContainerMenu extends AbstractContainerMenu {
     }
     
     public SmelteryContainerMenu(int windowId, Inventory playerInventory, FriendlyByteBuf buffer) {
-        this(windowId, playerInventory, (SmelteryBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(2));
+        this(windowId, playerInventory, (SmelteryBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
     }
     
     @Override
@@ -62,5 +62,12 @@ public class SmelteryContainerMenu extends AbstractContainerMenu {
     @OnlyIn(Dist.CLIENT)
     public float litTime() {
         return this.containerData.get(1) == 0 ? 0 : this.containerData.get(0) * 1.0f / this.containerData.get(1);
+    }
+    
+    @OnlyIn(Dist.CLIENT)
+    public int getSmeltingProgress() {
+        int i = this.containerData.get(2);
+        int j = this.containerData.get(3);
+        return j != 0 && i != 0 ? i * 24 / j : 0;
     }
 }

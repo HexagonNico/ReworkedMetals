@@ -35,15 +35,15 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
     private final float experience;
-    private int cookTime;
+    private int smeltingTime;
     
-    public SmelteryRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients, ItemStack output, float experience, int cookTime) {
+    public SmelteryRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients, ItemStack output, float experience, int smeltingTime) {
         this.id = id;
         this.group = group;
         this.ingredients = ingredients;
         this.output = output;
         this.experience = experience;
-        this.cookTime = cookTime;
+        this.smeltingTime = smeltingTime;
     }
     
     @Override
@@ -75,8 +75,8 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
         return this.experience;
     }
     
-    public int getCookTime() {
-        return this.cookTime;
+    public int getSmeltingTime() {
+        return this.smeltingTime;
     }
     
     @Override
@@ -150,7 +150,7 @@ public class SmelteryRecipe implements Recipe<SmelteryBlockEntity> {
             }
             buffer.writeItem(recipe.output);
             buffer.writeFloat(recipe.experience);
-            buffer.writeVarInt(recipe.cookTime);
+            buffer.writeVarInt(recipe.smeltingTime);
         }
     }
 }

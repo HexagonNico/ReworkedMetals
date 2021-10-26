@@ -14,4 +14,9 @@ public class SmelteryResultSlot extends Slot {
     public boolean mayPlace(ItemStack item) {
         return false;
     }
+    
+    @Override
+    public ItemStack remove(int item) {
+        return super.remove(item);
+    }
 }

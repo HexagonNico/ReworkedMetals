@@ -49,6 +49,7 @@ public class SmelteryGui extends AbstractContainerScreen<SmelteryContainerMenu> 
     }
     
     private void renderProgress(PoseStack poseStack) {
-    
+        int burn = super.menu.getSmeltingProgress();
+        this.blit(poseStack, this.leftPos + 81, this.topPos + 26, 176, 14, burn + 1, 16);
     }
 }
