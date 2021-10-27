@@ -20,6 +20,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlastFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -69,11 +70,6 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new ReworkedFurnaceMenu(id, playerInventory, this, this.containerData);
-    }
-    
-    @Override
-    protected Component getDefaultName() {
-        return new TextComponent("container.reworkedmetals.smeltery");
     }
     
     @Override
