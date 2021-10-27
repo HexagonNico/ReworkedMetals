@@ -1,4 +1,22 @@
 {
   "block.reworkedmetals.smeltery": "Smeltery",
+  "item.reworkedmetals.copper_pickaxe": "Copper Pickaxe",
+  "item.reworkedmetals.copper_sword": "Copper Sword",
+  "item.reworkedmetals.copper_axe": "Copper Axe",
+  "item.reworkedmetals.copper_shovel": "Copper Shovel",
+  "item.reworkedmetals.copper_hoe": "Copper Hoe",
+  "item.reworkedmetals.tin_ingot": "Tin Ingot",
+  "item.reworkedmetals.bronze_ingot": "Bronze Ingot",
+  "item.reworkedmetals.bronze_pickaxe": "Bronze Pickaxe",
+  "item.reworkedmetals.bronze_sword": "Bronze Sword",
+  "item.reworkedmetals.bronze_axe": "Bronze Axe",
+  "item.reworkedmetals.bronze_shovel": "Bronze Shovel",
+  "item.reworkedmetals.bronze_hoe": "Bronze Hoe",
+  "item.reworkedmetals.steel_ingot": "Steel Ingot",
+  "item.reworkedmetals.steel_pickaxe": "Steel Pickaxe",
+  "item.reworkedmetals.steel_sword": "Steel Sword",
+  "item.reworkedmetals.steel_axe": "Steel Axe",
+  "item.reworkedmetals.steel_shovel": "Steel Shovel",
+  "item.reworkedmetals.steel_hoe": "Steel Hoe",
   "container.reworkedmetals.smeltery": "Smeltery"
 }
