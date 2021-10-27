@@ -14,30 +14,30 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FurnaceLogic {
     
-    public static void tickFunction(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity reworkedFurnaceBlockEntity) {
-        Optional<ReworkedFurnaceRecipe> recipe = level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, reworkedFurnaceBlockEntity, level);
-        ItemStack outputSlotItem = reworkedFurnaceBlockEntity.getItem(5);
-        if(recipe.isPresent() && recipe.get().matches(reworkedFurnaceBlockEntity, level) && (outputSlotItem.isEmpty() || outputSlotItem.sameItem(recipe.get().getResultItem()))) {
-            if(!reworkedFurnaceBlockEntity.isLit()) {
-                ItemStack fuel = reworkedFurnaceBlockEntity.getItem(4);
+    public static void tickFunction(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
+        Optional<ReworkedFurnaceRecipe> recipe = level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, blockEntity, level);
+        ItemStack outputSlotItem = blockEntity.getItem(5);
+        if(recipe.isPresent() && recipe.get().getTier() <= blockEntity.tier() && recipe.get().matches(blockEntity, level) && (outputSlotItem.isEmpty() || outputSlotItem.sameItem(recipe.get().getResultItem()))) {
+            if(!blockEntity.isLit()) {
+                ItemStack fuel = blockEntity.getItem(4);
                 if(!fuel.isEmpty() && fuel.getItem().equals(Items.COAL)) {
-                    reworkedFurnaceBlockEntity.litUp(1600);
+                    blockEntity.litUp(1600);
                     state = state.setValue(ReworkedFurnaceBlock.LIT, true);
                     level.setBlock(pos, state, 3);
                     fuel.shrink(1);
                 }
             } else {
-                reworkedFurnaceBlockEntity.setSmeltingTime(recipe.get().getSmeltingTime());
-                reworkedFurnaceBlockEntity.smeltingProgress(1);
-                if(reworkedFurnaceBlockEntity.hasFinishedSmelting()) {
-                    reworkedFurnaceBlockEntity.getItem(0).shrink(1);
-                    reworkedFurnaceBlockEntity.getItem(1).shrink(1);
-                    reworkedFurnaceBlockEntity.getItem(2).shrink(1);
-                    reworkedFurnaceBlockEntity.getItem(3).shrink(1);
-                    reworkedFurnaceBlockEntity.resetSmeltingProgress();
-                    ItemStack result = recipe.get().assemble(reworkedFurnaceBlockEntity);
+                blockEntity.setSmeltingTime(recipe.get().getSmeltingTime());
+                blockEntity.smeltingProgress(1);
+                if(blockEntity.hasFinishedSmelting()) {
+                    blockEntity.getItem(0).shrink(1);
+                    blockEntity.getItem(1).shrink(1);
+                    blockEntity.getItem(2).shrink(1);
+                    blockEntity.getItem(3).shrink(1);
+                    blockEntity.resetSmeltingProgress();
+                    ItemStack result = recipe.get().assemble(blockEntity);
                     if(outputSlotItem.isEmpty()) {
-                        reworkedFurnaceBlockEntity.setItem(5, result);
+                        blockEntity.setItem(5, result);
                     } else {
                         outputSlotItem.grow(result.getCount());
                     }
@@ -45,13 +45,13 @@ public class FurnaceLogic {
                 }
             }
         }
-        if(reworkedFurnaceBlockEntity.isLit()) {
-            reworkedFurnaceBlockEntity.decreaseLitTime();
+        if(blockEntity.isLit()) {
+            blockEntity.decreaseLitTime();
         } else {
-            reworkedFurnaceBlockEntity.resetLitTime();
-            reworkedFurnaceBlockEntity.smeltingProgress(-1);
-            if(!reworkedFurnaceBlockEntity.isSmelting())
-                reworkedFurnaceBlockEntity.resetSmeltingTime();
+            blockEntity.resetLitTime();
+            blockEntity.smeltingProgress(-1);
+            if(!blockEntity.isSmelting())
+                blockEntity.resetSmeltingTime();
             state = state.setValue(ReworkedFurnaceBlock.LIT, false);
             level.setBlock(pos, state, 3);
         }

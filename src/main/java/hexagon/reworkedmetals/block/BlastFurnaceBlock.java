@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.block;
 
 import hexagon.reworkedmetals.FurnaceLogic;
-import hexagon.reworkedmetals.blockentity.SmelteryBlockEntity;
+import hexagon.reworkedmetals.blockentity.BlastFurnaceBlockEntity;
 import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
@@ -15,16 +15,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 @ParametersAreNonnullByDefault
-public class SmelteryBlock extends ReworkedFurnaceBlock {
+public class BlastFurnaceBlock extends ReworkedFurnaceBlock {
     
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SmelteryBlockEntity(pos, state);
+        return new BlastFurnaceBlockEntity(pos, state);
     }
     
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.SMELTERY.get(), FurnaceLogic::tickFunction);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.BLAST_FURNACE.get(), FurnaceLogic::tickFunction);
     }
 }

@@ -1,9 +1,7 @@
 package hexagon.reworkedmetals.block;
 
-import hexagon.reworkedmetals.FurnaceLogic;
 import hexagon.reworkedmetals.blockentity.ReworkedFurnaceBlockEntity;
 import hexagon.reworkedmetals.container.ReworkedFurnaceMenu;
-import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -27,8 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -127,11 +123,5 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
     @Override
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
-    }
-    
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.SMELTERY.get(), FurnaceLogic::tickFunction);
     }
 }

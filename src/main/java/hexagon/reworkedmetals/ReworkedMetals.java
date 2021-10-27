@@ -19,6 +19,7 @@ public final class ReworkedMetals {
         eventBus.addListener(this::commonSetup);
         eventBus.addListener(this::clientSetup);
         ModBlocks.REGISTER.register(eventBus);
+        ModBlocks.OVERRIDES.register(eventBus);
         ModBlockEntities.REGISTER.register(eventBus);
         ModContainers.REGISTER.register(eventBus);
         ModRecipes.REGISTER.register(eventBus);
