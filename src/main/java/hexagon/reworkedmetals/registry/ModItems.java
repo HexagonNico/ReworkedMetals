@@ -17,4 +17,5 @@ public class ModItems {
     public static final RegistryObject<Item> SMELTERY = REGISTER.register("smeltery", () -> new BlockItem(ModBlocks.SMELTERY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<Item> FURNACE = OVERRIDES.register("furnace", () -> new BlockItem(ModBlocks.FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
     public static final RegistryObject<Item> BLAST_FURNACE = OVERRIDES.register("blast_furnace", () -> new BlockItem(ModBlocks.BLAST_FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> KILN = REGISTER.register("kiln", () -> new BlockItem(ModBlocks.KILN.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 }
