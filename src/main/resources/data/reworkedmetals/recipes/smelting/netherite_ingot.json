@@ -15,10 +15,9 @@
     }
   ],
   "result": {
-    "item": "minecraft:netherite_ingot",
-    "count": 1
+    "item": "minecraft:netherite_ingot"
   },
   "experience": 0.2,
-  "cooking_time": 200,
+  "cooking_time": 400,
   "tier": 2
 }
