@@ -29,7 +29,7 @@ public final class ReworkedMetals {
     }
     
     private void commonSetup(final FMLCommonSetupEvent setupEvent) {
-    
+        ModWorldGen.register();
     }
     
     private void clientSetup(final FMLClientSetupEvent setupEvent) {
