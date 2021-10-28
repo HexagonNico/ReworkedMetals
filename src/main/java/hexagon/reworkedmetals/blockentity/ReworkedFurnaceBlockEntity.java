@@ -1,17 +1,18 @@
 package hexagon.reworkedmetals.blockentity;
 
+import hexagon.reworkedmetals.block.ReworkedFurnaceBlock;
 import hexagon.reworkedmetals.container.ReworkedFurnaceMenu;
+import hexagon.reworkedmetals.crafting.ReworkedFurnaceRecipe;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Optional;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,10 +20,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlastFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeHooks;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -130,47 +132,6 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         return this.containerData;
     }
     
-    public boolean isLit() {
-        return this.litTime > 0;
-    }
-    
-    public boolean isSmelting() {
-        return this.smeltingProgress > 0;
-    }
-    
-    public void litUp(int time) {
-        this.litTime = time;
-        this.totalLitTime = time;
-    }
-    
-    public void setSmeltingTime(int progress) {
-        this.smeltingTime = progress;
-    }
-    
-    public void smeltingProgress(int value) {
-        this.smeltingProgress += value;
-    }
-    
-    public boolean hasFinishedSmelting() {
-        return this.smeltingProgress == this.smeltingTime;
-    }
-    
-    public void resetSmeltingProgress() {
-        this.smeltingProgress = 0;
-    }
-    
-    public void decreaseLitTime() {
-        this.litTime--;
-    }
-    
-    public void resetLitTime() {
-        this.totalLitTime = 0;
-    }
-    
-    public void resetSmeltingTime() {
-        this.smeltingTime = 0;
-    }
-    
     public abstract int tier();
     
     @Nullable
@@ -217,5 +178,93 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                 return 4;
             }
         };
+    }
+    
+    public static class Logic {
+    
+        public static void tickFunction(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
+            Optional<ReworkedFurnaceRecipe> recipe = level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, blockEntity, level);
+            if(recipe.isPresent() && canSmelt(recipe.get(), level, blockEntity)) {
+                lightUpIfHasFuel(level, pos, state, blockEntity);
+                startSmelting(recipe.get(), blockEntity);
+                checkIfStillOn(level, pos, state, blockEntity);
+                checkIfDone(recipe.get(), blockEntity);
+                progress(blockEntity);
+            } else {
+                resetProgress(blockEntity);
+            }
+        }
+    
+        private static boolean canSmelt(ReworkedFurnaceRecipe recipe, Level level, ReworkedFurnaceBlockEntity blockEntity) {
+            ItemStack itemInOutputSlot = blockEntity.getItem(5);
+            ItemStack expectedOutput = recipe.getResultItem();
+            return recipe.getTier() <= blockEntity.tier() && recipe.matches(blockEntity, level) &&
+                    (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
+        }
+    
+        private static void startSmelting(ReworkedFurnaceRecipe recipe, ReworkedFurnaceBlockEntity blockEntity) {
+            if(blockEntity.litTime > 0 && blockEntity.smeltingProgress == 0) {
+                blockEntity.smeltingTime = recipe.getSmeltingTime();
+            }
+        }
+    
+        private static void lightUpIfHasFuel(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
+            ItemStack fuel = blockEntity.getItem(4);
+            int burnTime = ForgeHooks.getBurnTime(fuel, null);
+            if(blockEntity.litTime == 0 && !fuel.isEmpty() && burnTime > 0) {
+                blockEntity.totalLitTime = burnTime;
+                blockEntity.litTime = burnTime;
+                state = state.setValue(ReworkedFurnaceBlock.LIT, true);
+                level.setBlock(pos, state, 3);
+                fuel.shrink(1);
+            }
+        }
+        
+        private static void checkIfStillOn(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
+            if(blockEntity.litTime == 0 && blockEntity.totalLitTime > 0) {
+                blockEntity.totalLitTime = 0;
+                state = state.setValue(ReworkedFurnaceBlock.LIT, false);
+                level.setBlock(pos, state, 3);
+            }
+        }
+        
+        private static void checkIfDone(ReworkedFurnaceRecipe recipe, ReworkedFurnaceBlockEntity blockEntity) {
+            if(blockEntity.smeltingTime > 0 && blockEntity.smeltingProgress == blockEntity.smeltingTime) {
+                blockEntity.getItem(0).shrink(1);
+                blockEntity.getItem(1).shrink(1);
+                blockEntity.getItem(2).shrink(1);
+                blockEntity.getItem(3).shrink(1);
+                blockEntity.smeltingProgress = 0;
+                blockEntity.smeltingTime = 0;
+                ItemStack outputSlotItem = blockEntity.getItem(5);
+                ItemStack result = recipe.assemble(blockEntity);
+                if(outputSlotItem.isEmpty()) {
+                    blockEntity.setItem(5, result);
+                } else {
+                    outputSlotItem.grow(result.getCount());
+                }
+            }
+        }
+        
+        private static void progress(ReworkedFurnaceBlockEntity blockEntity) {
+            if(blockEntity.smeltingProgress >= 0 && blockEntity.smeltingProgress < blockEntity.smeltingTime) {
+                if(blockEntity.litTime > 0) {
+                    blockEntity.smeltingProgress++;
+                    blockEntity.litTime--;
+                } else {
+                    blockEntity.smeltingProgress--;
+                }
+            }
+        }
+        
+        private static void resetProgress(ReworkedFurnaceBlockEntity blockEntity) {
+            if(blockEntity.litTime > 0) {
+                blockEntity.litTime--;
+            }
+            if(blockEntity.smeltingProgress > 0) {
+                blockEntity.smeltingProgress = 0;
+                blockEntity.smeltingTime = 0;
+            }
+        }
     }
 }

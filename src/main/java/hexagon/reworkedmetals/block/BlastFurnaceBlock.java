@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.block;
 
-import hexagon.reworkedmetals.FurnaceLogic;
 import hexagon.reworkedmetals.blockentity.BlastFurnaceBlockEntity;
+import hexagon.reworkedmetals.blockentity.ReworkedFurnaceBlockEntity;
 import hexagon.reworkedmetals.registry.ModBlockEntities;
 
 import javax.annotation.Nullable;
@@ -31,7 +31,7 @@ public class BlastFurnaceBlock extends ReworkedFurnaceBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.BLAST_FURNACE.get(), FurnaceLogic::tickFunction);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntities.BLAST_FURNACE.get(), ReworkedFurnaceBlockEntity.Logic::tickFunction);
     }
     
     @Override
