@@ -5,6 +5,7 @@ import hexagon.reworkedmetals.registry.ModContainers;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,9 +13,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 
+@MethodsReturnNonnullByDefault
 public class ReworkedFurnaceMenu extends AbstractContainerMenu {
     
     private final ReworkedFurnaceBlockEntity container;
@@ -58,8 +62,8 @@ public class ReworkedFurnaceMenu extends AbstractContainerMenu {
     }
     
     @OnlyIn(Dist.CLIENT)
-    public float litTime() {
-        return this.containerData.get(1) == 0 ? 0 : this.containerData.get(0) * 1.0f / this.containerData.get(1);
+    public int litTime() {
+        return this.containerData.get(1) == 0 ? 0 : this.containerData.get(0) * 13 / this.containerData.get(1);
     }
     
     @OnlyIn(Dist.CLIENT)
@@ -67,5 +71,45 @@ public class ReworkedFurnaceMenu extends AbstractContainerMenu {
         int i = this.containerData.get(2);
         int j = this.containerData.get(3);
         return j != 0 && i != 0 ? i * 24 / j : 0;
+    }
+    
+    @Override
+    public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(slotIndex);
+        if(slot.hasItem()) {
+            ItemStack itemStack1 = slot.getItem();
+            itemStack = itemStack1.copy();
+            if(slotIndex == 5) {
+                if(!this.moveItemStackTo(itemStack1, 6, 42, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onQuickCraft(itemStack1, itemStack);
+            } else if(slotIndex > 5) {
+                if(ForgeHooks.getBurnTime(itemStack1, null) > 0) {
+                    if(!this.moveItemStackTo(itemStack1, 4, 5, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else {
+                    if(!this.moveItemStackTo(itemStack1, 0, 4, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
+            } else {
+                if(!this.moveItemStackTo(itemStack1, 6, 42, false)) {
+                    return ItemStack.EMPTY;
+                }
+            }
+            if(itemStack1.isEmpty()) {
+                slot.set(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+            if(itemStack1.getCount() == itemStack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+            slot.onTake(player, itemStack1);
+        }
+        return itemStack;
     }
 }

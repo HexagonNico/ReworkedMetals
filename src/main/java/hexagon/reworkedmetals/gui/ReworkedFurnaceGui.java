@@ -45,7 +45,7 @@ public class ReworkedFurnaceGui extends AbstractContainerScreen<ReworkedFurnaceM
     }
     
     private void renderBurning(PoseStack poseStack) {
-        int lit = (int) (13 * super.menu.litTime());
+        int lit = super.menu.litTime();
         if(lit > 0) {
             this.blit(poseStack, this.leftPos + 47, this.topPos + 54 + 12 - lit, 176, 12 - lit, 14, lit + 1);
         }

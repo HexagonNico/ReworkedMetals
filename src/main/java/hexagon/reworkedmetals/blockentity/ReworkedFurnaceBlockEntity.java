@@ -14,7 +14,10 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -134,6 +137,10 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     
     public abstract int tier();
     
+    public void popExperience(ServerPlayer player) {
+        ExperienceOrb.award(player.getLevel(), player.position(), Mth.floor(this.storedExp));
+    }
+    
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -243,6 +250,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                 } else {
                     outputSlotItem.grow(result.getCount());
                 }
+                blockEntity.storedExp += recipe.getExperience();
             }
         }
         
