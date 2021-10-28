@@ -1,0 +1,17 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:raw_tungsten"
+    },
+    {
+      "item": "reworkedmetals:raw_tungsten"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:tungsten_ingot"
+  },
+  "experience": 0.2,
+  "cooking_time": 200,
+  "tier": 0
+}
