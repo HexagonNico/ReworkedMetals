@@ -48,7 +48,7 @@ public class FurnaceBlock extends ReworkedFurnaceBlock {
             Direction.Axis axis = facing.getAxis();
             double d = random.nextDouble() * 0.6 - 0.3;
             double dx = axis == Direction.Axis.X ? (double) facing.getStepX() * 0.52 : d;
-            double dy = random.nextDouble() * 6.0 / 16.0;
+            double dy = random.nextDouble() * 6.0 / 16.0 + 0.5;
             double dz = axis == Direction.Axis.Z ? (double) facing.getStepZ() * 0.52 : d;
             level.addParticle(ParticleTypes.SMOKE, x + dx, y + dy, z + dz, 0.0, 0.0, 0.0);
         }

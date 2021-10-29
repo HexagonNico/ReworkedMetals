@@ -1,33 +1,33 @@
 {
   "variants": {
     "facing=east,lit=false": {
-      "model": "minecraft:block/furnace",
+      "model": "reworkedmetals:block/smeltery",
       "y": 90
     },
     "facing=east,lit=true": {
-      "model": "minecraft:block/furnace_on",
+      "model": "reworkedmetals:block/smeltery_on",
       "y": 90
     },
     "facing=north,lit=false": {
-      "model": "minecraft:block/furnace"
+      "model": "reworkedmetals:block/smeltery"
     },
     "facing=north,lit=true": {
-      "model": "minecraft:block/furnace_on"
+      "model": "reworkedmetals:block/smeltery_on"
     },
     "facing=south,lit=false": {
-      "model": "minecraft:block/furnace",
+      "model": "reworkedmetals:block/smeltery",
       "y": 180
     },
     "facing=south,lit=true": {
-      "model": "minecraft:block/furnace_on",
+      "model": "reworkedmetals:block/smeltery_on",
       "y": 180
     },
     "facing=west,lit=false": {
-      "model": "minecraft:block/furnace",
+      "model": "reworkedmetals:block/smeltery",
       "y": 270
     },
     "facing=west,lit=true": {
-      "model": "minecraft:block/furnace_on",
+      "model": "reworkedmetals:block/smeltery_on",
       "y": 270
     }
   }
