@@ -141,6 +141,25 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         ExperienceOrb.award(player.getLevel(), player.position(), Mth.floor(this.storedExp));
     }
     
+    public void removeIngredientItem(ItemStack itemStack) {
+        ItemStack itemToRemove = itemStack.copy();
+        for(int i = 0; i < 4; i++) {
+            if(itemToRemove.isEmpty())
+                break;
+            ItemStack itemInSlot = this.getItem(i);
+            if(itemInSlot.sameItem(itemToRemove)) {
+                if(itemInSlot.getCount() >= itemToRemove.getCount()) {
+                    itemInSlot.shrink(itemToRemove.getCount());
+                    this.setItem(i, itemInSlot);
+                    break;
+                } else {
+                    itemToRemove.shrink(itemInSlot.getCount());
+                    this.setItem(i, ItemStack.EMPTY);
+                }
+            }
+        }
+    }
+    
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
@@ -237,10 +256,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         
         private static void checkIfDone(ReworkedFurnaceRecipe recipe, ReworkedFurnaceBlockEntity blockEntity) {
             if(blockEntity.smeltingTime > 0 && blockEntity.smeltingProgress == blockEntity.smeltingTime) {
-                blockEntity.getItem(0).shrink(1);
-                blockEntity.getItem(1).shrink(1);
-                blockEntity.getItem(2).shrink(1);
-                blockEntity.getItem(3).shrink(1);
+                recipe.getItemsIngredients().forEach(blockEntity::removeIngredientItem);
                 blockEntity.smeltingProgress = 0;
                 blockEntity.smeltingTime = 0;
                 ItemStack outputSlotItem = blockEntity.getItem(5);

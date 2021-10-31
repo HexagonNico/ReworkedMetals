@@ -2,16 +2,14 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_iron"
-    },
-    {
-      "item": "minecraft:raw_iron"
+      "item": "minecraft:raw_iron",
+      "count": 2
     }
   ],
   "result": {
     "item": "minecraft:iron_ingot"
   },
-  "experience": 0.2,
-  "cooking_time": 200,
+  "experience": 0.7,
+  "smelting_time": 200,
   "tier": 1
 }

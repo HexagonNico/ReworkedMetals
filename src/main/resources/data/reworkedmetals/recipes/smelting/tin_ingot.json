@@ -2,16 +2,14 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tin"
-    },
-    {
-      "item": "reworkedmetals:raw_tin"
+      "item": "reworkedmetals:raw_tin",
+      "count": 2
     }
   ],
   "result": {
     "item": "reworkedmetals:tin_ingot"
   },
   "experience": 0.2,
-  "cooking_time": 200,
+  "smelting_time": 200,
   "tier": 0
 }

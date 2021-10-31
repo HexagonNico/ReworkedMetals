@@ -2,23 +2,19 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_copper"
+      "item": "minecraft:raw_copper",
+      "count": 3
     },
     {
-      "item": "minecraft:raw_copper"
-    },
-    {
-      "item": "minecraft:raw_copper"
-    },
-    {
-      "item": "reworkedmetals:raw_tin"
+      "item": "reworkedmetals:raw_tin",
+      "count": 1
     }
   ],
   "result": {
     "item": "reworkedmetals:bronze_ingot",
     "count": 2
   },
-  "experience": 0.2,
-  "cooking_time": 400,
+  "experience": 0.7,
+  "smelting_time": 400,
   "tier": 0
 }

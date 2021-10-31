@@ -11,7 +11,6 @@ import java.util.stream.IntStream;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,7 +23,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 @MethodsReturnNonnullByDefault
@@ -37,20 +35,47 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
     private final ResourceLocation id;
     private final String group;
+    private final NonNullList<ItemStack> itemsIngredients;
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
     private final float experience;
     private final int smeltingTime;
     private final int tier;
     
-    public ReworkedFurnaceRecipe(ResourceLocation id, String group, NonNullList<Ingredient> ingredients, ItemStack output, float experience, int smeltingTime, int tier) {
+    public ReworkedFurnaceRecipe(ResourceLocation id, JsonObject recipeJson) {
         this.id = id;
-        this.group = group;
-        this.ingredients = ingredients;
-        this.output = output;
-        this.experience = experience;
-        this.smeltingTime = smeltingTime;
-        this.tier = tier;
+        this.group = GsonHelper.getAsString(recipeJson, "group", "");
+        this.ingredients = NonNullList.create();
+        this.itemsIngredients = NonNullList.create();
+        JsonArray ingredientsJson = GsonHelper.getAsJsonArray(recipeJson, "ingredients");
+        for(int i = 0; i < ingredientsJson.size(); i++) {
+            Ingredient ingredient = Ingredient.fromJson(ingredientsJson.get(i));
+            ItemStack itemStack = CraftingHelper.getItemStack(ingredientsJson.get(i).getAsJsonObject(), true);
+            if(!ingredient.isEmpty()) this.ingredients.add(ingredient);
+            if(!itemStack.isEmpty()) this.itemsIngredients.add(itemStack);
+        }
+        this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(recipeJson, "result"), true);
+        this.experience = GsonHelper.getAsFloat(recipeJson, "experience", 0.0f);
+        this.smeltingTime = GsonHelper.getAsInt(recipeJson, "smelting_time", 200);
+        this.tier = GsonHelper.getAsInt(recipeJson, "tier", 0);
+    }
+    
+    public ReworkedFurnaceRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
+        this.id = id;
+        this.group = buffer.readUtf(32767);
+        int i = buffer.readVarInt();
+        this.ingredients = NonNullList.withSize(i, Ingredient.EMPTY);
+        this.itemsIngredients = NonNullList.withSize(i, ItemStack.EMPTY);
+        for(int j = 0; j < this.ingredients.size(); ++j) {
+            this.ingredients.set(j, Ingredient.fromNetwork(buffer));
+        }
+        for(int j = 0; j < this.itemsIngredients.size(); j++) {
+            this.itemsIngredients.set(j, buffer.readItem());
+        }
+        this.output = buffer.readItem();
+        this.experience = buffer.readFloat();
+        this.smeltingTime = buffer.readVarInt();
+        this.tier = buffer.readVarInt();
     }
     
     @Override
@@ -66,6 +91,10 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return this.ingredients;
+    }
+    
+    public NonNullList<ItemStack> getItemsIngredients() {
+        return itemsIngredients;
     }
     
     @Override
@@ -92,11 +121,22 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
     @Override
     public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, Level level) {
-        List<ItemStack> inputs = IntStream.range(0, 4)
+        List<ItemStack> inputItems = IntStream.range(0, 4)
                 .mapToObj(recipeWrapper::getItem)
                 .filter(itemStack -> !itemStack.isEmpty())
+                .collect(Collectors.groupingBy(ItemStack::getItem, Collectors.summingInt(ItemStack::getCount)))
+                .entrySet().stream()
+                .map(pair -> new ItemStack(pair.getKey(), pair.getValue()))
                 .collect(Collectors.toList());
-        return inputs.size() == this.ingredients.size() && RecipeMatcher.findMatches(inputs, this.ingredients) != null;
+        if(inputItems.isEmpty()) {
+            return false;
+        } else {
+            for(ItemStack ingredient : this.itemsIngredients) {
+                if(!inputItems.removeIf(inputItem -> inputItem.sameItem(ingredient) && inputItem.getCount() >= ingredient.getCount()))
+                    return false;
+            }
+            return inputItems.isEmpty();
+        }
     }
     
     @Override
@@ -118,48 +158,24 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
         @Override
         public ReworkedFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
-            String group = GsonHelper.getAsString(jsonObject, "group", "");
-            NonNullList<Ingredient> inputItems = NonNullList.create();
-            JsonArray ingredients = GsonHelper.getAsJsonArray(jsonObject, "ingredients");
-            for(int i = 0; i < ingredients.size(); i++) {
-                Ingredient ingredient = Ingredient.fromJson(ingredients.get(i));
-                if(!ingredient.isEmpty()) inputItems.add(ingredient);
-            }
-            if (inputItems.isEmpty()) {
-                throw new JsonParseException("No ingredients for cooking recipe");
-            } else if (inputItems.size() > 4) {
-                throw new JsonParseException("Too many ingredients for cooking recipe! The max is 4");
-            } else {
-                ItemStack output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(jsonObject, "result"), true);
-                float experience = GsonHelper.getAsFloat(jsonObject, "experience", 0.0F);
-                int cookTime = GsonHelper.getAsInt(jsonObject, "cooking_time", 200);
-                int tier = GsonHelper.getAsInt(jsonObject, "tier", 0);
-                return new ReworkedFurnaceRecipe(recipeId, group, inputItems, output, experience, cookTime, tier);
-            }
+            return new ReworkedFurnaceRecipe(recipeId, jsonObject);
         }
     
         @Nullable
         @Override
         public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            String groupIn = buffer.readUtf(32767);
-            int i = buffer.readVarInt();
-            NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
-            for(int j = 0; j < inputItemsIn.size(); ++j) {
-                inputItemsIn.set(j, Ingredient.fromNetwork(buffer));
-            }
-            ItemStack outputIn = buffer.readItem();
-            float experienceIn = buffer.readFloat();
-            int cookTimeIn = buffer.readVarInt();
-            int tier = buffer.readVarInt();
-            return new ReworkedFurnaceRecipe(recipeId, groupIn, inputItemsIn, outputIn, experienceIn, cookTimeIn, tier);
+            return new ReworkedFurnaceRecipe(recipeId, buffer);
         }
     
         @Override
         public void toNetwork(FriendlyByteBuf buffer, ReworkedFurnaceRecipe recipe) {
             buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.ingredients.size());
-            for (Ingredient ingredient : recipe.ingredients) {
+            for(Ingredient ingredient : recipe.ingredients) {
                 ingredient.toNetwork(buffer);
+            }
+            for(ItemStack itemStack : recipe.itemsIngredients) {
+                buffer.writeItem(itemStack);
             }
             buffer.writeItem(recipe.output);
             buffer.writeFloat(recipe.experience);

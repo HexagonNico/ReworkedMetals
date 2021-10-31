@@ -2,16 +2,14 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_gold"
-    },
-    {
-      "item": "minecraft:raw_gold"
+      "item": "minecraft:raw_gold",
+      "count": 2
     }
   ],
   "result": {
     "item": "minecraft:gold_ingot"
   },
-  "experience": 0.2,
-  "cooking_time": 200,
+  "experience": 1,
+  "smelting_time": 200,
   "tier": 1
 }
