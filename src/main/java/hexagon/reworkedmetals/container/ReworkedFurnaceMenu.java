@@ -38,7 +38,7 @@ public class ReworkedFurnaceMenu extends AbstractContainerMenu {
         }
         
         this.addSlot(new ReworkedFurnaceFuelSlot(container, 4, 47, 71));
-        this.addSlot(new ReworkedFurnaceResultSlot(container, 5, 118, 26));
+        this.addSlot(new ReworkedFurnaceResultSlot(container, playerInventory.player, 5, 118, 26));
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 9; j++) {

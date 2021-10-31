@@ -13,8 +13,11 @@ import net.minecraft.world.item.ItemStack;
 @ParametersAreNonnullByDefault
 public class ReworkedFurnaceResultSlot extends Slot {
     
-    public ReworkedFurnaceResultSlot(Container container, int index, int x, int y) {
+    private final Player player;
+    
+    public ReworkedFurnaceResultSlot(Container container, Player player, int index, int x, int y) {
         super(container, index, x, y);
+        this.player = player;
     }
     
     @Override
@@ -24,8 +27,21 @@ public class ReworkedFurnaceResultSlot extends Slot {
     
     @Override
     public void onTake(Player player, ItemStack item) {
-        if(player instanceof ServerPlayer serverPlayer && this.container instanceof ReworkedFurnaceBlockEntity blockEntity) {
-            blockEntity.popExperience(serverPlayer);
+        this.checkTakeAchievements(item);
+        super.onTake(player, item);
+    }
+    
+    @Override
+    public void onQuickCraft(ItemStack itemStack, ItemStack itemStack1) {
+        super.onQuickCraft(itemStack, itemStack1);
+        this.checkTakeAchievements(itemStack);
+    }
+    
+    @Override
+    protected void checkTakeAchievements(ItemStack itemStack) {
+        super.checkTakeAchievements(itemStack);
+        if(this.player instanceof ServerPlayer serverPlayer && this.container instanceof ReworkedFurnaceBlockEntity blockEntity) {
+            blockEntity.popExperience(serverPlayer, serverPlayer.getLevel(), serverPlayer.position());
         }
     }
 }

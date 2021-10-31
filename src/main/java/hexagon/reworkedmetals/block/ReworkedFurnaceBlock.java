@@ -1,7 +1,6 @@
 package hexagon.reworkedmetals.block;
 
 import hexagon.reworkedmetals.blockentity.ReworkedFurnaceBlockEntity;
-import hexagon.reworkedmetals.container.ReworkedFurnaceMenu;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -9,14 +8,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +31,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
 @SuppressWarnings("deprecation")
@@ -87,18 +86,7 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if(!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            NetworkHooks.openGui(serverPlayer, new MenuProvider() {
-    
-                @Override
-                public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
-                    return new ReworkedFurnaceMenu(id, playerInventory, (ReworkedFurnaceBlockEntity) blockEntity, ((ReworkedFurnaceBlockEntity) blockEntity).getData());
-                }
-    
-                @Override
-                public Component getDisplayName() {
-                    return ((ReworkedFurnaceBlockEntity) blockEntity).getDisplayName();
-                }
-            }, packetBuffer -> packetBuffer.writeBlockPos(pos));
+            NetworkHooks.openGui(serverPlayer, (MenuProvider) blockEntity, packetBuffer -> packetBuffer.writeBlockPos(pos));
             return InteractionResult.CONSUME;
         }
         return InteractionResult.SUCCESS;
@@ -109,6 +97,7 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
         if(!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if(blockEntity instanceof ReworkedFurnaceBlockEntity reworkedFurnaceBlockEntity) {
+                reworkedFurnaceBlockEntity.popExperience(null, (ServerLevel) level, Vec3.atCenterOf(pos));
                 Containers.dropContents(level, pos, reworkedFurnaceBlockEntity);
             }
             super.onRemove(state, level, pos, newState, isMoving);
