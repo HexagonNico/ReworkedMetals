@@ -43,7 +43,11 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     
     public ReworkedFurnaceBlock() {
-        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5f).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0));
+        this(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.5f).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0));
+    }
+    
+    public ReworkedFurnaceBlock(BlockBehaviour.Properties properties) {
+        super(properties);
         super.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
     

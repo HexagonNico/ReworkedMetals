@@ -21,7 +21,7 @@ public class BlastFurnaceBlockEntity extends ReworkedFurnaceBlockEntity {
     }
     
     @Override
-    public int tier() {
-        return 2;
+    public String stationType() {
+        return "blast_furnace";
     }
 }

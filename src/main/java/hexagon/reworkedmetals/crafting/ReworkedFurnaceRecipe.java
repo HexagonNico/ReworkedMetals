@@ -40,7 +40,7 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     private final ItemStack output;
     private final float experience;
     private final int smeltingTime;
-    private final int tier;
+    private final NonNullList<String> stations;
     
     public ReworkedFurnaceRecipe(ResourceLocation id, JsonObject recipeJson) {
         this.id = id;
@@ -57,7 +57,11 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(recipeJson, "result"), true);
         this.experience = GsonHelper.getAsFloat(recipeJson, "experience", 0.0f);
         this.smeltingTime = GsonHelper.getAsInt(recipeJson, "smelting_time", 200);
-        this.tier = GsonHelper.getAsInt(recipeJson, "tier", 0);
+        this.stations = NonNullList.create();
+        JsonArray stationsArray = GsonHelper.getAsJsonArray(recipeJson, "stations");
+        for(int i = 0; i < stationsArray.size(); i++) {
+            this.stations.add(stationsArray.get(i).getAsString());
+        }
     }
     
     public ReworkedFurnaceRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
@@ -75,7 +79,11 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         this.output = buffer.readItem();
         this.experience = buffer.readFloat();
         this.smeltingTime = buffer.readVarInt();
-        this.tier = buffer.readVarInt();
+        i = buffer.readVarInt();
+        this.stations = NonNullList.withSize(i, "");
+        for(int j = 0; j < this.stations.size(); j++) {
+            this.stations.set(j, buffer.readUtf());
+        }
     }
     
     @Override
@@ -115,8 +123,8 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         return this.smeltingTime;
     }
     
-    public int getTier() {
-        return this.tier;
+    public NonNullList<String> getStations() {
+        return this.stations;
     }
     
     @Override
@@ -180,7 +188,10 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
             buffer.writeItem(recipe.output);
             buffer.writeFloat(recipe.experience);
             buffer.writeVarInt(recipe.smeltingTime);
-            buffer.writeVarInt(recipe.tier);
+            buffer.writeVarInt(recipe.stations.size());
+            for(String string : recipe.stations) {
+                buffer.writeUtf(string);
+            }
         }
     }
 }

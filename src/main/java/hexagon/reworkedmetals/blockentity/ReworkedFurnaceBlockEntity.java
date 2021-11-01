@@ -146,11 +146,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         this.inventory.clear();
     }
     
-    public ContainerData getData() {
-        return this.containerData;
-    }
-    
-    public abstract int tier();
+    public abstract String stationType();
     
     public void popExperience(@Nullable ServerPlayer player, ServerLevel level, Vec3 position) {
         List<Recipe<?>> recipes = Lists.newArrayList();
@@ -308,7 +304,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         private static boolean canSmelt(ReworkedFurnaceRecipe recipe, Level level, ReworkedFurnaceBlockEntity blockEntity) {
             ItemStack itemInOutputSlot = blockEntity.getItem(5);
             ItemStack expectedOutput = recipe.getResultItem();
-            return recipe.getTier() <= blockEntity.tier() && recipe.matches(blockEntity, level) &&
+            return recipe.getStations().contains(blockEntity.stationType()) && recipe.matches(blockEntity, level) &&
                     (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
         }
     }

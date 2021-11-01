@@ -21,7 +21,7 @@ public class SmelteryBlockEntity extends ReworkedFurnaceBlockEntity {
     }
     
     @Override
-    public int tier() {
-        return 0;
+    public String stationType() {
+        return "smeltery";
     }
 }

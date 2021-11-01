@@ -1,5 +1,6 @@
 {
   "block.reworkedmetals.smeltery": "Smeltery",
+  "block.reworkedmetals.kiln": "Kiln",
   "block.reworkedmetals.tin_ore": "Tin Ore",
   "block.reworkedmetals.tungsten_ore": "Wolframite Ore",
   "block.reworkedmetals.deepslate_tin_ore": "Deepslate Tin Ore",
@@ -25,5 +26,6 @@
   "item.reworkedmetals.steel_axe": "Steel Axe",
   "item.reworkedmetals.steel_shovel": "Steel Shovel",
   "item.reworkedmetals.steel_hoe": "Steel Hoe",
-  "container.reworkedmetals.smeltery": "Smeltery"
+  "container.reworkedmetals.smeltery": "Smeltery",
+  "container.reworkedmetals.kiln": "Kiln"
 }

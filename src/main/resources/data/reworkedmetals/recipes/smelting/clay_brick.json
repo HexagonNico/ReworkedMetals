@@ -2,18 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tin",
-      "count": 2
+      "item": "minecraft:clay_ball"
     }
   ],
   "result": {
-    "item": "reworkedmetals:tin_ingot"
+    "item": "minecraft:brick"
   },
-  "experience": 0.2,
+  "experience": 0.3,
   "smelting_time": 200,
   "stations": [
     "smeltery",
-    "furnace",
-    "blast_furnace"
+    "kiln"
   ]
 }

@@ -11,5 +11,9 @@
   },
   "experience": 1,
   "smelting_time": 200,
-  "tier": 0
+  "stations": [
+    "smeltery",
+    "furnace",
+    "blast_furnace"
+  ]
 }
