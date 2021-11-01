@@ -26,6 +26,18 @@
   "item.reworkedmetals.steel_axe": "Steel Axe",
   "item.reworkedmetals.steel_shovel": "Steel Shovel",
   "item.reworkedmetals.steel_hoe": "Steel Hoe",
+  "item.reworkedmetals.copper_helmet": "Copper Helmet",
+  "item.reworkedmetals.copper_chestplate": "Copper Chestplate",
+  "item.reworkedmetals.copper_leggings": "Copper Leggings",
+  "item.reworkedmetals.copper_boots": "Copper Boots",
+  "item.reworkedmetals.bronze_helmet": "Bronze Helmet",
+  "item.reworkedmetals.bronze_chestplate": "Bronze Chestplate",
+  "item.reworkedmetals.bronze_leggings": "Bronze Leggings",
+  "item.reworkedmetals.bronze_boots": "Bronze Boots",
+  "item.reworkedmetals.steel_helmet": "Steel Helmet",
+  "item.reworkedmetals.steel_chestplate": "Steel Chestplate",
+  "item.reworkedmetals.steel_leggings": "Steel Leggings",
+  "item.reworkedmetals.steel_boots": "Steel Boots",
   "container.reworkedmetals.smeltery": "Smeltery",
   "container.reworkedmetals.kiln": "Kiln"
 }
