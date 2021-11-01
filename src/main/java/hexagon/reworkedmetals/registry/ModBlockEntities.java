@@ -3,6 +3,7 @@ package hexagon.reworkedmetals.registry;
 import hexagon.reworkedmetals.ReworkedMetals;
 import hexagon.reworkedmetals.blockentity.BlastFurnaceBlockEntity;
 import hexagon.reworkedmetals.blockentity.FurnaceBlockEntity;
+import hexagon.reworkedmetals.blockentity.KilnBlockEntity;
 import hexagon.reworkedmetals.blockentity.SmelteryBlockEntity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,4 +17,5 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<SmelteryBlockEntity>> SMELTERY = REGISTER.register("smeltery", () -> BlockEntityType.Builder.of(SmelteryBlockEntity::new, ModBlocks.SMELTERY.get()).build(null));
     public static final RegistryObject<BlockEntityType<FurnaceBlockEntity>> FURNACE = REGISTER.register("furnace", () -> BlockEntityType.Builder.of(FurnaceBlockEntity::new, ModBlocks.FURNACE.get()).build(null));
     public static final RegistryObject<BlockEntityType<BlastFurnaceBlockEntity>> BLAST_FURNACE = REGISTER.register("blast_furnace", () -> BlockEntityType.Builder.of(BlastFurnaceBlockEntity::new, ModBlocks.BLAST_FURNACE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<KilnBlockEntity>> KILN = REGISTER.register("kiln", () -> BlockEntityType.Builder.of(KilnBlockEntity::new, ModBlocks.KILN.get()).build(null));
 }
