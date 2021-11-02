@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "reworkedmetals:steel_pickaxe"
+  },
+  "addition": {
+    "item": "minecraft:emerald"
+  },
+  "result": {
+    "item": "reworkedmetals:steel_emerald_pickaxe"
+  }
+}

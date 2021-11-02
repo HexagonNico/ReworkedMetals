@@ -2,35 +2,36 @@ package hexagon.reworkedmetals.item;
 
 import hexagon.reworkedmetals.registry.ModItems;
 
-import java.util.function.Supplier;
-
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 
 @MethodsReturnNonnullByDefault
 public enum ModToolTiers implements Tier {
-    COPPER(1, 190, 5.0f, 1.5f, 12, () -> Ingredient.of(Items.COPPER_INGOT)),
-    BRONZE(2, 250, 6.0f, 2.0f, 15, () -> Ingredient.of(ModItems.BRONZE_INGOT.get())),
-    IRON(2, 700, 7.0f, 2.5f, 12, () -> Ingredient.of(Items.IRON_INGOT)),
-    STEEL(3, 1561, 8.0f, 3.0f, 10, () -> Ingredient.of(ModItems.STEEL_INGOT.get()));
+    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(Items.COPPER_INGOT)),
+    BRONZE(2, 250, 6.0f, 2.0f, 15, Ingredient.of(ModItems.BRONZE_INGOT.get())),
+    IRON(2, 700, 7.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
+    IRON_DIAMOND(3, 1125, 5.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
+    IRON_EMERALD(2, 450, 8.5f, 2.5f, 16, Ingredient.of(Items.IRON_INGOT)),
+    STEEL(3, 1561, 8.0f, 3.0f, 10, Ingredient.of(ModItems.STEEL_INGOT.get())),
+    STEEL_DIAMOND(4, 1970, 6.0f, 3.0f, 10, Ingredient.of(ModItems.STEEL_INGOT.get())),
+    STEEL_EMERALD(3, 1000, 9.5f, 3.0f, 14, Ingredient.of(ModItems.STEEL_INGOT.get()));
     
     private final int level;
     private final int uses;
     private final float speed;
     private final float damage;
     private final int enchantmentValue;
-    private final LazyLoadedValue<Ingredient> repairIngredient;
+    private final Ingredient repairIngredient;
     
-    ModToolTiers(int level, int uses, float speed, float damage, int enchantmentValue, Supplier<Ingredient> repairIngredient) {
+    ModToolTiers(int level, int uses, float speed, float damage, int enchantmentValue, Ingredient repairIngredient) {
         this.level = level;
         this.uses = uses;
         this.speed = speed;
         this.damage = damage;
         this.enchantmentValue = enchantmentValue;
-        this.repairIngredient = new LazyLoadedValue<>(repairIngredient);
+        this.repairIngredient = repairIngredient;
     }
     
     @Override
@@ -60,6 +61,6 @@ public enum ModToolTiers implements Tier {
     
     @Override
     public Ingredient getRepairIngredient() {
-        return this.repairIngredient.get();
+        return this.repairIngredient;
     }
 }
