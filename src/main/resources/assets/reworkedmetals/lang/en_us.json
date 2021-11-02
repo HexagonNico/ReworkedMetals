@@ -38,6 +38,14 @@
   "item.reworkedmetals.steel_chestplate": "Steel Chestplate",
   "item.reworkedmetals.steel_leggings": "Steel Leggings",
   "item.reworkedmetals.steel_boots": "Steel Boots",
+  "item.reworkedmetals.diamonded_netherite_helmet": "Diamonded Netherite Helmet",
+  "item.reworkedmetals.diamonded_netherite_chestplate": "Diamonded Netherite Chestplate",
+  "item.reworkedmetals.diamonded_netherite_leggings": "Diamonded Netherite Leggings",
+  "item.reworkedmetals.diamonded_netherite_boots": "Diamonded Netherite Boots",
+  "item.reworkedmetals.gilded_netherite_helmet": "Gilded Netherite Helmet",
+  "item.reworkedmetals.gilded_netherite_chestplate": "Gilded Netherite Chestplate",
+  "item.reworkedmetals.gilded_netherite_leggings": "Gilded Netherite Leggings",
+  "item.reworkedmetals.gilded_netherite_boots": "Gilded Netherite Boots",
   "container.reworkedmetals.smeltery": "Smeltery",
   "container.reworkedmetals.kiln": "Kiln"
 }
