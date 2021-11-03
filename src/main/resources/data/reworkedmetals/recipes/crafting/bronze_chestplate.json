@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "reworkedmetals:bronze_ingot"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:bronze_chestplate"
+  }
+}

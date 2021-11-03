@@ -16,12 +16,12 @@ A rework of Minecraft's metalworking system.
     modId="forge"
     mandatory=true
     versionRange="[37,)"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
 
 [[dependencies.reworkedmetals]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.17.1,1.18)"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"
