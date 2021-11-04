@@ -1,12 +1,21 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:air"
+    "item": "minecraft:diamond_hoe"
   },
   "addition": {
-    "item": "minecraft:air"
+    "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "minecraft:air"
-  }
+    "item": "minecraft:netherite_hoe"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "consistentNetheriteCrafting"
+      }
+    }
+  ]
 }

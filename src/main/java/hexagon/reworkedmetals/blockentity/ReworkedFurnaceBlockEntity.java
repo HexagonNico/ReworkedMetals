@@ -253,10 +253,9 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                         blockEntity.totalLitTime = blockEntity.litTime;
                         if(blockEntity.litTime > 0) {
                             flag1 = true;
-                            if(fuel.hasContainerItem())
+                            if(fuel.hasContainerItem()) {
                                 blockEntity.inventory.set(4, fuel.getContainerItem());
-                            else
-                            if(!fuel.isEmpty()) {
+                            } else if(!fuel.isEmpty()) {
                                 fuel.shrink(1);
                                 if(fuel.isEmpty()) {
                                     blockEntity.inventory.set(4, fuel.getContainerItem());

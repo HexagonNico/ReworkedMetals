@@ -12,5 +12,11 @@
   },
   "result": {
     "item": "minecraft:netherite_chestplate"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "consistentNetheriteCrafting"
+    }
+  ]
 }

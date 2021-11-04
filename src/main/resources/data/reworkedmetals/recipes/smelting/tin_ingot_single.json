@@ -2,8 +2,7 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tin",
-      "count": 2
+      "item": "reworkedmetals:raw_tin"
     }
   ],
   "result": {
@@ -18,8 +17,11 @@
   ],
   "conditions": [
     {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
     }
   ]
 }

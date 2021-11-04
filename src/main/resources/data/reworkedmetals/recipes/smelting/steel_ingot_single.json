@@ -2,12 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_iron",
-      "count": 2
+      "item": "minecraft:raw_iron"
     },
     {
-      "item": "minecraft:charcoal",
-      "count": 2
+      "item": "minecraft:charcoal"
     }
   ],
   "result": {
@@ -20,8 +18,11 @@
   ],
   "conditions": [
     {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
     }
   ]
 }

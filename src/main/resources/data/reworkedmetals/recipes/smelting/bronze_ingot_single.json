@@ -12,10 +12,10 @@
   ],
   "result": {
     "item": "reworkedmetals:bronze_ingot",
-    "count": 2
+    "count": 4
   },
   "experience": 0.7,
-  "smelting_time": 400,
+  "smelting_time": 800,
   "stations": [
     "smeltery",
     "furnace",
@@ -23,8 +23,11 @@
   ],
   "conditions": [
     {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
     }
   ]
 }

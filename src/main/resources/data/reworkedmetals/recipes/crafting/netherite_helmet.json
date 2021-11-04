@@ -11,5 +11,11 @@
   },
   "result": {
     "item": "minecraft:netherite_helmet"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "consistentNetheriteCrafting"
+    }
+  ]
 }

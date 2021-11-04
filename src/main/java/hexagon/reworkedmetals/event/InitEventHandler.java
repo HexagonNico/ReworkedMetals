@@ -1,5 +1,6 @@
 package hexagon.reworkedmetals.event;
 
+import hexagon.reworkedmetals.Config;
 import hexagon.reworkedmetals.ReworkedMetals;
 import hexagon.reworkedmetals.registry.ModWorldGen;
 
@@ -16,7 +17,7 @@ public class InitEventHandler {
     @SubscribeEvent
     public static void onBiomeLoad(BiomeLoadingEvent event) {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
-        generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModWorldGen.ORE_TIN);
-        generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModWorldGen.ORE_TUNGSTEN);
+        if(Config.getBoolean("tinOreGenEnabled")) generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModWorldGen.ORE_TIN);
+        if(Config.getBoolean("tungstenOreGenEnabled")) generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModWorldGen.ORE_TUNGSTEN);
     }
 }

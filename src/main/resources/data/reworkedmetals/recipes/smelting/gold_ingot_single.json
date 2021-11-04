@@ -2,24 +2,25 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tungsten",
-      "count": 2
+      "item": "minecraft:raw_gold"
     }
   ],
   "result": {
-    "item": "reworkedmetals:tungsten_ingot"
+    "item": "minecraft:gold_ingot"
   },
   "experience": 1,
   "smelting_time": 200,
   "stations": [
-    "smeltery",
     "furnace",
     "blast_furnace"
   ],
   "conditions": [
     {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
     }
   ]
 }

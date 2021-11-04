@@ -12,5 +12,11 @@
   },
   "result": {
     "item": "minecraft:netherite_leggings"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "consistentNetheriteCrafting"
+    }
+  ]
 }

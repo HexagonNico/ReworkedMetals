@@ -1,12 +1,21 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:air"
+    "item": "minecraft:diamond_chestplate"
   },
   "addition": {
-    "item": "minecraft:air"
+    "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "minecraft:air"
-  }
+    "item": "minecraft:netherite_chestplate"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "consistentNetheriteCrafting"
+      }
+    }
+  ]
 }

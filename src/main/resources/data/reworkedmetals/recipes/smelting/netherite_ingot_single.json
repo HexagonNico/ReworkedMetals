@@ -2,12 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_gold",
-      "count": 2
+      "item": "minecraft:raw_gold"
     },
     {
-      "item": "minecraft:netherite_scrap",
-      "count": 2
+      "item": "minecraft:netherite_scrap"
     }
   ],
   "result": {
@@ -20,8 +18,11 @@
   ],
   "conditions": [
     {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
     }
   ]
 }

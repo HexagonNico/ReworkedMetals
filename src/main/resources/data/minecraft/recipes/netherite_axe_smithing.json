@@ -1,13 +1,13 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "minecraft:diamond_pickaxe"
+    "item": "minecraft:diamond_axe"
   },
   "addition": {
     "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "minecraft:netherite_pickaxe"
+    "item": "minecraft:netherite_axe"
   },
   "conditions": [
     {
