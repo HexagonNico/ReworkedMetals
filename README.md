@@ -1,7 +1,7 @@
 # ReworkedMetals
 A rework of Minecraft's metalworking system.
 
-Copyright (c) 2022 HexagonNico
+Copyright (c) 2021 HexagonNico
 
 All rights reserved
 
