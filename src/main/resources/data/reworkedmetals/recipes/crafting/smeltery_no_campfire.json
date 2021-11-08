@@ -1,27 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
-    " # ",
-    " # "
+    "###",
+    "# #",
+    "###"
   ],
   "key": {
     "#": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "item": "minecraft:diamond"
+      "tag": "minecraft:stone_crafting_materials"
     }
   },
   "result": {
-    "item": "minecraft:diamond_pickaxe"
+    "item": "reworkedmetals:smeltery"
   },
   "conditions": [
     {
       "type": "forge:not",
       "value": {
         "type": "reworkedmetals:config",
-        "config": "disableDiamondsCrafting"
+        "config": "requireCampfireForSmeltery"
       }
     }
   ]

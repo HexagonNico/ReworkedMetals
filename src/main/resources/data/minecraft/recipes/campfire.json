@@ -1,27 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
-    " # ",
-    " # "
+    " / ",
+    "/ /",
+    "###"
   ],
   "key": {
     "#": {
-      "item": "minecraft:stick"
+      "tag": "minecraft:log"
     },
-    "X": {
-      "item": "minecraft:diamond"
+    "/": {
+      "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "minecraft:diamond_pickaxe"
+    "item": "minecraft:campfire"
   },
   "conditions": [
     {
       "type": "forge:not",
       "value": {
         "type": "reworkedmetals:config",
-        "config": "disableDiamondsCrafting"
+        "config": "requireCoalForCampfire"
       }
     }
   ]

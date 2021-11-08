@@ -1,14 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
+    "X",
+    "X",
     "#"
   ],
   "key": {
     "#": {
-      "item": "minecraft:air"
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {
-    "item": "minecraft:air"
-  }
+    "item": "minecraft:diamond_sword"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "disableDiamondsCrafting"
+      }
+    }
+  ]
 }
