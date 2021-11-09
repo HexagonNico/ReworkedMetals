@@ -38,6 +38,7 @@ public final class ReworkedMetals {
     private void commonSetup(final FMLCommonSetupEvent setupEvent) {
         ReworkedMetalsWorldGen.register();
         ReworkedMetalsCrafting.registerConditions();
+        ReworkedMetalsVillagers.armorerFix();
     }
     
     private void clientSetup(final FMLClientSetupEvent setupEvent) {
