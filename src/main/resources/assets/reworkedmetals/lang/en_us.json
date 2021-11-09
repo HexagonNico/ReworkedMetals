@@ -67,5 +67,6 @@
   "item.reworkedmetals.gilded_netherite_leggings": "Gilded Netherite Leggings",
   "item.reworkedmetals.gilded_netherite_boots": "Gilded Netherite Boots",
   "container.reworkedmetals.smeltery": "Smeltery",
-  "container.reworkedmetals.kiln": "Kiln"
+  "container.reworkedmetals.kiln": "Kiln",
+  "reworkedmetals.jei_category": "Reworked Smelting"
 }
