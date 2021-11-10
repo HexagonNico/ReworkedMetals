@@ -28,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
@@ -169,23 +170,31 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         this.recipesUsed.addTo(recipe.getId(), 1);
     }
     
-    public void removeIngredientItem(ItemStack itemStack) {
-        ItemStack itemToRemove = itemStack.copy();
+    public void removeIngredient(Ingredient ingredient) {
         for(int i = 0; i < 4; i++) {
-            if(itemToRemove.isEmpty())
-                break;
             ItemStack itemInSlot = this.getItem(i);
-            if(itemInSlot.sameItem(itemToRemove)) {
-                if(itemInSlot.getCount() >= itemToRemove.getCount()) {
-                    itemInSlot.shrink(itemToRemove.getCount());
-                    this.setItem(i, itemInSlot);
-                    break;
-                } else {
-                    itemToRemove.shrink(itemInSlot.getCount());
-                    this.setItem(i, ItemStack.EMPTY);
-                }
+            if(!itemInSlot.isEmpty() && ingredient.test(itemInSlot)) {
+                itemInSlot.shrink(1);
+                this.setItem(i, itemInSlot.isEmpty() ? ItemStack.EMPTY : itemInSlot);
+                break;
             }
         }
+//        ItemStack itemToRemove = itemStack.copy();
+//        for(int i = 0; i < 4; i++) {
+//            if(itemToRemove.isEmpty())
+//                break;
+//            ItemStack itemInSlot = this.getItem(i);
+//            if(itemInSlot.sameItem(itemToRemove)) {
+//                if(itemInSlot.getCount() >= itemToRemove.getCount()) {
+//                    itemInSlot.shrink(itemToRemove.getCount());
+//                    this.setItem(i, itemInSlot);
+//                    break;
+//                } else {
+//                    itemToRemove.shrink(itemInSlot.getCount());
+//                    this.setItem(i, ItemStack.EMPTY);
+//                }
+//            }
+//        }
     }
     
     @Nullable
@@ -269,7 +278,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                         if(blockEntity.smeltingProgress == blockEntity.smeltingTime) {
                             blockEntity.smeltingProgress = 0;
                             if(canSmelt(recipe.get(), level, blockEntity)) {
-                                recipe.get().getItemsIngredients().forEach(blockEntity::removeIngredientItem);
+                                recipe.get().getIngredients().forEach(blockEntity::removeIngredient);
                                 ItemStack outputSlotItem = blockEntity.getItem(5);
                                 ItemStack result = recipe.get().assemble(blockEntity);
                                 if(outputSlotItem.isEmpty()) {

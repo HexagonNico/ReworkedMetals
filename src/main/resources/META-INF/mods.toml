@@ -6,7 +6,7 @@ license="All rights reserved"
 modId="reworkedmetals"
 version="0.1"
 displayName="Reworked Metals"
-#logoFile="examplemod.png"
+logoFile="logo.png"
 authors="HexagonNico"
 description='''
 A rework of Minecraft's metalworking system.

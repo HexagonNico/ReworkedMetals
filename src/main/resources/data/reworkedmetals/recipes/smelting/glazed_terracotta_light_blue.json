@@ -2,16 +2,15 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:cactus"
+      "item": "minecraft:light_blue_terracotta"
     }
   ],
   "result": {
-    "item": "minecraft:green_dye"
+    "item": "minecraft:light_blue_glazed_terracotta"
   },
   "experience": 0.1,
   "smelting_time": 200,
   "stations": [
-    "smeltery",
     "kiln"
   ]
 }

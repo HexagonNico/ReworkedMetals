@@ -2,8 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tin",
-      "count": 2
+      "item": "reworkedmetals:raw_tin"
+    },
+    {
+      "item": "reworkedmetals:raw_tin"
     }
   ],
   "result": {

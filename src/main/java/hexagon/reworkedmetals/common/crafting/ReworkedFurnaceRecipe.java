@@ -5,6 +5,8 @@ import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -35,7 +37,6 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
     private final ResourceLocation id;
     private final String group;
-    private final NonNullList<ItemStack> itemsIngredients;
     private final NonNullList<Ingredient> ingredients;
     private final ItemStack output;
     private final float experience;
@@ -46,13 +47,10 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         this.id = id;
         this.group = GsonHelper.getAsString(recipeJson, "group", "");
         this.ingredients = NonNullList.create();
-        this.itemsIngredients = NonNullList.create();
         JsonArray ingredientsJson = GsonHelper.getAsJsonArray(recipeJson, "ingredients");
         for(int i = 0; i < ingredientsJson.size(); i++) {
             Ingredient ingredient = Ingredient.fromJson(ingredientsJson.get(i));
-            ItemStack itemStack = CraftingHelper.getItemStack(ingredientsJson.get(i).getAsJsonObject(), true);
             if(!ingredient.isEmpty()) this.ingredients.add(ingredient);
-            if(!itemStack.isEmpty()) this.itemsIngredients.add(itemStack);
         }
         this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(recipeJson, "result"), true);
         this.experience = GsonHelper.getAsFloat(recipeJson, "experience", 0.0f);
@@ -69,12 +67,8 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         this.group = buffer.readUtf(32767);
         int i = buffer.readVarInt();
         this.ingredients = NonNullList.withSize(i, Ingredient.EMPTY);
-        this.itemsIngredients = NonNullList.withSize(i, ItemStack.EMPTY);
         for(int j = 0; j < this.ingredients.size(); ++j) {
             this.ingredients.set(j, Ingredient.fromNetwork(buffer));
-        }
-        for(int j = 0; j < this.itemsIngredients.size(); j++) {
-            this.itemsIngredients.set(j, buffer.readItem());
         }
         this.output = buffer.readItem();
         this.experience = buffer.readFloat();
@@ -99,10 +93,6 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return this.ingredients;
-    }
-    
-    public NonNullList<ItemStack> getItemsIngredients() {
-        return itemsIngredients;
     }
     
     @Override
@@ -130,7 +120,7 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     @Override
     public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, Level level) {
         List<ItemStack> inputItems = IntStream.range(0, 4)
-                .mapToObj(recipeWrapper::getItem)
+                .mapToObj(i -> recipeWrapper.getItem(i).copy())
                 .filter(itemStack -> !itemStack.isEmpty())
                 .collect(Collectors.groupingBy(ItemStack::getItem, Collectors.summingInt(ItemStack::getCount)))
                 .entrySet().stream()
@@ -139,11 +129,31 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
         if(inputItems.isEmpty()) {
             return false;
         } else {
-            for(ItemStack ingredient : this.itemsIngredients) {
-                if(!inputItems.removeIf(inputItem -> inputItem.sameItem(ingredient) && inputItem.getCount() >= ingredient.getCount()))
-                    return false;
+            ArrayList<Ingredient> ingredients = new ArrayList<>(this.ingredients);
+            Iterator<Ingredient> ingredientIterator = ingredients.iterator();
+            while(ingredientIterator.hasNext()) {
+                Ingredient ingredient = ingredientIterator.next();
+                for(ItemStack input : inputItems) {
+                    if(!input.isEmpty() && ingredient.test(input)) {
+                        input.shrink(1);
+                        ingredientIterator.remove();
+                    }
+                }
             }
-            return inputItems.isEmpty();
+            if(!ingredients.isEmpty()) {
+                return false;
+            } else {
+                for(ItemStack input : inputItems) {
+                    if(!input.isEmpty() && this.ingredients.stream().noneMatch(ingredient -> ingredient.test(input)))
+                        return false;
+                }
+                return true;
+            }
+//            for(ItemStack ingredient : this.itemsIngredients) {
+//                if(!inputItems.removeIf(inputItem -> inputItem.sameItem(ingredient) && inputItem.getCount() >= ingredient.getCount()))
+//                    return false;
+//            }
+//            return inputItems.isEmpty();
         }
     }
     
@@ -181,9 +191,6 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
             buffer.writeVarInt(recipe.ingredients.size());
             for(Ingredient ingredient : recipe.ingredients) {
                 ingredient.toNetwork(buffer);
-            }
-            for(ItemStack itemStack : recipe.itemsIngredients) {
-                buffer.writeItem(itemStack);
             }
             buffer.writeItem(recipe.output);
             buffer.writeFloat(recipe.experience);

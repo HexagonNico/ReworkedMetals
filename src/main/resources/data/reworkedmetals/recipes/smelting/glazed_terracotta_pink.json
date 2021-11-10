@@ -2,16 +2,15 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:sea_pickle"
+      "item": "minecraft:pink_terracotta"
     }
   ],
   "result": {
-    "item": "minecraft:lime_dye"
+    "item": "minecraft:pink_glazed_terracotta"
   },
   "experience": 0.1,
   "smelting_time": 200,
   "stations": [
-    "smeltery",
     "kiln"
   ]
 }

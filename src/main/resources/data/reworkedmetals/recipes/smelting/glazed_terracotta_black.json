@@ -2,11 +2,11 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:stone"
+      "item": "minecraft:black_terracotta"
     }
   ],
   "result": {
-    "item": "minecraft:smooth_stone"
+    "item": "minecraft:black_glazed_terracotta"
   },
   "experience": 0.1,
   "smelting_time": 200,
