@@ -1,5 +1,6 @@
 package hexagon.reworkedmetals.common.blockentity;
 
+import hexagon.reworkedmetals.common.block.ReworkedFurnaceBlock;
 import hexagon.reworkedmetals.common.container.ReworkedFurnaceMenu;
 import hexagon.reworkedmetals.common.crafting.ReworkedFurnaceRecipe;
 
@@ -11,36 +12,42 @@ import java.util.Optional;
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IRecipeHelperPopulator;
+import net.minecraft.inventory.IRecipeHolder;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.RecipeItemHelper;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.LockableLootTileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntity {
+public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
     
     protected int litTime;
     protected int totalLitTime;
@@ -49,48 +56,46 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     protected float storedExp;
     
     protected NonNullList<ItemStack> inventory;
-    protected final ContainerData containerData;
     
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     
-    public ReworkedFurnaceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
-        super(blockEntityType, pos, state);
+    public ReworkedFurnaceBlockEntity(TileEntityType<?> blockEntityType) {
+        super(blockEntityType);
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
-        this.containerData = this.getContainerData();
     }
     
     @Override
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
+    public void load(BlockState state, CompoundNBT compoundTag) {
+        super.load(state, compoundTag);
         this.litTime = compoundTag.getInt("LitTime");
         this.totalLitTime = compoundTag.getInt("TotalLitTime");
         this.smeltingProgress = compoundTag.getInt("SmeltingProgress");
         this.smeltingTime = compoundTag.getInt("SmeltingTime");
         this.storedExp = compoundTag.getFloat("StoredExp");
         this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compoundTag, this.inventory);
-        CompoundTag recipesUsedTag = compoundTag.getCompound("RecipesUsed");
+        ItemStackHelper.loadAllItems(compoundTag, this.inventory);
+        CompoundNBT recipesUsedTag = compoundTag.getCompound("RecipesUsed");
         recipesUsedTag.getAllKeys().forEach(key -> this.recipesUsed.put(new ResourceLocation(key), recipesUsedTag.getInt(key)));
     }
     
     @Override
-    public CompoundTag save(CompoundTag compoundTag) {
+    public CompoundNBT save(CompoundNBT compoundTag) {
         super.save(compoundTag);
         compoundTag.putInt("LitTime", this.litTime);
         compoundTag.putInt("TotalLitTime", this.totalLitTime);
         compoundTag.putInt("SmeltingProgress", this.smeltingProgress);
         compoundTag.putInt("SmeltingTime", this.smeltingTime);
         compoundTag.putFloat("StoredExp", this.storedExp);
-        ContainerHelper.saveAllItems(compoundTag, this.inventory);
-        CompoundTag recipesTag = new CompoundTag();
+        ItemStackHelper.saveAllItems(compoundTag, this.inventory);
+        CompoundNBT recipesTag = new CompoundNBT();
         this.recipesUsed.forEach((resourceLocation, integer) -> recipesTag.putInt(resourceLocation.toString(), integer));
         compoundTag.put("RecipesUsed", recipesTag);
         return compoundTag;
     }
     
     @Override
-    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new ReworkedFurnaceMenu(id, playerInventory, this, this.containerData);
+    protected Container createMenu(int id, PlayerInventory playerInventory) {
+        return new ReworkedFurnaceMenu(id, playerInventory, this, this.getDataAccess());
     }
     
     @Override
@@ -110,12 +115,12 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     
     @Override
     public ItemStack removeItem(int index, int flags) {
-        return ContainerHelper.removeItem(this.inventory, index, flags);
+        return ItemStackHelper.removeItem(this.inventory, index, flags);
     }
     
     @Override
     public ItemStack removeItemNoUpdate(int index) {
-        return ContainerHelper.takeItem(this.inventory, index);
+        return ItemStackHelper.takeItem(this.inventory, index);
     }
     
     @Override
@@ -134,7 +139,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     }
     
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(PlayerEntity player) {
         if(this.level != null && this.level.getBlockEntity(this.worldPosition) != this) {
             return false;
         } else {
@@ -147,19 +152,33 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         this.inventory.clear();
     }
     
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return this.inventory;
+    }
+    
+    @Override
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.inventory = items;
+    }
+    
     public abstract String stationType();
     
-    public void popExperience(@Nullable ServerPlayer player, ServerLevel level, Vec3 position) {
-        List<Recipe<?>> recipes = Lists.newArrayList();
+    public void popExperience(@Nullable ServerPlayerEntity player, ServerWorld world, Vector3d position) {
+        List<IRecipe<?>> recipes = Lists.newArrayList();
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe -> {
+            world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe -> {
                 recipes.add(recipe);
                 float exp = (float) entry.getIntValue() * ((ReworkedFurnaceRecipe) recipe).getExperience();
-                int expInt = Mth.floor(exp);
-                float random = Mth.frac(exp);
+                int expInt = MathHelper.floor(exp);
+                float random = MathHelper.frac(exp);
                 if(random != 0.0f && Math.random() < (double) random)
                     expInt++;
-                ExperienceOrb.award(level, position, expInt);
+                while(expInt > 0) {
+                    int j = ExperienceOrbEntity.getExperienceValue(expInt);
+                    expInt -= j;
+                    world.addFreshEntity(new ExperienceOrbEntity(world, position.x, position.y, position.z, j));
+                }
             }));
         }
         if(player != null) player.awardRecipes(recipes);
@@ -179,60 +198,44 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                 break;
             }
         }
-//        ItemStack itemToRemove = itemStack.copy();
-//        for(int i = 0; i < 4; i++) {
-//            if(itemToRemove.isEmpty())
-//                break;
-//            ItemStack itemInSlot = this.getItem(i);
-//            if(itemInSlot.sameItem(itemToRemove)) {
-//                if(itemInSlot.getCount() >= itemToRemove.getCount()) {
-//                    itemInSlot.shrink(itemToRemove.getCount());
-//                    this.setItem(i, itemInSlot);
-//                    break;
-//                } else {
-//                    itemToRemove.shrink(itemInSlot.getCount());
-//                    this.setItem(i, ItemStack.EMPTY);
-//                }
-//            }
-//        }
     }
     
     @Nullable
     @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, 1, this.getUpdateTag());
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
     }
     
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+    public CompoundNBT getUpdateTag() {
+        return this.save(new CompoundNBT());
     }
     
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        this.load(pkt.getTag());
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        this.load(this.getBlockState(), pkt.getTag());
     }
     
-    private ContainerData getContainerData() {
-        return new ContainerData() {
+    private IIntArray getDataAccess() {
+        return new IIntArray() {
             @Override
             public int get(int index) {
-                return switch (index) {
-                    case 0 -> ReworkedFurnaceBlockEntity.this.litTime;
-                    case 1 -> ReworkedFurnaceBlockEntity.this.totalLitTime;
-                    case 2 -> ReworkedFurnaceBlockEntity.this.smeltingProgress;
-                    case 3 -> ReworkedFurnaceBlockEntity.this.smeltingTime;
-                    default -> 0;
-                };
+                switch (index) {
+                    case 0: return ReworkedFurnaceBlockEntity.this.litTime;
+                    case 1: return ReworkedFurnaceBlockEntity.this.totalLitTime;
+                    case 2: return ReworkedFurnaceBlockEntity.this.smeltingProgress;
+                    case 3: return ReworkedFurnaceBlockEntity.this.smeltingTime;
+                    default: return 0;
+                }
             }
             
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> ReworkedFurnaceBlockEntity.this.litTime = value;
-                    case 1 -> ReworkedFurnaceBlockEntity.this.totalLitTime = value;
-                    case 2 -> ReworkedFurnaceBlockEntity.this.smeltingProgress = value;
-                    case 3 -> ReworkedFurnaceBlockEntity.this.smeltingTime = value;
+                    case 0: ReworkedFurnaceBlockEntity.this.litTime = value; break;
+                    case 1: ReworkedFurnaceBlockEntity.this.totalLitTime = value; break;
+                    case 2: ReworkedFurnaceBlockEntity.this.smeltingProgress = value; break;
+                    case 3: ReworkedFurnaceBlockEntity.this.smeltingTime = value; break;
                 }
             }
             
@@ -243,77 +246,118 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         };
     }
     
-    public static class Logic {
-    
-        public static void tickFunction(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
-            boolean flag = blockEntity.litTime > 0;
-            boolean flag1 = false;
-            if(blockEntity.litTime > 0) {
-                blockEntity.litTime--;
-            }
-    
-            ItemStack fuel = blockEntity.inventory.get(4);
-            if(blockEntity.litTime > 0 || !fuel.isEmpty()) {
-                Optional<ReworkedFurnaceRecipe> recipe = level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, blockEntity, level);
-                if(recipe.isPresent()) {
-                    blockEntity.smeltingTime = recipe.get().getSmeltingTime();
-                    if(blockEntity.litTime <= 0 && canSmelt(recipe.get(), level, blockEntity)) {
-                        blockEntity.litTime = ForgeHooks.getBurnTime(fuel, null);
-                        blockEntity.totalLitTime = blockEntity.litTime;
-                        if(blockEntity.litTime > 0) {
-                            flag1 = true;
-                            if(fuel.hasContainerItem()) {
-                                blockEntity.inventory.set(4, fuel.getContainerItem());
-                            } else if(!fuel.isEmpty()) {
-                                fuel.shrink(1);
-                                if(fuel.isEmpty()) {
-                                    blockEntity.inventory.set(4, fuel.getContainerItem());
-                                }
+    @Override
+    public void tick() {
+        boolean flag = this.litTime > 0;
+        boolean flag1 = false;
+        if(this.litTime > 0) {
+            this.litTime--;
+        }
+
+        ItemStack fuel = this.inventory.get(4);
+        if(this.litTime > 0 || !fuel.isEmpty()) {
+            Optional<ReworkedFurnaceRecipe> recipe = this.level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, this, level);
+            if(recipe.isPresent()) {
+                this.smeltingTime = recipe.get().getSmeltingTime();
+                if(this.litTime <= 0 && this.canSmelt(recipe.get(), this.level)) {
+                    this.litTime = ForgeHooks.getBurnTime(fuel, null);
+                    this.totalLitTime = this.litTime;
+                    if(this.litTime > 0) {
+                        flag1 = true;
+                        if(fuel.hasContainerItem()) {
+                            this.inventory.set(4, fuel.getContainerItem());
+                        } else if(!fuel.isEmpty()) {
+                            fuel.shrink(1);
+                            if(fuel.isEmpty()) {
+                                this.inventory.set(4, fuel.getContainerItem());
                             }
                         }
-                    }
-    
-                    if(blockEntity.litTime > 0 && canSmelt(recipe.get(), level, blockEntity)) {
-                        blockEntity.smeltingProgress++;
-                        if(blockEntity.smeltingProgress == blockEntity.smeltingTime) {
-                            blockEntity.smeltingProgress = 0;
-                            if(canSmelt(recipe.get(), level, blockEntity)) {
-                                recipe.get().getIngredients().forEach(blockEntity::removeIngredient);
-                                ItemStack outputSlotItem = blockEntity.getItem(5);
-                                ItemStack result = recipe.get().assemble(blockEntity);
-                                if(outputSlotItem.isEmpty()) {
-                                    blockEntity.setItem(5, result);
-                                } else {
-                                    outputSlotItem.grow(result.getCount());
-                                }
-                                blockEntity.setRecipeUsed(recipe.get());
-                            }
-                            flag1 = true;
-                        }
-                    } else {
-                        blockEntity.smeltingProgress = 0;
                     }
                 }
-            } else if(blockEntity.litTime <= 0 && blockEntity.smeltingProgress > 0) {
-                blockEntity.smeltingProgress = Mth.clamp(blockEntity.smeltingProgress - 2, 0, blockEntity.smeltingTime);
+
+                if(this.litTime > 0 && this.canSmelt(recipe.get(), level)) {
+                    this.smeltingProgress++;
+                    if(this.smeltingProgress == this.smeltingTime) {
+                        this.smeltingProgress = 0;
+                        if(this.canSmelt(recipe.get(), level)) {
+                            recipe.get().getIngredients().forEach(this::removeIngredient);
+                            ItemStack outputSlotItem = this.getItem(5);
+                            ItemStack result = recipe.get().assemble(this);
+                            if(outputSlotItem.isEmpty()) {
+                                this.setItem(5, result);
+                            } else {
+                                outputSlotItem.grow(result.getCount());
+                            }
+                            this.setRecipeUsed(recipe.get());
+                        }
+                        flag1 = true;
+                    }
+                } else {
+                    this.smeltingProgress = 0;
+                }
             }
-    
-            if(flag != (blockEntity.litTime > 0)) {
-                flag1 = true;
-                state = state.setValue(AbstractFurnaceBlock.LIT, blockEntity.litTime > 0);
-                level.setBlock(pos, state, 3);
-            }
-            
-            if(flag1) {
-                setChanged(level, pos, state);
-            }
+        } else if(this.litTime <= 0 && this.smeltingProgress > 0) {
+            this.smeltingProgress = MathHelper.clamp(this.smeltingProgress - 2, 0, this.smeltingTime);
         }
-    
-        private static boolean canSmelt(ReworkedFurnaceRecipe recipe, Level level, ReworkedFurnaceBlockEntity blockEntity) {
-            ItemStack itemInOutputSlot = blockEntity.getItem(5);
-            ItemStack expectedOutput = recipe.getResultItem();
-            return recipe.getStations().contains(blockEntity.stationType()) && recipe.matches(blockEntity, level) &&
-                    (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
+
+        if(flag != (this.litTime > 0)) {
+            flag1 = true;
+            this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(ReworkedFurnaceBlock.LIT, this.litTime > 0), 3);
         }
+        
+        if(flag1) {
+            this.setChanged();
+        }
+    }
+
+    private boolean canSmelt(ReworkedFurnaceRecipe recipe, World level) {
+        ItemStack itemInOutputSlot = this.getItem(5);
+        ItemStack expectedOutput = recipe.getResultItem();
+        return recipe.getStations().contains(this.stationType()) && recipe.matches(this, level) &&
+                (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
+    }
+    
+    @Override
+    public int[] getSlotsForFace(Direction direction) {
+        switch(direction) {
+            case DOWN: return new int[] {5, 4};
+            case UP: return new int[] {0, 1, 2, 3};
+            default: return new int[] {4};
+        }
+    }
+    
+    @Override
+    public boolean canPlaceItemThroughFace(int i, ItemStack item, @Nullable Direction direction) {
+        return this.canPlaceItem(i, item);
+    }
+    
+    @Override
+    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+        if(direction == Direction.DOWN && i == 1) {
+            Item item = itemStack.getItem();
+            return item == Items.WATER_BUCKET || item == Items.BUCKET;
+        }
+        return true;
+    }
+    
+    @Override
+    public void fillStackedContents(RecipeItemHelper recipeItemHelper) {
+        for(ItemStack itemstack : this.inventory) {
+            recipeItemHelper.accountStack(itemstack);
+        }
+    }
+    
+    @Override
+    public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
+        if(recipe != null) {
+            ResourceLocation resourcelocation = recipe.getId();
+            this.recipesUsed.addTo(resourcelocation, 1);
+        }
+    }
+    
+    @Nullable
+    @Override
+    public IRecipe<?> getRecipeUsed() {
+        return null;
     }
 }

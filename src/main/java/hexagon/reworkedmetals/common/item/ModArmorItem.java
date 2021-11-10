@@ -4,15 +4,15 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -21,7 +21,7 @@ public class ModArmorItem extends ArmorItem {
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
     private final boolean piglingsNeutral;
     
-    public ModArmorItem(ModArmorMaterials material, EquipmentSlot slot, Item.Properties properties) {
+    public ModArmorItem(ModArmorMaterials material, EquipmentSlotType slot, Item.Properties properties) {
         super(material, slot, properties);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.putAll(super.getDefaultAttributeModifiers(slot));
@@ -31,7 +31,7 @@ public class ModArmorItem extends ArmorItem {
     }
     
     @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
         return slot == this.slot ? this.attributeModifiers : super.getDefaultAttributeModifiers(slot);
     }
     

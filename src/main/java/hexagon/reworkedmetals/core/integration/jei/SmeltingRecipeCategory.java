@@ -9,7 +9,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -18,11 +19,8 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -52,8 +50,8 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedFurnaceRe
     }
     
     @Override
-    public Component getTitle() {
-        return new TranslatableComponent("reworkedmetals.jei_category");
+    public String getTitle() {
+        return "reworkedmetals.jei_category";
     }
     
     @Override
@@ -121,17 +119,19 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedFurnaceRe
     }
     
     private List<ItemStack> getStations(ReworkedFurnaceRecipe recipe) {
-        return recipe.getStations().stream().map(string -> switch (string) {
-            case "smeltery" -> new ItemStack(ReworkedMetalsItems.SMELTERY.get());
-            case "furnace" -> new ItemStack(ReworkedMetalsItems.FURNACE.get());
-            case "blast_furnace" -> new ItemStack(ReworkedMetalsItems.BLAST_FURNACE.get());
-            case "kiln" -> new ItemStack(ReworkedMetalsItems.KILN.get());
-            default -> ItemStack.EMPTY;
+        return recipe.getStations().stream().map(string -> {
+            switch(string) {
+                case "smeltery": return new ItemStack(ReworkedMetalsItems.SMELTERY.get());
+                case "furnace": return new ItemStack(ReworkedMetalsItems.FURNACE.get());
+                case "blast_furnace": return new ItemStack(ReworkedMetalsItems.BLAST_FURNACE.get());
+                case "kiln": return new ItemStack(ReworkedMetalsItems.KILN.get());
+                default: return ItemStack.EMPTY;
+            }
         }).collect(Collectors.toList());
     }
     
     @Override
-    public void draw(ReworkedFurnaceRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(ReworkedFurnaceRecipe recipe, MatrixStack stack, double mouseX, double mouseY) {
         this.arrow.draw(stack, 44, 32);
     }
 }

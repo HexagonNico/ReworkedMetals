@@ -2,20 +2,20 @@ package hexagon.reworkedmetals.common.container;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.world.Container;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 
 @ParametersAreNonnullByDefault
 public class ReworkedFurnaceFuelSlot extends Slot {
     
-    public ReworkedFurnaceFuelSlot(Container container, int index, int x, int y) {
+    public ReworkedFurnaceFuelSlot(IInventory container, int index, int x, int y) {
         super(container, index, x, y);
     }
     
     @Override
     public boolean mayPlace(ItemStack item) {
-        return AbstractFurnaceBlockEntity.isFuel(item);
+        return AbstractFurnaceTileEntity.isFuel(item);
     }
 }

@@ -1,11 +1,11 @@
 package hexagon.reworkedmetals.common.crafting;
 
-import hexagon.reworkedmetals.core.config.Config;
 import hexagon.reworkedmetals.core.ReworkedMetals;
+import hexagon.reworkedmetals.core.config.Config;
 
 import com.google.gson.JsonObject;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.util.JSONUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
@@ -42,7 +42,7 @@ public class ConfigCondition implements ICondition {
     
         @Override
         public ConfigCondition read(JsonObject json) {
-            return new ConfigCondition(this.id, GsonHelper.getAsString(json, "config", ""));
+            return new ConfigCondition(this.id, JSONUtils.getAsString(json, "config", ""));
         }
     
         @Override

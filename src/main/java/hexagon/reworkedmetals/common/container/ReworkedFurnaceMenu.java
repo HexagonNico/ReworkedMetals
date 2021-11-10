@@ -5,26 +5,26 @@ import hexagon.reworkedmetals.core.registry.ReworkedMetalsContainers;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.IntArray;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 @MethodsReturnNonnullByDefault
-public class ReworkedFurnaceMenu extends AbstractContainerMenu {
+public class ReworkedFurnaceMenu extends Container {
     
     private final ReworkedFurnaceBlockEntity container;
-    private final ContainerData containerData;
+    private final IIntArray containerData;
     
-    public ReworkedFurnaceMenu(int windowId, Inventory playerInventory, ReworkedFurnaceBlockEntity container, ContainerData containerData) {
+    public ReworkedFurnaceMenu(int windowId, PlayerInventory playerInventory, ReworkedFurnaceBlockEntity container, IIntArray containerData) {
         super(ReworkedMetalsContainers.FURNACE.get(), windowId);
         this.container = container;
         this.containerData = containerData;
@@ -52,12 +52,12 @@ public class ReworkedFurnaceMenu extends AbstractContainerMenu {
         this.addDataSlots(containerData);
     }
     
-    public ReworkedFurnaceMenu(int windowId, Inventory playerInventory, FriendlyByteBuf buffer) {
-        this(windowId, playerInventory, (ReworkedFurnaceBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
+    public ReworkedFurnaceMenu(int windowId, PlayerInventory playerInventory, PacketBuffer buffer) {
+        this(windowId, playerInventory, (ReworkedFurnaceBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new IntArray(4));
     }
     
     @Override
-    public boolean stillValid(@Nonnull Player player) {
+    public boolean stillValid(@Nonnull PlayerEntity player) {
         return this.container.stillValid(player);
     }
     
@@ -74,7 +74,7 @@ public class ReworkedFurnaceMenu extends AbstractContainerMenu {
     }
     
     @Override
-    public ItemStack quickMoveStack(@Nonnull Player player, int slotIndex) {
+    public ItemStack quickMoveStack(@Nonnull PlayerEntity player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIndex);
         if(slot.hasItem()) {

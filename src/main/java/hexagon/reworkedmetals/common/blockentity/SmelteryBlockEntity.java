@@ -2,22 +2,20 @@ package hexagon.reworkedmetals.common.blockentity;
 
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsBlockEntities;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.level.block.state.BlockState;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 @MethodsReturnNonnullByDefault
 public class SmelteryBlockEntity extends ReworkedFurnaceBlockEntity {
     
-    public SmelteryBlockEntity(BlockPos pos, BlockState state) {
-        super(ReworkedMetalsBlockEntities.SMELTERY.get(), pos, state);
+    public SmelteryBlockEntity() {
+        super(ReworkedMetalsBlockEntities.SMELTERY.get());
     }
     
     @Override
-    protected Component getDefaultName() {
-        return new TranslatableComponent("container.reworkedmetals.smeltery");
+    protected ITextComponent getDefaultName() {
+        return new TranslationTextComponent("container.reworkedmetals.smeltery");
     }
     
     @Override

@@ -6,13 +6,13 @@ import hexagon.reworkedmetals.core.ReworkedMetals;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.stream.Collectors;
 
+import mcp.MethodsReturnNonnullByDefault;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 @JeiPlugin
 @MethodsReturnNonnullByDefault

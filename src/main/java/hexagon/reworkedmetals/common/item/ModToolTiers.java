@@ -2,14 +2,14 @@ package hexagon.reworkedmetals.common.item;
 
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsItems;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 
 @MethodsReturnNonnullByDefault
-public enum ModToolTiers implements Tier {
-    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(Items.COPPER_INGOT)),
+public enum ModToolTiers implements IItemTier {
+    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(/*Items.COPPER_INGOT*/ Items.COMMAND_BLOCK)),
     BRONZE(2, 250, 6.0f, 2.0f, 15, Ingredient.of(ReworkedMetalsItems.BRONZE_INGOT.get())),
     IRON(2, 700, 7.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
     IRON_DIAMOND(3, 1125, 5.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),

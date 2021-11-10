@@ -4,18 +4,20 @@ import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class ReworkedFurnaceResultSlot extends Slot {
     
-    private final Player player;
+    private final PlayerEntity player;
     
-    public ReworkedFurnaceResultSlot(Container container, Player player, int index, int x, int y) {
+    public ReworkedFurnaceResultSlot(IInventory container, PlayerEntity player, int index, int x, int y) {
         super(container, index, x, y);
         this.player = player;
     }
@@ -26,9 +28,9 @@ public class ReworkedFurnaceResultSlot extends Slot {
     }
     
     @Override
-    public void onTake(Player player, ItemStack item) {
+    public ItemStack onTake(PlayerEntity player, ItemStack item) {
         this.checkTakeAchievements(item);
-        super.onTake(player, item);
+        return super.onTake(player, item);
     }
     
     @Override
@@ -40,8 +42,8 @@ public class ReworkedFurnaceResultSlot extends Slot {
     @Override
     protected void checkTakeAchievements(ItemStack itemStack) {
         super.checkTakeAchievements(itemStack);
-        if(this.player instanceof ServerPlayer serverPlayer && this.container instanceof ReworkedFurnaceBlockEntity blockEntity) {
-            blockEntity.popExperience(serverPlayer, serverPlayer.getLevel(), serverPlayer.position());
+        if(this.player instanceof ServerPlayerEntity && this.container instanceof ReworkedFurnaceBlockEntity) {
+            ((ReworkedFurnaceBlockEntity) this.container).popExperience((ServerPlayerEntity) player, ((ServerPlayerEntity) player).getLevel(), player.position());
         }
     }
 }

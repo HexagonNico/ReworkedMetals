@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.common.crafting;
 
-import hexagon.reworkedmetals.core.ReworkedMetals;
 import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
+import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,25 +13,25 @@ import java.util.stream.IntStream;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity> {
+public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceBlockEntity> {
     
-    public static final RecipeType<ReworkedFurnaceRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":smelting");
+    public static final IRecipeType<ReworkedFurnaceRecipe> TYPE = IRecipeType.register(ReworkedMetals.ID + ":smelting");
     
     public static final Serializer SERIALIZER = new Serializer();
     
@@ -45,24 +45,24 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
     public ReworkedFurnaceRecipe(ResourceLocation id, JsonObject recipeJson) {
         this.id = id;
-        this.group = GsonHelper.getAsString(recipeJson, "group", "");
+        this.group = JSONUtils.getAsString(recipeJson, "group", "");
         this.ingredients = NonNullList.create();
-        JsonArray ingredientsJson = GsonHelper.getAsJsonArray(recipeJson, "ingredients");
+        JsonArray ingredientsJson = JSONUtils.getAsJsonArray(recipeJson, "ingredients");
         for(int i = 0; i < ingredientsJson.size(); i++) {
             Ingredient ingredient = Ingredient.fromJson(ingredientsJson.get(i));
             if(!ingredient.isEmpty()) this.ingredients.add(ingredient);
         }
-        this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(recipeJson, "result"), true);
-        this.experience = GsonHelper.getAsFloat(recipeJson, "experience", 0.0f);
-        this.smeltingTime = GsonHelper.getAsInt(recipeJson, "smelting_time", 200);
+        this.output = CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(recipeJson, "result"), true);
+        this.experience = JSONUtils.getAsFloat(recipeJson, "experience", 0.0f);
+        this.smeltingTime = JSONUtils.getAsInt(recipeJson, "smelting_time", 200);
         this.stations = NonNullList.create();
-        JsonArray stationsArray = GsonHelper.getAsJsonArray(recipeJson, "stations");
+        JsonArray stationsArray = JSONUtils.getAsJsonArray(recipeJson, "stations");
         for(int i = 0; i < stationsArray.size(); i++) {
             this.stations.add(stationsArray.get(i).getAsString());
         }
     }
     
-    public ReworkedFurnaceRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
+    public ReworkedFurnaceRecipe(ResourceLocation id, PacketBuffer buffer) {
         this.id = id;
         this.group = buffer.readUtf(32767);
         int i = buffer.readVarInt();
@@ -118,7 +118,7 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     }
     
     @Override
-    public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, Level level) {
+    public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, World world) {
         List<ItemStack> inputItems = IntStream.range(0, 4)
                 .mapToObj(i -> recipeWrapper.getItem(i).copy())
                 .filter(itemStack -> !itemStack.isEmpty())
@@ -149,11 +149,6 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
                 }
                 return true;
             }
-//            for(ItemStack ingredient : this.itemsIngredients) {
-//                if(!inputItems.removeIf(inputItem -> inputItem.sameItem(ingredient) && inputItem.getCount() >= ingredient.getCount()))
-//                    return false;
-//            }
-//            return inputItems.isEmpty();
         }
     }
     
@@ -163,16 +158,16 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     }
     
     @Override
-    public RecipeType<?> getType() {
+    public IRecipeType<?> getType() {
         return TYPE;
     }
     
     @Override
-    public RecipeSerializer<?> getSerializer() {
+    public IRecipeSerializer<?> getSerializer() {
         return SERIALIZER;
     }
     
-    private static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ReworkedFurnaceRecipe> {
+    private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ReworkedFurnaceRecipe> {
     
         @Override
         public ReworkedFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
@@ -181,12 +176,12 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
     
         @Nullable
         @Override
-        public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
             return new ReworkedFurnaceRecipe(recipeId, buffer);
         }
     
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, ReworkedFurnaceRecipe recipe) {
+        public void toNetwork(PacketBuffer buffer, ReworkedFurnaceRecipe recipe) {
             buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.ingredients.size());
             for(Ingredient ingredient : recipe.ingredients) {

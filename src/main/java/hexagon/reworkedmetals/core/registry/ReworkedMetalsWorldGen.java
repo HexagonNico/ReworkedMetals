@@ -2,35 +2,24 @@ package hexagon.reworkedmetals.core.registry;
 
 import hexagon.reworkedmetals.core.config.Config;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class ReworkedMetalsWorldGen {
     
-    public static final ImmutableList<OreConfiguration.TargetBlockState> ORE_TIN_TARGET_LIST = ImmutableList.of(
-            OreConfiguration.target(OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, ReworkedMetalsBlocks.TIN_ORE.get().defaultBlockState()),
-            OreConfiguration.target(OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES, ReworkedMetalsBlocks.DEEPSLATE_TIN_ORE.get().defaultBlockState())
-    );
-    public static final ImmutableList<OreConfiguration.TargetBlockState> ORE_TUNGSTEN_TARGET_LIST = ImmutableList.of(
-            OreConfiguration.target(OreConfiguration.Predicates.STONE_ORE_REPLACEABLES, ReworkedMetalsBlocks.TUNGSTEN_ORE.get().defaultBlockState()),
-            OreConfiguration.target(OreConfiguration.Predicates.DEEPSLATE_ORE_REPLACEABLES, ReworkedMetalsBlocks.DEEPSLATE_TUNGSTEN_ORE.get().defaultBlockState())
-    );
-    
     public static final ConfiguredFeature<?, ?> ORE_TIN = Feature.ORE.configured(
-            new OreConfiguration(ORE_TIN_TARGET_LIST, Config.getInt("tinOreVeinSize")))
-                .rangeTriangle(VerticalAnchor.absolute(Config.getInt("tinOreMinHeight")), VerticalAnchor.absolute(Config.getInt("tinOreMaxHeight"))).squared().count(Config.getInt("tinOreAttempts"));
+            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ReworkedMetalsBlocks.TIN_ORE.get().defaultBlockState(), Config.getInt("tinOreVeinSize")))
+                .range(Config.getInt("tinOreMaxHeight")).squared().count(Config.getInt("tinOreAttempts"));
     public static final ConfiguredFeature<?, ?> ORE_TUNGSTEN = Feature.ORE.configured(
-            new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, Config.getInt("tungstenOreVeinSize")))
-                .rangeTriangle(VerticalAnchor.absolute(Config.getInt("tungstenOreMinHeight")), VerticalAnchor.absolute(Config.getInt("tungstenOreMaxHeight"))).squared().count(Config.getInt("tungstenOreAttempts"));
+            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ReworkedMetalsBlocks.TUNGSTEN_ORE.get().defaultBlockState(), Config.getInt("tungstenOreVeinSize")))
+                .range(Config.getInt("tungstenOreMaxHeight")).squared().count(Config.getInt("tungstenOreAttempts"));
     
-    private static <FC extends FeatureConfiguration> void register(String key, ConfiguredFeature<FC, ?> feature) {
-        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, feature);
+    private static <FC extends IFeatureConfig> void register(String key, ConfiguredFeature<FC, ?> feature) {
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, feature);
     }
     
     public static void register() {
