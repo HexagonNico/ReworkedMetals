@@ -1,7 +1,7 @@
 {
-    "variants": {
-      "": {
-        "model": "reworkedmetals:block/deepslate_tungsten_ore"
-      }
+  "variants": {
+    "": {
+      "model": "reworkedmetals:block/deepslate_tungsten_ore"
     }
   }
+}

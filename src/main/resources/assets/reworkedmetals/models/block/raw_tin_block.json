@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "reworkedmetals:block/deepslate_tungsten_ore"
+    "all": "reworkedmetals:block/raw_tin_block"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:tin_block"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:tin_ingot",
+    "count": 9
+  }
+}

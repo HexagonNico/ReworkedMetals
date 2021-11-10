@@ -1,9 +1,9 @@
 package hexagon.reworkedmetals.core.registry;
 
-import hexagon.reworkedmetals.core.ReworkedMetals;
 import hexagon.reworkedmetals.common.item.ModArmorItem;
 import hexagon.reworkedmetals.common.item.ModArmorMaterials;
 import hexagon.reworkedmetals.common.item.ModToolTiers;
+import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -33,6 +33,13 @@ public class ReworkedMetalsItems {
     public static final RegistryObject<Item> DEEPSLATE_TIN_ORE = REGISTER.register("deepslate_tin_ore", () -> new BlockItem(ReworkedMetalsBlocks.DEEPSLATE_TIN_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TUNGSTEN_ORE = REGISTER.register("tungsten_ore", () -> new BlockItem(ReworkedMetalsBlocks.TUNGSTEN_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = REGISTER.register("deepslate_tungsten_ore", () -> new BlockItem(ReworkedMetalsBlocks.DEEPSLATE_TUNGSTEN_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    
+    public static final RegistryObject<Item> TIN_BLOCK = REGISTER.register("tin_block", () -> new BlockItem(ReworkedMetalsBlocks.TIN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TIN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> TUNGSTEN_BLOCK = REGISTER.register("tungsten_block", () -> new BlockItem(ReworkedMetalsBlocks.TUNGSTEN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_TUNGSTEN_BLOCK = REGISTER.register("raw_tungsten_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TUNGSTEN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> BRONZE_BLOCK = REGISTER.register("bronze_block", () -> new BlockItem(ReworkedMetalsBlocks.BRONZE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STEEL_BLOCK = REGISTER.register("steel_block", () -> new BlockItem(ReworkedMetalsBlocks.STEEL_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     
     public static final RegistryObject<Item> COPPER_PICKAXE = REGISTER.register("copper_pickaxe", () -> new PickaxeItem(ModToolTiers.COPPER, 1, -2.8f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
     public static final RegistryObject<Item> COPPER_SWORD = REGISTER.register("copper_sword", () -> new SwordItem(ModToolTiers.COPPER, 3, -2.4f, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
