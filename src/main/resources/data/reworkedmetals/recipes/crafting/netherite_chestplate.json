@@ -7,7 +7,7 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:netherite_ingot"
+      "tag": "forge:ingots/netherite"
     }
   },
   "result": {

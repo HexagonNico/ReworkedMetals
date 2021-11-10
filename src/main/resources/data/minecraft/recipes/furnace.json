@@ -13,7 +13,7 @@
       "item": "reworkedmetals:smeltery"
     },
     "I": {
-      "item": "reworkedmetals:tungsten_ingot"
+      "tag": "forge:ingots/tungsten"
     }
   },
   "result": {

@@ -4,7 +4,7 @@
     "item": "minecraft:netherite_boots"
   },
   "addition": {
-    "item": "minecraft:gold_ingot"
+    "tag": "forge:ingots/gold"
   },
   "result": {
     "item": "reworkedmetals:gilded_netherite_boots"

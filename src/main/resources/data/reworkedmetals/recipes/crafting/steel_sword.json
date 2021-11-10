@@ -10,7 +10,7 @@
       "tag": "forge:rods/wooden"
     },
     "#": {
-      "item": "reworkedmetals:steel_ingot"
+      "tag": "forge:ingots/steel"
     }
   },
   "result": {
