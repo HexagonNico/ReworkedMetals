@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ReworkedMetalsContainers {
     
     public static DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.CONTAINERS, ReworkedMetals.ID);
+    
     public static RegistryObject<MenuType<ReworkedFurnaceMenu>> FURNACE = REGISTER.register("furnace", () -> IForgeContainerType.create(ReworkedFurnaceMenu::new));
     
     public static void registerGuis() {

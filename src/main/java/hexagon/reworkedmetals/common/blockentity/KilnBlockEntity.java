@@ -24,6 +24,4 @@ public class KilnBlockEntity extends ReworkedFurnaceBlockEntity {
     public String stationType() {
         return "kiln";
     }
-    
-    // TODO - Glazed terracotta, cracked bricks, charcoal, chorus fruit, sponges
 }

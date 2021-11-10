@@ -149,11 +149,6 @@ public class ReworkedFurnaceRecipe implements Recipe<ReworkedFurnaceBlockEntity>
                 }
                 return true;
             }
-//            for(ItemStack ingredient : this.itemsIngredients) {
-//                if(!inputItems.removeIf(inputItem -> inputItem.sameItem(ingredient) && inputItem.getCount() >= ingredient.getCount()))
-//                    return false;
-//            }
-//            return inputItems.isEmpty();
         }
     }
     

@@ -179,22 +179,6 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
                 break;
             }
         }
-//        ItemStack itemToRemove = itemStack.copy();
-//        for(int i = 0; i < 4; i++) {
-//            if(itemToRemove.isEmpty())
-//                break;
-//            ItemStack itemInSlot = this.getItem(i);
-//            if(itemInSlot.sameItem(itemToRemove)) {
-//                if(itemInSlot.getCount() >= itemToRemove.getCount()) {
-//                    itemInSlot.shrink(itemToRemove.getCount());
-//                    this.setItem(i, itemInSlot);
-//                    break;
-//                } else {
-//                    itemToRemove.shrink(itemInSlot.getCount());
-//                    this.setItem(i, ItemStack.EMPTY);
-//                }
-//            }
-//        }
     }
     
     @Nullable

@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ReworkedMetalsCrafting {
     
     public static DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ReworkedMetals.ID);
+    
     public static RegistryObject<RecipeSerializer<?>> SMELTING = REGISTER.register("smelting", () -> ReworkedFurnaceRecipe.SERIALIZER);
     
     public static void registerConditions() {

@@ -14,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ReworkedMetalsBlockEntities {
     
     public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, ReworkedMetals.ID);
+    
     public static final RegistryObject<BlockEntityType<SmelteryBlockEntity>> SMELTERY = REGISTER.register("smeltery", () -> BlockEntityType.Builder.of(SmelteryBlockEntity::new, ReworkedMetalsBlocks.SMELTERY.get()).build(null));
     public static final RegistryObject<BlockEntityType<FurnaceBlockEntity>> FURNACE = REGISTER.register("furnace", () -> BlockEntityType.Builder.of(FurnaceBlockEntity::new, ReworkedMetalsBlocks.FURNACE.get()).build(null));
     public static final RegistryObject<BlockEntityType<BlastFurnaceBlockEntity>> BLAST_FURNACE = REGISTER.register("blast_furnace", () -> BlockEntityType.Builder.of(BlastFurnaceBlockEntity::new, ReworkedMetalsBlocks.BLAST_FURNACE.get()).build(null));
