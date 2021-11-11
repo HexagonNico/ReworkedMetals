@@ -1,8 +1,7 @@
 {
   "values": [
+    "reworkedmetals:copper_ore",
     "reworkedmetals:tin_ore",
-    "reworkedmetals:deepslate_tin_ore",
-    "reworkedmetals:tungsten_ore",
-    "reworkedmetals:deepslate_tungsten_ore"
+    "reworkedmetals:tungsten_ore"
   ]
 }

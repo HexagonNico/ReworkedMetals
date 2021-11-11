@@ -2,7 +2,7 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_iron"
+      "item": "reworkedmetals:raw_iron"
     }
   ],
   "result": {

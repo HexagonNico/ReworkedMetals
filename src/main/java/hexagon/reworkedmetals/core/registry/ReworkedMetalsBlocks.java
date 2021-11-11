@@ -27,15 +27,18 @@ public class ReworkedMetalsBlocks {
     public static final RegistryObject<Block> BLAST_FURNACE = OVERRIDES.register("blast_furnace", BlastFurnaceBlock::new);
     public static final RegistryObject<Block> KILN = REGISTER.register("kiln", KilnBlock::new);
     
+    public static final RegistryObject<Block> COPPER_ORE = REGISTER.register("copper_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0f, 3.0f)));
     public static final RegistryObject<Block> TIN_ORE = REGISTER.register("tin_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0f, 3.0f)));
-//    public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = REGISTER.register("deepslate_tin_ore", () -> new OreBlock(AbstractBlock.Properties.copy(TIN_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5f, 3.0f).sound(SoundType.DEEPSLATE)));
     public static final RegistryObject<Block> TUNGSTEN_ORE = REGISTER.register("tungsten_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0f, 3.0f)));
-//    public static final RegistryObject<Block> DEEPSLATE_TUNGSTEN_ORE = REGISTER.register("deepslate_tungsten_ore", () -> new OreBlock(AbstractBlock.Properties.copy(TIN_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5f, 3.0f).sound(SoundType.DEEPSLATE)));
     
-    public static final RegistryObject<Block> TIN_BLOCK = REGISTER.register("tin_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(/*SoundType.COPPER*/ SoundType.ANVIL)));
-//    public static final RegistryObject<Block> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
+    public static final RegistryObject<Block> COPPER_BLOCK = REGISTER.register("copper_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_ORANGE).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> RAW_COPPER_BLOCK = REGISTER.register("raw_copper_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_ORANGE).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
+    public static final RegistryObject<Block> TIN_BLOCK = REGISTER.register("tin_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
     public static final RegistryObject<Block> TUNGSTEN_BLOCK = REGISTER.register("tungsten_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
-//    public static final RegistryObject<Block> RAW_TUNGSTEN_BLOCK = REGISTER.register("raw_tungsten_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
-    public static final RegistryObject<Block> BRONZE_BLOCK = REGISTER.register("bronze_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(/*SoundType.COPPER*/ SoundType.ANVIL)));
+    public static final RegistryObject<Block> RAW_TUNGSTEN_BLOCK = REGISTER.register("raw_tungsten_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
+    public static final RegistryObject<Block> BRONZE_BLOCK = REGISTER.register("bronze_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> RAW_IRON_BLOCK = REGISTER.register("raw_iron_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
+    public static final RegistryObject<Block> RAW_GOLD_BLOCK = REGISTER.register("raw_gold_block", () -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.GOLD).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
     public static final RegistryObject<Block> STEEL_BLOCK = REGISTER.register("steel_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
 }

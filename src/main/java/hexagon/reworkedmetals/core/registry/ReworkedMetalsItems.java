@@ -22,23 +22,30 @@ public class ReworkedMetalsItems {
     public static final RegistryObject<Item> BLAST_FURNACE = OVERRIDES.register("blast_furnace", () -> new BlockItem(ReworkedMetalsBlocks.BLAST_FURNACE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> KILN = REGISTER.register("kiln", () -> new BlockItem(ReworkedMetalsBlocks.KILN.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     
+    public static final RegistryObject<Item> RAW_COPPER = REGISTER.register("raw_copper", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> COPPER_INGOT = REGISTER.register("copper_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> RAW_TIN = REGISTER.register("raw_tin", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> TIN_INGOT = REGISTER.register("tin_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> RAW_TUNGSTEN = REGISTER.register("raw_tungsten", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> TUNGSTEN_INGOT = REGISTER.register("tungsten_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> BRONZE_INGOT = REGISTER.register("bronze_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> RAW_IRON = REGISTER.register("raw_iron", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> RAW_GOLD = REGISTER.register("raw_gold", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> STEEL_INGOT = REGISTER.register("steel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     
+    public static final RegistryObject<Item> COPPER_ORE = REGISTER.register("copper_ore", () -> new BlockItem(ReworkedMetalsBlocks.COPPER_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TIN_ORE = REGISTER.register("tin_ore", () -> new BlockItem(ReworkedMetalsBlocks.TIN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-//    public static final RegistryObject<Item> DEEPSLATE_TIN_ORE = REGISTER.register("deepslate_tin_ore", () -> new BlockItem(ReworkedMetalsBlocks.DEEPSLATE_TIN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TUNGSTEN_ORE = REGISTER.register("tungsten_ore", () -> new BlockItem(ReworkedMetalsBlocks.TUNGSTEN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-//    public static final RegistryObject<Item> DEEPSLATE_TUNGSTEN_ORE = REGISTER.register("deepslate_tungsten_ore", () -> new BlockItem(ReworkedMetalsBlocks.DEEPSLATE_TUNGSTEN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     
+    public static final RegistryObject<Item> COPPER_BLOCK = REGISTER.register("copper_block", () -> new BlockItem(ReworkedMetalsBlocks.COPPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_COPPER_BLOCK = REGISTER.register("raw_copper_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_COPPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TIN_BLOCK = REGISTER.register("tin_block", () -> new BlockItem(ReworkedMetalsBlocks.TIN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-//    public static final RegistryObject<Item> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TIN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TIN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TUNGSTEN_BLOCK = REGISTER.register("tungsten_block", () -> new BlockItem(ReworkedMetalsBlocks.TUNGSTEN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-//    public static final RegistryObject<Item> RAW_TUNGSTEN_BLOCK = REGISTER.register("raw_tungsten_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TUNGSTEN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_TUNGSTEN_BLOCK = REGISTER.register("raw_tungsten_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_TUNGSTEN_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> BRONZE_BLOCK = REGISTER.register("bronze_block", () -> new BlockItem(ReworkedMetalsBlocks.BRONZE_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_IRON_BLOCK = REGISTER.register("raw_iron_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_IRON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_GOLD_BLOCK = REGISTER.register("raw_gold_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_GOLD_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STEEL_BLOCK = REGISTER.register("steel_block", () -> new BlockItem(ReworkedMetalsBlocks.STEEL_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     
     public static final RegistryObject<Item> COPPER_PICKAXE = REGISTER.register("copper_pickaxe", () -> new PickaxeItem(ModToolTiers.COPPER, 1, -2.8f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));

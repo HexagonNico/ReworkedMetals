@@ -2,13 +2,13 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_copper"
+      "item": "reworkedmetals:raw_copper"
     },
     {
-      "item": "minecraft:raw_copper"
+      "item": "reworkedmetals:raw_copper"
     },
     {
-      "item": "minecraft:raw_copper"
+      "item": "reworkedmetals:raw_copper"
     },
     {
       "item": "reworkedmetals:raw_tin"
