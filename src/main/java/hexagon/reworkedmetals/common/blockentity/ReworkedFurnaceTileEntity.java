@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.common.blockentity;
 
 import hexagon.reworkedmetals.common.block.ReworkedFurnaceBlock;
-import hexagon.reworkedmetals.common.container.ReworkedFurnaceMenu;
+import hexagon.reworkedmetals.common.container.ReworkedFurnaceContainer;
 import hexagon.reworkedmetals.common.crafting.ReworkedFurnaceRecipe;
 
 import javax.annotation.Nullable;
@@ -47,7 +47,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
+public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
     
     protected int litTime;
     protected int totalLitTime;
@@ -59,7 +59,7 @@ public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity 
     
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     
-    public ReworkedFurnaceBlockEntity(TileEntityType<?> blockEntityType) {
+    public ReworkedFurnaceTileEntity(TileEntityType<?> blockEntityType) {
         super(blockEntityType);
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
     }
@@ -95,7 +95,7 @@ public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity 
     
     @Override
     protected Container createMenu(int id, PlayerInventory playerInventory) {
-        return new ReworkedFurnaceMenu(id, playerInventory, this, this.getDataAccess());
+        return new ReworkedFurnaceContainer(id, playerInventory, this, this.getDataAccess());
     }
     
     @Override
@@ -221,10 +221,10 @@ public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity 
             @Override
             public int get(int index) {
                 switch (index) {
-                    case 0: return ReworkedFurnaceBlockEntity.this.litTime;
-                    case 1: return ReworkedFurnaceBlockEntity.this.totalLitTime;
-                    case 2: return ReworkedFurnaceBlockEntity.this.smeltingProgress;
-                    case 3: return ReworkedFurnaceBlockEntity.this.smeltingTime;
+                    case 0: return ReworkedFurnaceTileEntity.this.litTime;
+                    case 1: return ReworkedFurnaceTileEntity.this.totalLitTime;
+                    case 2: return ReworkedFurnaceTileEntity.this.smeltingProgress;
+                    case 3: return ReworkedFurnaceTileEntity.this.smeltingTime;
                     default: return 0;
                 }
             }
@@ -232,10 +232,10 @@ public abstract class ReworkedFurnaceBlockEntity extends LockableLootTileEntity 
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0: ReworkedFurnaceBlockEntity.this.litTime = value; break;
-                    case 1: ReworkedFurnaceBlockEntity.this.totalLitTime = value; break;
-                    case 2: ReworkedFurnaceBlockEntity.this.smeltingProgress = value; break;
-                    case 3: ReworkedFurnaceBlockEntity.this.smeltingTime = value; break;
+                    case 0: ReworkedFurnaceTileEntity.this.litTime = value; break;
+                    case 1: ReworkedFurnaceTileEntity.this.totalLitTime = value; break;
+                    case 2: ReworkedFurnaceTileEntity.this.smeltingProgress = value; break;
+                    case 3: ReworkedFurnaceTileEntity.this.smeltingTime = value; break;
                 }
             }
             

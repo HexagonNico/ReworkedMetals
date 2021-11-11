@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.block;
 
-import hexagon.reworkedmetals.common.blockentity.KilnBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.KilnTileEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -32,7 +32,7 @@ public class KilnBlock extends ReworkedFurnaceBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new KilnBlockEntity();
+        return new KilnTileEntity();
     }
     
     @Override

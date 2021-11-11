@@ -1,7 +1,7 @@
 package hexagon.reworkedmetals.core.registry;
 
 import hexagon.reworkedmetals.client.gui.ReworkedFurnaceGui;
-import hexagon.reworkedmetals.common.container.ReworkedFurnaceMenu;
+import hexagon.reworkedmetals.common.container.ReworkedFurnaceContainer;
 import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import net.minecraft.client.gui.ScreenManager;
@@ -15,7 +15,7 @@ public class ReworkedMetalsContainers {
     
     public static DeferredRegister<ContainerType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.CONTAINERS, ReworkedMetals.ID);
     
-    public static RegistryObject<ContainerType<ReworkedFurnaceMenu>> FURNACE = REGISTER.register("furnace", () -> IForgeContainerType.create(ReworkedFurnaceMenu::new));
+    public static RegistryObject<ContainerType<ReworkedFurnaceContainer>> FURNACE = REGISTER.register("furnace", () -> IForgeContainerType.create(ReworkedFurnaceContainer::new));
     
     public static void registerGuis() {
         ScreenManager.register(FURNACE.get(), ReworkedFurnaceGui::new);

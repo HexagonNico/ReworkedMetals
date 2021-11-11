@@ -1,16 +1,16 @@
 package hexagon.reworkedmetals.common.blockentity;
 
-import hexagon.reworkedmetals.core.registry.ReworkedMetalsBlockEntities;
+import hexagon.reworkedmetals.core.registry.ReworkedMetalsTileEntities;
 
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 @MethodsReturnNonnullByDefault
-public class BlastFurnaceBlockEntity extends ReworkedFurnaceBlockEntity {
+public class BlastFurnaceTileEntity extends ReworkedFurnaceTileEntity {
     
-    public BlastFurnaceBlockEntity() {
-        super(ReworkedMetalsBlockEntities.BLAST_FURNACE.get());
+    public BlastFurnaceTileEntity() {
+        super(ReworkedMetalsTileEntities.BLAST_FURNACE.get());
     }
     
     @Override

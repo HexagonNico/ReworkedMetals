@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.block;
 
-import hexagon.reworkedmetals.common.blockentity.FurnaceBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.FurnaceTileEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -22,7 +22,7 @@ public class FurnaceBlock extends ReworkedFurnaceBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new FurnaceBlockEntity();
+        return new FurnaceTileEntity();
     }
     
     @Override

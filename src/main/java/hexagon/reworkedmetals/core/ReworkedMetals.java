@@ -28,7 +28,7 @@ public final class ReworkedMetals {
         ReworkedMetalsBlocks.OVERRIDES.register(eventBus);
         ReworkedMetalsItems.REGISTER.register(eventBus);
         ReworkedMetalsItems.OVERRIDES.register(eventBus);
-        ReworkedMetalsBlockEntities.REGISTER.register(eventBus);
+        ReworkedMetalsTileEntities.REGISTER.register(eventBus);
         ReworkedMetalsContainers.REGISTER.register(eventBus);
         ReworkedMetalsCrafting.REGISTER.register(eventBus);
         

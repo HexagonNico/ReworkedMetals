@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.container;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsContainers;
 
 import javax.annotation.Nonnull;
@@ -19,26 +19,26 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 
 @MethodsReturnNonnullByDefault
-public class ReworkedFurnaceMenu extends Container {
+public class ReworkedFurnaceContainer extends Container {
     
-    private final ReworkedFurnaceBlockEntity container;
+    private final ReworkedFurnaceTileEntity tileEntity;
     private final IIntArray containerData;
     
-    public ReworkedFurnaceMenu(int windowId, PlayerInventory playerInventory, ReworkedFurnaceBlockEntity container, IIntArray containerData) {
+    public ReworkedFurnaceContainer(int windowId, PlayerInventory playerInventory, ReworkedFurnaceTileEntity tileEntity, IIntArray containerData) {
         super(ReworkedMetalsContainers.FURNACE.get(), windowId);
-        this.container = container;
+        this.tileEntity = tileEntity;
         this.containerData = containerData;
-        checkContainerSize(container, 6);
-        container.startOpen(playerInventory.player);
+        checkContainerSize(tileEntity, 6);
+        tileEntity.startOpen(playerInventory.player);
         
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
-                this.addSlot(new Slot(container, j + i * 2, 38 + j * 18, 17 + i * 18));
+                this.addSlot(new Slot(tileEntity, j + i * 2, 38 + j * 18, 17 + i * 18));
             }
         }
         
-        this.addSlot(new ReworkedFurnaceFuelSlot(container, 4, 47, 71));
-        this.addSlot(new ReworkedFurnaceResultSlot(container, playerInventory.player, 5, 118, 26));
+        this.addSlot(new ReworkedFurnaceFuelSlot(tileEntity, 4, 47, 71));
+        this.addSlot(new ReworkedFurnaceResultSlot(tileEntity, playerInventory.player, 5, 118, 26));
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 9; j++) {
@@ -52,13 +52,13 @@ public class ReworkedFurnaceMenu extends Container {
         this.addDataSlots(containerData);
     }
     
-    public ReworkedFurnaceMenu(int windowId, PlayerInventory playerInventory, PacketBuffer buffer) {
-        this(windowId, playerInventory, (ReworkedFurnaceBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new IntArray(4));
+    public ReworkedFurnaceContainer(int windowId, PlayerInventory playerInventory, PacketBuffer buffer) {
+        this(windowId, playerInventory, (ReworkedFurnaceTileEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new IntArray(4));
     }
     
     @Override
     public boolean stillValid(@Nonnull PlayerEntity player) {
-        return this.container.stillValid(player);
+        return this.tileEntity.stillValid(player);
     }
     
     @OnlyIn(Dist.CLIENT)

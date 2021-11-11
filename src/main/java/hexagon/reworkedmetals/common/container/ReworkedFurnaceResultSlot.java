@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.container;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -42,8 +42,8 @@ public class ReworkedFurnaceResultSlot extends Slot {
     @Override
     protected void checkTakeAchievements(ItemStack itemStack) {
         super.checkTakeAchievements(itemStack);
-        if(this.player instanceof ServerPlayerEntity && this.container instanceof ReworkedFurnaceBlockEntity) {
-            ((ReworkedFurnaceBlockEntity) this.container).popExperience((ServerPlayerEntity) player, ((ServerPlayerEntity) player).getLevel(), player.position());
+        if(this.player instanceof ServerPlayerEntity && this.container instanceof ReworkedFurnaceTileEntity) {
+            ((ReworkedFurnaceTileEntity) this.container).popExperience((ServerPlayerEntity) player, ((ServerPlayerEntity) player).getLevel(), player.position());
         }
     }
 }

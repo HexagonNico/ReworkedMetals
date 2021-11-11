@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.block;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -58,8 +58,8 @@ public abstract class ReworkedFurnaceBlock extends Block {
     public void setPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack item) {
         if(item.hasCustomHoverName()) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if(tileEntity instanceof ReworkedFurnaceBlockEntity) {
-                ((ReworkedFurnaceBlockEntity) tileEntity).setCustomName(item.getHoverName());
+            if(tileEntity instanceof ReworkedFurnaceTileEntity) {
+                ((ReworkedFurnaceTileEntity) tileEntity).setCustomName(item.getHoverName());
             }
         }
     }
@@ -98,8 +98,8 @@ public abstract class ReworkedFurnaceBlock extends Block {
     public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
         if(!state.is(newState.getBlock())) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if(tileEntity instanceof ReworkedFurnaceBlockEntity) {
-                ((ReworkedFurnaceBlockEntity) tileEntity).popExperience(null, (ServerWorld) world, Vector3d.atCenterOf(pos));
+            if(tileEntity instanceof ReworkedFurnaceTileEntity) {
+                ((ReworkedFurnaceTileEntity) tileEntity).popExperience(null, (ServerWorld) world, Vector3d.atCenterOf(pos));
                 InventoryHelper.dropContents(world, pos, (IInventory) tileEntity);
             }
             super.onRemove(state, world, pos, newState, isMoving);

@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.client.gui;
 
-import hexagon.reworkedmetals.common.container.ReworkedFurnaceMenu;
+import hexagon.reworkedmetals.common.container.ReworkedFurnaceContainer;
 import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,11 +13,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 @ParametersAreNonnullByDefault
-public class ReworkedFurnaceGui extends ContainerScreen<ReworkedFurnaceMenu> {
+public class ReworkedFurnaceGui extends ContainerScreen<ReworkedFurnaceContainer> {
     
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ReworkedMetals.ID, "textures/gui/furnace.png");
     
-    public ReworkedFurnaceGui(ReworkedFurnaceMenu container, PlayerInventory playerInventory, ITextComponent title) {
+    public ReworkedFurnaceGui(ReworkedFurnaceContainer container, PlayerInventory playerInventory, ITextComponent title) {
         super(container, playerInventory, title);
         this.leftPos = 0;
         this.topPos = 0;

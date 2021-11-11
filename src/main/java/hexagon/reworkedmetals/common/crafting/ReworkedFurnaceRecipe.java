@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.crafting;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceBlockEntity;
+import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
 import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import javax.annotation.Nullable;
@@ -29,7 +29,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceBlockEntity> {
+public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity> {
     
     public static final IRecipeType<ReworkedFurnaceRecipe> TYPE = IRecipeType.register(ReworkedMetals.ID + ":smelting");
     
@@ -101,7 +101,7 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceBlockEntity
     }
     
     @Override
-    public ItemStack assemble(ReworkedFurnaceBlockEntity recipeWrapper) {
+    public ItemStack assemble(ReworkedFurnaceTileEntity recipeWrapper) {
         return this.output.copy();
     }
     
@@ -118,7 +118,7 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceBlockEntity
     }
     
     @Override
-    public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, World world) {
+    public boolean matches(ReworkedFurnaceTileEntity recipeWrapper, World world) {
         List<ItemStack> inputItems = IntStream.range(0, 4)
                 .mapToObj(i -> recipeWrapper.getItem(i).copy())
                 .filter(itemStack -> !itemStack.isEmpty())
