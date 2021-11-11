@@ -23,14 +23,16 @@ public class Config {
         configBuilder.pop();
         
         configBuilder.comment("World generation").push("world_gen");
+        createConfigValue(configBuilder, "copperOreGenEnabled", true, "Enables natural generation of copper ore", "Default: true", "Set this to false to disable copper ore generation");
+        createConfigValue(configBuilder, "copperOreVeinSize", 10, 1, 32, "Max size of a copper ore vein", "Default value: 10");
+        createConfigValue(configBuilder, "copperOreMaxHeight", 96, 0, 256, "Max height at which copper can generate", "Default value: 96");
+        createConfigValue(configBuilder, "copperOreAttempts", 6, 0, 32, "Number of generation attempts for copper ore", "Default value: 6");
         createConfigValue(configBuilder, "tinOreGenEnabled", true, "Enables natural generation of tin ore", "Default: true", "Set this to false to disable tin ore generation");
         createConfigValue(configBuilder, "tinOreVeinSize", 10, 1, 32, "Max size of a tin ore vein", "Default value: 10");
-        createConfigValue(configBuilder, "tinOreMinHeight", 0, 0, 256, "Min height at which tin can generate", "Default value: 0");
         createConfigValue(configBuilder, "tinOreMaxHeight", 96, 0, 256, "Max height at which tin can generate", "Default value: 96");
         createConfigValue(configBuilder, "tinOreAttempts", 4, 0, 32, "Number of generation attempts for tin ore", "Default value: 4");
         createConfigValue(configBuilder, "tungstenOreGenEnabled", true, "Enables natural generation of tungsten ore", "Default: true", "Set this to false to disable tungsten ore generation");
         createConfigValue(configBuilder, "tungstenOreVeinSize", 9, 1, 32, "Max size of a tungsten ore vein", "Default value: 9");
-        createConfigValue(configBuilder, "tungstenOreMinHeight", 32, 0, 256, "Min height at which tungsten can generate", "Default value: 32");
         createConfigValue(configBuilder, "tungstenOreMaxHeight", 96, 0, 256, "Max height at which tungsten can generate", "Default value: 96");
         createConfigValue(configBuilder, "tungstenOreAttempts", 4, 0, 32, "Number of generation attempts for tungsten ore", "Default value: 4");
         configBuilder.pop();

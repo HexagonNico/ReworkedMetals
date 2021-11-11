@@ -11,9 +11,12 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class ReworkedMetalsWorldGen {
     
+    public static final ConfiguredFeature<?, ?> ORE_COPPER = Feature.ORE.configured(
+            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ReworkedMetalsBlocks.COPPER_ORE.get().defaultBlockState(), Config.getInt("copperOreVeinSize")))
+            .range(Config.getInt("copperOreMaxHeight")).squared().count(Config.getInt("copperOreAttempts"));
     public static final ConfiguredFeature<?, ?> ORE_TIN = Feature.ORE.configured(
             new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ReworkedMetalsBlocks.TIN_ORE.get().defaultBlockState(), Config.getInt("tinOreVeinSize")))
-                .range(Config.getInt("tinOreMaxHeight")).squared().count(Config.getInt("tinOreAttempts"));
+            .range(Config.getInt("tinOreMaxHeight")).squared().count(Config.getInt("tinOreAttempts"));
     public static final ConfiguredFeature<?, ?> ORE_TUNGSTEN = Feature.ORE.configured(
             new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ReworkedMetalsBlocks.TUNGSTEN_ORE.get().defaultBlockState(), Config.getInt("tungstenOreVeinSize")))
                 .range(Config.getInt("tungstenOreMaxHeight")).squared().count(Config.getInt("tungstenOreAttempts"));
@@ -23,6 +26,7 @@ public class ReworkedMetalsWorldGen {
     }
     
     public static void register() {
+        register("copper_ore", ORE_COPPER);
         register("ore_tin", ORE_TIN);
         register("ore_tungsten", ORE_TUNGSTEN);
     }
