@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.block;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
+import hexagon.reworkedmetals.common.tileentity.ReworkedFurnaceTileEntity;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -82,6 +82,11 @@ public abstract class ReworkedFurnaceBlock extends Block {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+    
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
     
     @Override

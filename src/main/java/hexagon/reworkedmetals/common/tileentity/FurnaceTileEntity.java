@@ -1,4 +1,4 @@
-package hexagon.reworkedmetals.common.blockentity;
+package hexagon.reworkedmetals.common.tileentity;
 
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsTileEntities;
 

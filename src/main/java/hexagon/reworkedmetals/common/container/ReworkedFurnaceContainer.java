@@ -1,6 +1,6 @@
 package hexagon.reworkedmetals.common.container;
 
-import hexagon.reworkedmetals.common.blockentity.ReworkedFurnaceTileEntity;
+import hexagon.reworkedmetals.common.tileentity.ReworkedFurnaceTileEntity;
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsContainers;
 
 import javax.annotation.Nonnull;

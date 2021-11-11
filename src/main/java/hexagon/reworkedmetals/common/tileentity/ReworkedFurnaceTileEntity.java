@@ -1,9 +1,10 @@
-package hexagon.reworkedmetals.common.blockentity;
+package hexagon.reworkedmetals.common.tileentity;
 
 import hexagon.reworkedmetals.common.block.ReworkedFurnaceBlock;
 import hexagon.reworkedmetals.common.container.ReworkedFurnaceContainer;
 import hexagon.reworkedmetals.common.crafting.ReworkedFurnaceRecipe;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -32,6 +33,7 @@ import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -44,6 +46,11 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -327,17 +334,31 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
     }
     
     @Override
-    public boolean canPlaceItemThroughFace(int i, ItemStack item, @Nullable Direction direction) {
-        return this.canPlaceItem(i, item);
+    public boolean canPlaceItemThroughFace(int slot, ItemStack item, @Nullable Direction direction) {
+        return this.canPlaceItem(slot, item);
     }
     
     @Override
-    public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
-        if(direction == Direction.DOWN && i == 1) {
-            Item item = itemStack.getItem();
-            return item == Items.WATER_BUCKET || item == Items.BUCKET;
+    public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction direction) {
+        if(direction == Direction.DOWN) {
+            if(slot == 4) {
+                Item item = itemStack.getItem();
+                return item == Items.WATER_BUCKET || item == Items.BUCKET;
+            }
+            return slot == 5;
         }
         return true;
+    }
+    
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack item) {
+        if(slot == 5) {
+            return false;
+        } else if(slot == 4) {
+            return AbstractFurnaceTileEntity.isFuel(item);
+        } else {
+            return true;
+        }
     }
     
     @Override
@@ -359,5 +380,21 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
     @Override
     public IRecipe<?> getRecipeUsed() {
         return null;
+    }
+    
+    LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+
+    @Nonnull
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
+        if(!this.remove && side != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if(side == Direction.UP)
+                return handlers[0].cast();
+            else if(side == Direction.DOWN)
+                return handlers[1].cast();
+            else
+                return handlers[2].cast();
+        }
+        return super.getCapability(capability, side);
     }
 }

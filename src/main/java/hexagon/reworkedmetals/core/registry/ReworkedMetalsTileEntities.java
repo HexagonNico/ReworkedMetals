@@ -1,8 +1,8 @@
 package hexagon.reworkedmetals.core.registry;
 
-import hexagon.reworkedmetals.common.blockentity.*;
-import hexagon.reworkedmetals.common.blockentity.KilnTileEntity;
-import hexagon.reworkedmetals.common.blockentity.SmelteryTileEntity;
+import hexagon.reworkedmetals.common.tileentity.*;
+import hexagon.reworkedmetals.common.tileentity.KilnTileEntity;
+import hexagon.reworkedmetals.common.tileentity.SmelteryTileEntity;
 import hexagon.reworkedmetals.core.ReworkedMetals;
 
 import net.minecraft.tileentity.TileEntityType;

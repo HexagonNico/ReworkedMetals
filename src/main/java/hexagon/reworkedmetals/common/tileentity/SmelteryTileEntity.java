@@ -1,4 +1,4 @@
-package hexagon.reworkedmetals.common.blockentity;
+package hexagon.reworkedmetals.common.tileentity;
 
 import hexagon.reworkedmetals.core.registry.ReworkedMetalsTileEntities;
 
@@ -7,19 +7,19 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 @MethodsReturnNonnullByDefault
-public class BlastFurnaceTileEntity extends ReworkedFurnaceTileEntity {
+public class SmelteryTileEntity extends ReworkedFurnaceTileEntity {
     
-    public BlastFurnaceTileEntity() {
-        super(ReworkedMetalsTileEntities.BLAST_FURNACE.get());
+    public SmelteryTileEntity() {
+        super(ReworkedMetalsTileEntities.SMELTERY.get());
     }
     
     @Override
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.blast_furnace");
+        return new TranslationTextComponent("container.reworkedmetals.smeltery");
     }
     
     @Override
     public String stationType() {
-        return "blast_furnace";
+        return "smeltery";
     }
 }

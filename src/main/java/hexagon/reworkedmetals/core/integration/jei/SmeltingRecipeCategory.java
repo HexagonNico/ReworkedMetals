@@ -51,7 +51,7 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedFurnaceRe
     
     @Override
     public String getTitle() {
-        return "reworkedmetals.jei_category";
+        return "Reworked Smelting";
     }
     
     @Override
