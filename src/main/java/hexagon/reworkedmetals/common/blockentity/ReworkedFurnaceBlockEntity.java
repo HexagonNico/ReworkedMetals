@@ -1,8 +1,10 @@
 package hexagon.reworkedmetals.common.blockentity;
 
+import hexagon.reworkedmetals.common.block.ReworkedFurnaceBlock;
 import hexagon.reworkedmetals.common.container.ReworkedFurnaceMenu;
 import hexagon.reworkedmetals.common.crafting.ReworkedFurnaceRecipe;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -13,6 +15,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -22,25 +25,36 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.StackedContentsCompatible;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntity {
+public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
     
     protected int litTime;
     protected int totalLitTime;
@@ -227,6 +241,80 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         };
     }
     
+    @Override
+    public int[] getSlotsForFace(Direction face) {
+        return switch (face) {
+            case UP -> new int[] {0, 1, 2, 3};
+            case DOWN -> new int[] {5, 4};
+            default -> new int[] {4};
+        };
+    }
+    
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack itemStack, @Nullable Direction face) {
+        return this.canPlaceItem(slot, itemStack);
+    }
+    
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction face) {
+        if(face == Direction.DOWN) {
+            if(slot == 4) {
+                Item item = this.getItem(4).getItem();
+                return item == Items.WATER_BUCKET || item == Items.BUCKET;
+            }
+            return slot == 5;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack itemStack) {
+        if(slot == 5) {
+            return false;
+        } else if(slot == 4) {
+            return AbstractFurnaceBlockEntity.isFuel(itemStack);
+        } else {
+            return true;
+        }
+    }
+    
+    @Override
+    public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+        if(recipe != null) {
+            ResourceLocation resourcelocation = recipe.getId();
+            this.recipesUsed.addTo(resourcelocation, 1);
+        }
+    }
+    
+    @Nullable
+    @Override
+    public Recipe<?> getRecipeUsed() {
+        return null;
+    }
+    
+    @Override
+    public void fillStackedContents(StackedContents stackedContents) {
+        for(ItemStack itemstack : this.inventory) {
+            stackedContents.accountStack(itemstack);
+        }
+    }
+    
+    LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
+    
+    @Nonnull
+    @Override
+    public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+        if(!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if(facing == Direction.UP)
+                return handlers[0].cast();
+            else if(facing == Direction.DOWN)
+                return handlers[1].cast();
+            else
+                return handlers[2].cast();
+        }
+        return super.getCapability(capability, facing);
+    }
+    
     public static class Logic {
     
         public static void tickFunction(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
@@ -284,7 +372,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
     
             if(flag != (blockEntity.litTime > 0)) {
                 flag1 = true;
-                state = state.setValue(AbstractFurnaceBlock.LIT, blockEntity.litTime > 0);
+                state = state.setValue(ReworkedFurnaceBlock.LIT, blockEntity.litTime > 0);
                 level.setBlock(pos, state, 3);
             }
             
