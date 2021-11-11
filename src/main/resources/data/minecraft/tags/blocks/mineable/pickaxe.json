@@ -4,6 +4,12 @@
     "reworkedmetals:tin_ore",
     "reworkedmetals:deepslate_tin_ore",
     "reworkedmetals:tungsten_ore",
-    "reworkedmetals:deepslate_tungsten_ore"
+    "reworkedmetals:deepslate_tungsten_ore",
+    "reworkedmetals:tin_block",
+    "reworkedmetals:raw_tin_block",
+    "reworkedmetals:tungsten_block",
+    "reworkedmetals:raw_tungsten_block",
+    "reworkedmetals:bronze_block",
+    "reworkedmetals:steel_block"
   ]
 }
