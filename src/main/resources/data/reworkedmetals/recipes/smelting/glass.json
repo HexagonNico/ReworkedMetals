@@ -2,7 +2,7 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:sand"
+      "tag": "forge:sand"
     }
   ],
   "result": {

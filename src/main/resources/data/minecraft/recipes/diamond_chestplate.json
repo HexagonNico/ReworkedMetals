@@ -1,14 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "#"
+    "X X",
+    "XXX",
+    "XXX"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:air"
+    "X": {
+      "item": "minecraft:diamond"
     }
   },
   "result": {
-    "item": "minecraft:air"
-  }
+    "item": "minecraft:diamond_chestplate"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "disableDiamondsCrafting"
+      }
+    }
+  ]
 }

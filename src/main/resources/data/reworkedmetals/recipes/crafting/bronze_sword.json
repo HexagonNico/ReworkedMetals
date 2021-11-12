@@ -10,7 +10,7 @@
       "tag": "forge:rods/wooden"
     },
     "#": {
-      "item": "reworkedmetals:bronze_ingot"
+      "tag": "forge:ingots/bronze"
     }
   },
   "result": {

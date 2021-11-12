@@ -18,5 +18,11 @@
   },
   "result": {
     "item": "reworkedmetals:smeltery"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "requireCampfireForSmeltery"
+    }
+  ]
 }

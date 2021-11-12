@@ -2,7 +2,12 @@
   "values": [
     "reworkedmetals:tin_ore",
     "reworkedmetals:deepslate_tin_ore",
+    "reworkedmetals:raw_tin_block",
+    "reworkedmetals:tin_block",
     "reworkedmetals:tungsten_ore",
-    "reworkedmetals:deepslate_tungsten_ore"
+    "reworkedmetals:deepslate_tungsten_ore",
+    "reworkedmetals:raw_tungsten_block",
+    "reworkedmetals:tungsten_block",
+    "reworkedmetals:bronze_block"
   ]
 }

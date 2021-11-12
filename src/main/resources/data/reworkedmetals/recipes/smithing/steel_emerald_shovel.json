@@ -4,7 +4,7 @@
     "item": "reworkedmetals:steel_shovel"
   },
   "addition": {
-    "item": "minecraft:emerald"
+    "tag": "forge:gems/emerald"
   },
   "result": {
     "item": "reworkedmetals:steel_emerald_shovel"

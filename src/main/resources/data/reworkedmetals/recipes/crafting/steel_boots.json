@@ -6,7 +6,7 @@
   ],
   "key": {
     "X": {
-      "item": "reworkedmetals:steel_ingot"
+      "tag": "forge:ingots/steel"
     }
   },
   "result": {

@@ -1,0 +1,16 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "minecraft:yellow_terracotta"
+    }
+  ],
+  "result": {
+    "item": "minecraft:yellow_glazed_terracotta"
+  },
+  "experience": 0.1,
+  "smelting_time": 200,
+  "stations": [
+    "kiln"
+  ]
+}
