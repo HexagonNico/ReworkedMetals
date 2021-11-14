@@ -2,7 +2,7 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_tungsten"
+      "tag": "forge:raw_metals/tungsten"
     }
   ],
   "result": {

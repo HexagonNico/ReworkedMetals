@@ -2,10 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_iron"
+      "tag": "forge:raw_metals/iron"
     },
     {
-      "item": "minecraft:raw_iron"
+      "tag": "forge:raw_metals/iron"
     },
     {
       "item": "minecraft:charcoal"

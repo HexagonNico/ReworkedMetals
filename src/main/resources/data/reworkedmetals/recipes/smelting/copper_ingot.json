@@ -2,10 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_copper"
+      "tag": "forge:raw_metals/copper"
     },
     {
-      "item": "minecraft:raw_copper"
+      "tag": "forge:raw_metals/copper"
     }
   ],
   "result": {
