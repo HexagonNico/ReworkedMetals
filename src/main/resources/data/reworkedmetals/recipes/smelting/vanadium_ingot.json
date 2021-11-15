@@ -1,0 +1,26 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:raw_metals/vanadium"
+    },
+    {
+      "tag": "forge:raw_metals/vanadium"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:vanadium_ingot"
+  },
+  "experience": 1,
+  "smelting_time": 200,
+  "stations": [
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "ingotsRequireTwoOre"
+    }
+  ]
+}

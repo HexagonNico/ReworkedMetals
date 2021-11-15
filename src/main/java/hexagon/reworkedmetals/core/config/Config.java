@@ -33,6 +33,11 @@ public class Config {
         createConfigValue(configBuilder, "tungstenOreMinHeight", 32, 0, 256, "Min height at which tungsten can generate", "Default value: 32");
         createConfigValue(configBuilder, "tungstenOreMaxHeight", 96, 0, 256, "Max height at which tungsten can generate", "Default value: 96");
         createConfigValue(configBuilder, "tungstenOreAttempts", 4, 0, 32, "Number of generation attempts for tungsten ore", "Default value: 4");
+        createConfigValue(configBuilder, "vanadiumOreGenEnabled", true, "Enables natural generation of vanadium ore", "Default: true", "Set this to false to disable vanadium ore generation");
+        createConfigValue(configBuilder, "vanadiumOreVeinSize", 8, 1, 32, "Max size of a vanadium ore vein", "Default value: 8");
+        createConfigValue(configBuilder, "vanadiumOreMinHeight", 0, 0, 256, "Min height at which vanadium can generate", "Default value: 0");
+        createConfigValue(configBuilder, "vanadiumOreMaxHeight", 15, 0, 256, "Max height at which vanadium can generate", "Default value: 15");
+        createConfigValue(configBuilder, "vanadiumOreAttempts", 1, 0, 32, "Number of generation attempts for vanadium ore", "Default value: 1");
         configBuilder.pop();
         
         CONFIG = configBuilder.build();

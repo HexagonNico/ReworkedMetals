@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
+    "reworkedmetals:vanadium_ore",
+    "reworkedmetals:deepslate_vanadium_ore",
+    "reworkedmetals:raw_vanadium_block",
+    "reworkedmetals:vanadium_block",
     "reworkedmetals:steel_block"
   ]
 }
