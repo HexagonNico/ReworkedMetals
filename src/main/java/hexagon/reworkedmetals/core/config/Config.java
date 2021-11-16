@@ -16,6 +16,7 @@ public class Config {
     
         configBuilder.comment("Reworked smelting options").push("smelting");
         createConfigValue(configBuilder, "ingotsRequireTwoOre", true, "When enabled, ingots require two raw ore materials to be smelted", "Default: true", "Set this to false to only require one raw ore per ingot");
+        createConfigValue(configBuilder, "allowSmeltingFromOreBlock", true, "Allows the player to smelt ingots from ore blocks, not just raw ores chunk", "Default: true", "This option is only needed for compatibility with other mods, it may be turned off if it is not needed");
         configBuilder.pop();
     
         configBuilder.comment("Vanilla crafting changes").push("crafting_changes");

@@ -1,0 +1,24 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/tin"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:tin_ingot"
+  },
+  "experience": 0.2,
+  "smelting_time": 200,
+  "stations": [
+    "smeltery",
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "allowSmeltingFromOreBlock"
+    }
+  ]
+}

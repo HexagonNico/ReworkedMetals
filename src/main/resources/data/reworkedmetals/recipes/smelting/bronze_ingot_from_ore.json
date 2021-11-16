@@ -1,0 +1,34 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/copper"
+    },
+    {
+      "tag": "forge:ores/copper"
+    },
+    {
+      "tag": "forge:ores/copper"
+    },
+    {
+      "tag": "forge:ores/tin"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:bronze_ingot",
+    "count": 4
+  },
+  "experience": 0.7,
+  "smelting_time": 800,
+  "stations": [
+    "smeltery",
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "allowSmeltingFromOreBlock"
+    }
+  ]
+}
