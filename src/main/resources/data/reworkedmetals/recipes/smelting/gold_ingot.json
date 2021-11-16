@@ -2,10 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_ores/gold"
     },
     {
-      "item": "minecraft:raw_gold"
+      "tag": "forge:raw_ores/gold"
     }
   ],
   "result": {
