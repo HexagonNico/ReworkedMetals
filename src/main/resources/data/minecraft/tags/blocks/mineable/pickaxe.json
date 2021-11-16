@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "reworkedmetals:smeltery",
+    "reworkedmetals:kiln",
     "reworkedmetals:tin_ore",
     "reworkedmetals:deepslate_tin_ore",
     "reworkedmetals:tungsten_ore",
@@ -16,6 +17,8 @@
     "reworkedmetals:raw_tungsten_block",
     "reworkedmetals:bronze_block",
     "reworkedmetals:steel_block",
+    "reworkedmetals:vanadium_block",
+    "reworkedmetals:raw_vanadium_block",
     "reworkedmetals:ruby_block"
   ]
 }
