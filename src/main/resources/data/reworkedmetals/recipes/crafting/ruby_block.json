@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "reworkedmetals:ruby"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:ruby_block"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableRubyBlock"
+    }
+  ]
+}

@@ -34,6 +34,7 @@ public class Config {
         createConfigValue(configBuilder, "enableSteelBlock", true, "Enables crafting block of steel", "Default: true");
         createConfigValue(configBuilder, "enableVanadiumBlock", true, "Enables crafting block of vanadium", "Default: true");
         createConfigValue(configBuilder, "enableRawVanadiumBlock", true, "Enables crafting block of raw vanadium", "Default: true");
+        createConfigValue(configBuilder, "enableRubyBlock", true, "Enables crafting block of ruby", "Default: true");
         configBuilder.pop();
         
         configBuilder.comment("Tin ore generation").push("tin_ore_gen");
@@ -58,6 +59,14 @@ public class Config {
         createConfigValue(configBuilder, "vanadiumOreMinHeight", 0, 0, 256, "Min height at which vanadium can generate", "Default value: 0");
         createConfigValue(configBuilder, "vanadiumOreMaxHeight", 15, 0, 256, "Max height at which vanadium can generate", "Default value: 15");
         createConfigValue(configBuilder, "vanadiumOreAttempts", 1, 0, 32, "Number of generation attempts for vanadium ore", "Default value: 1");
+        configBuilder.pop();
+    
+        configBuilder.comment("Ruby ore generation").push("ruby_ore_gen");
+        createConfigValue(configBuilder, "rubyOreGenEnabled", true, "Enables natural generation of ruby ore", "Default: true", "Set this to false to disable ruby ore generation");
+        createConfigValue(configBuilder, "rubyOreMinHeight", 4, 0, 256, "Min height at which ruby can generate", "Default value: 4");
+        createConfigValue(configBuilder, "rubyOreMaxHeight", 31, 0, 256, "Max height at which ruby can generate", "Default value: 31");
+        createConfigValue(configBuilder, "rubyOreMinAttempts", 3, 0, 32, "Min number of generation attempts for ruby ore", "Default value: 3");
+        createConfigValue(configBuilder, "rubyOreMaxAttempts", 8, 0, 32, "Max number of generation attempts for ruby ore", "Default value: 8");
         configBuilder.pop();
         
         CONFIG = configBuilder.build();

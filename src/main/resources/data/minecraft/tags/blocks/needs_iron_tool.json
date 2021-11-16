@@ -3,8 +3,11 @@
   "values": [
     "reworkedmetals:vanadium_ore",
     "reworkedmetals:deepslate_vanadium_ore",
+    "reworkedmetals:ruby_ore",
+    "reworkedmetals:deepslate_ruby_ore",
     "reworkedmetals:raw_vanadium_block",
     "reworkedmetals:vanadium_block",
-    "reworkedmetals:steel_block"
+    "reworkedmetals:steel_block",
+    "reworkedmetals:ruby_block"
   ]
 }
