@@ -2,10 +2,10 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_metals/tin"
+      "tag": "forge:raw_ores/raw_tin"
     },
     {
-      "tag": "forge:raw_metals/tin"
+      "tag": "forge:raw_ores/raw_tin"
     }
   ],
   "result": {

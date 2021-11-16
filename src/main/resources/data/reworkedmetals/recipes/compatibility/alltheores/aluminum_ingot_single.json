@@ -2,24 +2,14 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_ores/raw_copper"
-    },
-    {
-      "tag": "forge:raw_ores/raw_copper"
-    },
-    {
-      "tag": "forge:raw_ores/raw_copper"
-    },
-    {
-      "tag": "forge:raw_ores/raw_tin"
+      "tag": "forge:raw_ores/raw_aluminum"
     }
   ],
   "result": {
-    "item": "reworkedmetals:bronze_ingot",
-    "count": 4
+    "item": "alltheores:aluminum_ingot"
   },
-  "experience": 0.7,
-  "smelting_time": 800,
+  "experience": 0.2,
+  "smelting_time": 200,
   "stations": [
     "smeltery",
     "furnace",
@@ -32,6 +22,10 @@
         "type": "reworkedmetals:config",
         "config": "ingotsRequireTwoOre"
       }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
     }
   ]
 }

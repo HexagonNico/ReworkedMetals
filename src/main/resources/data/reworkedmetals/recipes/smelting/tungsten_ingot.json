@@ -2,16 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_metals/tungsten"
+      "tag": "forge:raw_ores/raw_tungsten"
     },
     {
-      "tag": "forge:raw_metals/tungsten"
+      "tag": "forge:raw_ores/raw_tungsten"
     }
   ],
   "result": {
     "item": "reworkedmetals:tungsten_ingot"
   },
-  "experience": 1,
+  "experience": 0.7,
   "smelting_time": 200,
   "stations": [
     "smeltery",

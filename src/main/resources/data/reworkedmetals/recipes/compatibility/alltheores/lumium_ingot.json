@@ -1,0 +1,32 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:raw_ores/raw_tin"
+    },
+    {
+      "tag": "forge:raw_ores/raw_tin"
+    },
+    {
+      "tag": "forge:raw_ores/raw_silver"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "result": {
+    "item": "alltheores:lumium_ingot",
+    "count": 2
+  },
+  "experience": 0.5,
+  "smelting_time": 400,
+  "stations": [
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
+    }
+  ]
+}

@@ -2,18 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_ores/raw_iron"
-    },
-    {
-      "item": "minecraft:charcoal"
+      "tag": "forge:raw_ores/raw_osmium"
     }
   ],
   "result": {
-    "item": "reworkedmetals:steel_ingot"
+    "item": "alltheores:osmium_ingot"
   },
-  "experience": 1,
-  "smelting_time": 400,
+  "experience": 0.2,
+  "smelting_time": 200,
   "stations": [
+    "furnace",
     "blast_furnace"
   ],
   "conditions": [
@@ -23,6 +21,10 @@
         "type": "reworkedmetals:config",
         "config": "ingotsRequireTwoOre"
       }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
     }
   ]
 }

@@ -2,16 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_metals/gold"
+      "tag": "forge:raw_ores/raw_gold"
     },
     {
-      "tag": "forge:raw_metals/gold"
+      "tag": "forge:raw_ores/raw_gold"
     },
     {
-      "tag": "forge:raw_metals/netherite"
+      "tag": "forge:raw_ores/raw_netherite"
     },
     {
-      "tag": "forge:raw_metals/netherite"
+      "tag": "forge:raw_ores/raw_netherite"
     }
   ],
   "result": {

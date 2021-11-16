@@ -2,17 +2,14 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:raw_ores/raw_iron"
-    },
-    {
-      "item": "minecraft:charcoal"
+      "tag": "forge:raw_ores/raw_lead"
     }
   ],
   "result": {
-    "item": "reworkedmetals:steel_ingot"
+    "item": "alltheores:lead_ingot"
   },
-  "experience": 1,
-  "smelting_time": 400,
+  "experience": 0.2,
+  "smelting_time": 200,
   "stations": [
     "blast_furnace"
   ],
@@ -23,6 +20,10 @@
         "type": "reworkedmetals:config",
         "config": "ingotsRequireTwoOre"
       }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
     }
   ]
 }

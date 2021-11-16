@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#forge:raw_metals/tin",
     "reworkedmetals:raw_tin"
   ]
 }
