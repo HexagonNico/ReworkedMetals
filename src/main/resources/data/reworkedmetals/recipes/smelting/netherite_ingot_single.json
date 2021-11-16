@@ -2,7 +2,7 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_gold"
+      "tag": "forge:raw_ores/gold"
     },
     {
       "item": "minecraft:netherite_scrap"

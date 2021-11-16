@@ -2,16 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "item": "reworkedmetals:raw_copper"
+      "tag": "forge:raw_ores/copper"
     },
     {
-      "item": "reworkedmetals:raw_copper"
+      "tag": "forge:raw_ores/copper"
     },
     {
-      "item": "reworkedmetals:raw_copper"
+      "tag": "forge:raw_ores/copper"
     },
     {
-      "item": "reworkedmetals:raw_tin"
+      "tag": "forge:raw_ores/tin"
     }
   ],
   "result": {

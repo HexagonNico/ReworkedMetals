@@ -32,10 +32,15 @@ public class ReworkedMetalsItems {
     public static final RegistryObject<Item> RAW_IRON = REGISTER.register("raw_iron", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> RAW_GOLD = REGISTER.register("raw_gold", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     public static final RegistryObject<Item> STEEL_INGOT = REGISTER.register("steel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> RAW_VANADIUM = REGISTER.register("raw_vanadium", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> VANADIUM_INGOT = REGISTER.register("vanadium_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
+    public static final RegistryObject<Item> RUBY = REGISTER.register("ruby", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MATERIALS)));
     
     public static final RegistryObject<Item> COPPER_ORE = REGISTER.register("copper_ore", () -> new BlockItem(ReworkedMetalsBlocks.COPPER_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TIN_ORE = REGISTER.register("tin_ore", () -> new BlockItem(ReworkedMetalsBlocks.TIN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> TUNGSTEN_ORE = REGISTER.register("tungsten_ore", () -> new BlockItem(ReworkedMetalsBlocks.TUNGSTEN_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> VANADIUM_ORE = REGISTER.register("vanadium_ore", () -> new BlockItem(ReworkedMetalsBlocks.VANADIUM_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RUBY_ORE = REGISTER.register("ruby_ore", () -> new BlockItem(ReworkedMetalsBlocks.RUBY_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     
     public static final RegistryObject<Item> COPPER_BLOCK = REGISTER.register("copper_block", () -> new BlockItem(ReworkedMetalsBlocks.COPPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> RAW_COPPER_BLOCK = REGISTER.register("raw_copper_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_COPPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -47,6 +52,9 @@ public class ReworkedMetalsItems {
     public static final RegistryObject<Item> RAW_IRON_BLOCK = REGISTER.register("raw_iron_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_IRON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> RAW_GOLD_BLOCK = REGISTER.register("raw_gold_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_GOLD_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STEEL_BLOCK = REGISTER.register("steel_block", () -> new BlockItem(ReworkedMetalsBlocks.STEEL_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RAW_VANADIUM_BLOCK = REGISTER.register("raw_vanadium_block", () -> new BlockItem(ReworkedMetalsBlocks.RAW_VANADIUM_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> VANADIUM_BLOCK = REGISTER.register("vanadium_block", () -> new BlockItem(ReworkedMetalsBlocks.VANADIUM_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> RUBY_BLOCK = REGISTER.register("ruby_block", () -> new BlockItem(ReworkedMetalsBlocks.RUBY_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     
     public static final RegistryObject<Item> COPPER_PICKAXE = REGISTER.register("copper_pickaxe", () -> new PickaxeItem(ModToolTiers.COPPER, 1, -2.8f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     public static final RegistryObject<Item> COPPER_SWORD = REGISTER.register("copper_sword", () -> new SwordItem(ModToolTiers.COPPER, 3, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
@@ -95,6 +103,12 @@ public class ReworkedMetalsItems {
     public static final RegistryObject<Item> STEEL_EMERALD_AXE = REGISTER.register("steel_emerald_axe", () -> new AxeItem(ModToolTiers.STEEL_EMERALD, 5.0f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     public static final RegistryObject<Item> STEEL_EMERALD_SHOVEL = REGISTER.register("steel_emerald_shovel", () -> new ShovelItem(ModToolTiers.STEEL_EMERALD, 1.5f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     public static final RegistryObject<Item> STEEL_EMERALD_HOE = REGISTER.register("steel_emerald_hoe", () -> new HoeItem(ModToolTiers.STEEL_EMERALD, -3, -0.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
+    
+    public static final RegistryObject<Item> GOLD_RUBY_PICKAXE = REGISTER.register("gold_ruby_pickaxe", () -> new PickaxeItem(ModToolTiers.GOLD_RUBY, 1, -2.8f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
+    public static final RegistryObject<Item> GOLD_RUBY_SWORD = REGISTER.register("gold_ruby_sword", () -> new SwordItem(ModToolTiers.GOLD_RUBY, 3, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+    public static final RegistryObject<Item> GOLD_RUBY_AXE = REGISTER.register("gold_ruby_axe", () -> new AxeItem(ModToolTiers.GOLD_RUBY, 5.0f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
+    public static final RegistryObject<Item> GOLD_RUBY_SHOVEL = REGISTER.register("gold_ruby_shovel", () -> new ShovelItem(ModToolTiers.GOLD_RUBY, 1.5f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
+    public static final RegistryObject<Item> GOLD_RUBY_HOE = REGISTER.register("gold_ruby_hoe", () -> new HoeItem(ModToolTiers.GOLD_RUBY, -3, -0.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     
     public static final RegistryObject<Item> COPPER_HELMET = REGISTER.register("copper_helmet", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlotType.HEAD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
     public static final RegistryObject<Item> COPPER_CHESTPLATE = REGISTER.register("copper_chestplate", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlotType.CHEST, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));

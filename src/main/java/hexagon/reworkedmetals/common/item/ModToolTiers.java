@@ -16,7 +16,8 @@ public enum ModToolTiers implements IItemTier {
     IRON_EMERALD(2, 450, 8.5f, 2.5f, 16, Ingredient.of(Items.IRON_INGOT)),
     STEEL(3, 1561, 8.0f, 3.0f, 10, Ingredient.of(ReworkedMetalsItems.STEEL_INGOT.get())),
     STEEL_DIAMOND(4, 1970, 6.0f, 3.0f, 10, Ingredient.of(ReworkedMetalsItems.STEEL_INGOT.get())),
-    STEEL_EMERALD(3, 1000, 9.5f, 3.0f, 14, Ingredient.of(ReworkedMetalsItems.STEEL_INGOT.get()));
+    STEEL_EMERALD(3, 1000, 9.5f, 3.0f, 14, Ingredient.of(ReworkedMetalsItems.STEEL_INGOT.get())),
+    GOLD_RUBY(1, 200, 12.0F, 2.0F, 22, Ingredient.of(Items.GOLD_INGOT));
     
     private final int level;
     private final int uses;
