@@ -3,8 +3,6 @@ package hexagonnico.reworkedmetals.content.crafting;
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +11,10 @@ import java.util.stream.IntStream;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import mcp.MethodsReturnNonnullByDefault;
+
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.registries.ForgeRegistryEntry;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -24,11 +25,12 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+/**
+ * Recipe for the reworked furnace.
+ * 
+ * @author Nico
+ */
 public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity> {
     
     public static final IRecipeType<ReworkedFurnaceRecipe> TYPE = IRecipeType.register(ReworkedMetals.ID + ":smelting");
@@ -43,6 +45,11 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
     private final int smeltingTime;
     private final NonNullList<String> stations;
     
+    /**
+     * Create recipe from JSON object
+     * @param id ResourceLocation
+     * @param recipeJson JsonObject
+     */
     public ReworkedFurnaceRecipe(ResourceLocation id, JsonObject recipeJson) {
         this.id = id;
         this.group = JSONUtils.getAsString(recipeJson, "group", "");
@@ -62,6 +69,11 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
         }
     }
     
+    /**
+     * Create recipe from Network
+     * @param id ResourceLocation
+     * @param buffer PacketBuffer
+     */
     public ReworkedFurnaceRecipe(ResourceLocation id, PacketBuffer buffer) {
         this.id = id;
         this.group = buffer.readUtf(32767);
@@ -174,7 +186,6 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
             return new ReworkedFurnaceRecipe(recipeId, jsonObject);
         }
     
-        @Nullable
         @Override
         public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
             return new ReworkedFurnaceRecipe(recipeId, buffer);

@@ -2,23 +2,29 @@ package hexagonnico.reworkedmetals.content.tileentity;
 
 import hexagonnico.reworkedmetals.registry.TileEntitiesRegistry;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-@MethodsReturnNonnullByDefault
+/**
+ * Tile entity for the kiln
+ * 
+ * @author Nico
+ */
 public class FurnaceTileEntity extends ReworkedFurnaceTileEntity {
     
+    /**
+     * Create tile entity
+     */
     public FurnaceTileEntity() {
         super(TileEntitiesRegistry.FURNACE.get());
     }
     
-    @Override
+    @Override // Text title
     protected ITextComponent getDefaultName() {
         return new TranslationTextComponent("container.furnace");
     }
     
-    @Override
+    @Override // Reworked furnace recipe
     public String stationType() {
         return "furnace";
     }

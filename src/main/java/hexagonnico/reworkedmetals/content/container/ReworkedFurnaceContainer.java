@@ -3,9 +3,8 @@ package hexagonnico.reworkedmetals.content.container;
 import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
 import hexagonnico.reworkedmetals.registry.ContainersRegistry;
 
-import javax.annotation.Nonnull;
+import net.minecraftforge.common.ForgeHooks;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -14,18 +13,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeHooks;
 
-@MethodsReturnNonnullByDefault
+/**
+ * Furnace container. All tile entities that contain items need one of this.
+ * 
+ * @author Nico
+ */
 public class ReworkedFurnaceContainer extends Container {
     
     private final ReworkedFurnaceTileEntity tileEntity;
     private final IIntArray containerData;
     
-    public ReworkedFurnaceContainer(int windowId, PlayerInventory playerInventory, ReworkedFurnaceTileEntity tileEntity, IIntArray containerData) {
-        super(ContainersRegistry.FURNACE.get(), windowId);
+    /**
+     * Get container data and create slots
+     * @param id Window id
+     * @param playerInventory player inventory
+     * @param tileEntity ReworkedFurnaceTileEntity
+     * @param containerData Needed to pass data from block to gui
+     */
+    public ReworkedFurnaceContainer(int id, PlayerInventory playerInventory, ReworkedFurnaceTileEntity tileEntity, IIntArray containerData) {
+        super(ContainersRegistry.FURNACE.get(), id);
         this.tileEntity = tileEntity;
         this.containerData = containerData;
         checkContainerSize(tileEntity, 6);
@@ -52,29 +59,41 @@ public class ReworkedFurnaceContainer extends Container {
         this.addDataSlots(containerData);
     }
     
-    public ReworkedFurnaceContainer(int windowId, PlayerInventory playerInventory, PacketBuffer buffer) {
-        this(windowId, playerInventory, (ReworkedFurnaceTileEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new IntArray(4));
+    /**
+     * Constructor needed to register container type.
+     * @param id Window id
+     * @param playerInventory PlayerInventory
+     * @param buffer PacketBuffer
+     */
+    public ReworkedFurnaceContainer(int id, PlayerInventory playerInventory, PacketBuffer buffer) {
+        this(id, playerInventory, (ReworkedFurnaceTileEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new IntArray(4));
     }
     
-    @Override
-    public boolean stillValid(@Nonnull PlayerEntity player) {
+    @Override // Container is accessible
+    public boolean stillValid(PlayerEntity player) {
         return this.tileEntity.stillValid(player);
     }
     
-    @OnlyIn(Dist.CLIENT)
+    /**
+     * Get proportioned lit time for gui animation.
+     * @return Number of pixels for the fire animation in the gui.
+     */
     public int litTime() {
         return this.containerData.get(1) == 0 ? 0 : this.containerData.get(0) * 13 / this.containerData.get(1);
     }
     
-    @OnlyIn(Dist.CLIENT)
+    /**
+     * Get proportioned smelting progress for gui animation.
+     * @return Number of pixels for the arrow animation in the gui.
+     */
     public int getSmeltingProgress() {
         int i = this.containerData.get(2);
         int j = this.containerData.get(3);
         return j != 0 && i != 0 ? i * 24 / j : 0;
     }
     
-    @Override
-    public ItemStack quickMoveStack(@Nonnull PlayerEntity player, int slotIndex) {
+    @Override // Handles shift-click
+    public ItemStack quickMoveStack(PlayerEntity player, int slotIndex) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIndex);
         if(slot.hasItem()) {

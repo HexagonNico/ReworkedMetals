@@ -1,5 +1,6 @@
 package hexagonnico.reworkedmetals.registry;
 
+import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.config.Config;
 
 import net.minecraft.block.Blocks;
@@ -13,6 +14,11 @@ import net.minecraft.world.gen.feature.ReplaceBlockConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 
+/**
+ * World generation registry. Handles world generation for ReworkedMetals.
+ * 
+ * @author Nico
+ */
 public class WorldGenRegistry {
 
     public static final ConfiguredFeature<?, ?> ORE_COPPER = Feature.ORE.configured(
@@ -35,10 +41,20 @@ public class WorldGenRegistry {
             new ReplaceBlockConfig(Blocks.STONE.defaultBlockState(), BlocksRegistry.RUBY_ORE.get().defaultBlockState())
     ).decorated(Placement.EMERALD_ORE.configured(IPlacementConfig.NONE));
     
+    /**
+     * Registers a configured feature.
+     * @param <FC> IFeatureConfig type.
+     * @param key Name of the feature.
+     * @param feature The feature to register.
+     */
     private static <FC extends IFeatureConfig> void register(String key, ConfiguredFeature<FC, ?> feature) {
         Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, feature);
     }
     
+    /**
+     * Registers all configured features. Called in {@link ReworkedMetals#commonSetup}.
+     * Note that features need to be added to biomes with an event handler in order to generate.
+     */
     public static void register() {
         register("copper_ore", ORE_COPPER);
         register("ore_tin", ORE_TIN);

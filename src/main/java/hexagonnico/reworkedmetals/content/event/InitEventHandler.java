@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ReworkedMetals.ID)
 public class InitEventHandler {
     
-    @SubscribeEvent
+    @SubscribeEvent // Event run when loading biomes
     public static void onBiomeLoad(BiomeLoadingEvent event) {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
         if(Config.getBoolean("copperOreGenEnabled")) {

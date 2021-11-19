@@ -2,7 +2,6 @@ package hexagonnico.reworkedmetals.content.item;
 
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Items;
@@ -10,7 +9,11 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 
-@MethodsReturnNonnullByDefault
+/**
+ * Armor tier enum.
+ * 
+ * @author Nico
+ */
 public enum ModArmorMaterials implements IArmorMaterial {
     COPPER("copper", 15, new int[] {1, 4, 5, 2}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f, 0.0f, Ingredient.of(/*Items.COPPER_INGOT*/ Items.COMMAND_BLOCK), false),
     BRONZE("bronze", 15, new int[] {2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, 0.0f, Ingredient.of(ItemsRegistry.BRONZE_INGOT.get()), false),

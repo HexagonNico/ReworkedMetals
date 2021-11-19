@@ -4,16 +4,20 @@ import hexagonnico.reworkedmetals.content.block.ReworkedFurnaceBlock;
 import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainer;
 import hexagonnico.reworkedmetals.content.crafting.ReworkedFurnaceRecipe;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import mcp.MethodsReturnNonnullByDefault;
+
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,15 +49,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
+/**
+ * Reworked Furnace Tile Entity. All furnaces in ReworkedMetals extend this class.
+ * 
+ * @author Nico
+ */
 public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
     
     protected int litTime;
@@ -66,12 +67,16 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
     
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     
-    public ReworkedFurnaceTileEntity(TileEntityType<?> blockEntityType) {
-        super(blockEntityType);
+    /**
+     * Create tile entity
+     * @param tileEntityType TileEntityType
+     */
+    public ReworkedFurnaceTileEntity(TileEntityType<?> tileEntityType) {
+        super(tileEntityType);
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
     }
     
-    @Override
+    @Override // Load data from NBT
     public void load(BlockState state, CompoundNBT compoundTag) {
         super.load(state, compoundTag);
         this.litTime = compoundTag.getInt("LitTime");
@@ -85,7 +90,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         recipesUsedTag.getAllKeys().forEach(key -> this.recipesUsed.put(new ResourceLocation(key), recipesUsedTag.getInt(key)));
     }
     
-    @Override
+    @Override // Saves data to NBT
     public CompoundNBT save(CompoundNBT compoundTag) {
         super.save(compoundTag);
         compoundTag.putInt("LitTime", this.litTime);
@@ -100,37 +105,37 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         return compoundTag;
     }
     
-    @Override
+    @Override // Create container
     protected Container createMenu(int id, PlayerInventory playerInventory) {
         return new ReworkedFurnaceContainer(id, playerInventory, this, this.getDataAccess());
     }
     
-    @Override
+    @Override // Inventory size
     public int getContainerSize() {
         return this.inventory.size();
     }
     
-    @Override
+    @Override // If inventory is empty
     public boolean isEmpty() {
         return this.inventory.stream().allMatch(ItemStack::isEmpty);
     }
     
-    @Override
+    @Override // Get item in inventory
     public ItemStack getItem(int index) {
         return this.inventory.get(index);
     }
     
-    @Override
+    @Override // Remove item from inventory
     public ItemStack removeItem(int index, int flags) {
         return ItemStackHelper.removeItem(this.inventory, index, flags);
     }
     
-    @Override
+    @Override // Remove item from inventory
     public ItemStack removeItemNoUpdate(int index) {
         return ItemStackHelper.takeItem(this.inventory, index);
     }
     
-    @Override
+    @Override // Set item in inventory
     public void setItem(int index, ItemStack item) {
         ItemStack itemStack = this.inventory.get(index);
         boolean flag = !item.isEmpty() && item.sameItem(itemStack) && ItemStack.tagMatches(item, itemStack);
@@ -145,7 +150,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
     
-    @Override
+    @Override // Container is still valid
     public boolean stillValid(PlayerEntity player) {
         if(this.level != null && this.level.getBlockEntity(this.worldPosition) != this) {
             return false;
@@ -154,25 +159,35 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
     
-    @Override
+    @Override // Clears inventory
     public void clearContent() {
         this.inventory.clear();
     }
     
-    @Override
+    @Override // Get inventory
     protected NonNullList<ItemStack> getItems() {
         return this.inventory;
     }
     
-    @Override
+    @Override // Set inventory
     protected void setItems(NonNullList<ItemStack> items) {
         this.inventory = items;
     }
     
+    /**
+     * Get station type. Needed by {@link ReworkedFurnaceRecipe}.
+     * @return A value among ["smeltery", "furnace", "blast_furnace", "kiln"]
+     */
     public abstract String stationType();
     
-    public void popExperience(@Nullable ServerPlayerEntity player, ServerWorld world, Vector3d position) {
-        List<IRecipe<?>> recipes = Lists.newArrayList();
+    /**
+     * Adds experience to world when block is broken or output item is taken.
+     * @param player ServerPlayerEntity
+     * @param world ServerWorld
+     * @param position block position
+     */
+    public void popExperience(ServerPlayerEntity player, ServerWorld world, Vector3d position) {
+        List<IRecipe<?>> recipes = new ArrayList<>();
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
             world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe -> {
                 recipes.add(recipe);
@@ -192,10 +207,18 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         this.recipesUsed.clear();
     }
     
+    /**
+     * Adds a recipe to the stored recipes map
+     * @param recipe ReworkedFurnaceRecipe
+     */
     public void setRecipeUsed(ReworkedFurnaceRecipe recipe) {
         this.recipesUsed.addTo(recipe.getId(), 1);
     }
     
+    /**
+     * Remove item according by given ingredient.
+     * @param ingredient Ingredient
+     */
     public void removeIngredient(Ingredient ingredient) {
         for(int i = 0; i < 4; i++) {
             ItemStack itemInSlot = this.getItem(i);
@@ -207,7 +230,6 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
     
-    @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         return new SUpdateTileEntityPacket(this.worldPosition, 1, this.getUpdateTag());
@@ -223,6 +245,10 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         this.load(this.getBlockState(), pkt.getTag());
     }
     
+    /**
+     * Value used to access data from gui
+     * @return IIntArray of length 4: [litTime, totalLitTime, smeltingProgress, smeltingTime]
+     */
     private IIntArray getDataAccess() {
         return new IIntArray() {
             @Override
@@ -253,7 +279,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         };
     }
     
-    @Override
+    @Override // Server tick, furnace logic
     public void tick() {
         boolean flag = this.litTime > 0;
         boolean flag1 = false;
@@ -317,14 +343,20 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
 
-    private boolean canSmelt(ReworkedFurnaceRecipe recipe, World level) {
+    /**
+     * Checks if furnace has fuel, has a free output slot and the given recipe matches the input.
+     * @param recipe ReworkedFurnaceRecipe. Need to match input
+     * @param world World
+     * @return True if can smelt, false if not
+     */
+    private boolean canSmelt(ReworkedFurnaceRecipe recipe, World world) {
         ItemStack itemInOutputSlot = this.getItem(5);
         ItemStack expectedOutput = recipe.getResultItem();
-        return recipe.getStations().contains(this.stationType()) && recipe.matches(this, level) &&
+        return recipe.getStations().contains(this.stationType()) && recipe.matches(this, world) &&
                 (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
     }
     
-    @Override
+    @Override // Slots for hopper interaction
     public int[] getSlotsForFace(Direction direction) {
         switch(direction) {
             case DOWN: return new int[] {5, 4};
@@ -333,12 +365,12 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
     
-    @Override
-    public boolean canPlaceItemThroughFace(int slot, ItemStack item, @Nullable Direction direction) {
+    @Override // Hopper interaction
+    public boolean canPlaceItemThroughFace(int slot, ItemStack item, Direction direction) {
         return this.canPlaceItem(slot, item);
     }
     
-    @Override
+    @Override // Hopper interaction
     public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction direction) {
         if(direction == Direction.DOWN) {
             if(slot == 4) {
@@ -350,7 +382,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         return true;
     }
     
-    @Override
+    @Override // Hopper interaction
     public boolean canPlaceItem(int slot, ItemStack item) {
         if(slot == 5) {
             return false;
@@ -361,32 +393,30 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         }
     }
     
-    @Override
+    @Override // Recipe stuff
     public void fillStackedContents(RecipeItemHelper recipeItemHelper) {
-        for(ItemStack itemstack : this.inventory) {
-            recipeItemHelper.accountStack(itemstack);
+        for(ItemStack itemStack : this.inventory) {
+            recipeItemHelper.accountStack(itemStack);
         }
     }
     
-    @Override
-    public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
+    @Override // Recipe stuff
+    public void setRecipeUsed(IRecipe<?> recipe) {
         if(recipe != null) {
-            ResourceLocation resourcelocation = recipe.getId();
-            this.recipesUsed.addTo(resourcelocation, 1);
+            ResourceLocation resourceLocation = recipe.getId();
+            this.recipesUsed.addTo(resourceLocation, 1);
         }
     }
     
-    @Nullable
-    @Override
+    @Override // Recipe stuff
     public IRecipe<?> getRecipeUsed() {
         return null;
     }
     
     LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
 
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction side) {
+    @Override // Hopper interaction
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction side) {
         if(!this.remove && side != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             if(side == Direction.UP)
                 return handlers[0].cast();

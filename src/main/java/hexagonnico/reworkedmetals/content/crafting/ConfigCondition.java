@@ -1,15 +1,21 @@
 package hexagonnico.reworkedmetals.content.crafting;
 
-import com.google.gson.JsonObject;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.config.Config;
+
+import com.google.gson.JsonObject;
 
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 
+import net.minecraft.util.JSONUtils;
+import net.minecraft.util.ResourceLocation;
+
+/**
+ * Allows to enable/disable recipes depending on config files.
+ * 
+ * @author Nico
+ */
 public class ConfigCondition implements ICondition {
     
     public static final Serializer SERIALIZER = new Serializer();
@@ -17,9 +23,14 @@ public class ConfigCondition implements ICondition {
     private final ResourceLocation id;
     private final String condition;
     
-    private ConfigCondition(ResourceLocation id, String condition) {
+    /**
+     * Create condition
+     * @param id ResourceLocation
+     * @param config Config string value
+     */
+    private ConfigCondition(ResourceLocation id, String config) {
         this.id = id;
-        this.condition = condition;
+        this.condition = config;
     }
     
     @Override

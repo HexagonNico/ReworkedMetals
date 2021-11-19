@@ -2,8 +2,6 @@ package hexagonnico.reworkedmetals.content.block;
 
 import hexagonnico.reworkedmetals.content.tileentity.BlastFurnaceTileEntity;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
 import net.minecraft.block.BlockState;
@@ -16,16 +14,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-@ParametersAreNonnullByDefault
+/**
+ * Class for blast furnace block.
+ * 
+ * @author Nico
+ */
 public class BlastFurnaceBlock extends ReworkedFurnaceBlock {
     
-    @Nullable
-    @Override
+    @Override // Get the right tile entity
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new BlastFurnaceTileEntity();
     }
     
-    @Override
+    @Override // Block sounds and particles
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
         if(state.getValue(LIT)) {
             double x = pos.getX() + 0.5;

@@ -20,8 +20,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(ReworkedMetals.ID)
 public final class ReworkedMetals {
     
+    /** ReworkedMetals Mod Id */
     public static final String ID = "reworkedmetals";
     
+    /**
+     * Mod initializer
+     */
     public ReworkedMetals() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::commonSetup);
@@ -40,11 +44,19 @@ public final class ReworkedMetals {
         MinecraftForge.EVENT_BUS.register(this);
     }
     
+    /**
+     * Common setup event to register things.
+     * @param setupEvent FMLCommonSetupEvent.
+     */
     private void commonSetup(final FMLCommonSetupEvent setupEvent) {
         WorldGenRegistry.register();
         CraftingRegistry.registerConditions();
     }
     
+    /**
+     * Client setup event for client stuff.
+     * @param setupEvent FMLClientSetupEvent.
+     */
     private void clientSetup(final FMLClientSetupEvent setupEvent) {
         ContainersRegistry.registerGuis();
     }

@@ -12,6 +12,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import net.minecraft.tileentity.TileEntityType;
 
+/**
+ * Tile entity types registry. Contains all tile entity types in ReworkedMetals.
+ * 
+ * @author Nico
+ */
 public class TileEntitiesRegistry {
     
     public static final DeferredRegister<TileEntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ReworkedMetals.ID);

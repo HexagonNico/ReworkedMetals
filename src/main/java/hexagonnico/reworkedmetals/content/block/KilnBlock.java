@@ -2,11 +2,8 @@ package hexagonnico.reworkedmetals.content.block;
 
 import hexagonnico.reworkedmetals.content.tileentity.KilnTileEntity;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -21,21 +18,26 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+/**
+ * Class for kiln block.
+ * 
+ * @author Nico
+ */
 public class KilnBlock extends ReworkedFurnaceBlock {
     
+    /**
+     * Default properties.
+     */
     public KilnBlock() {
         super(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(3.5F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0));
     }
     
-    @Nullable
-    @Override
+    @Override // Get the right tile entity
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new KilnTileEntity();
     }
     
-    @Override
+    @Override // Block sounds and particles
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
         if(state.getValue(LIT)) {
             double x = pos.getX() + 0.5;

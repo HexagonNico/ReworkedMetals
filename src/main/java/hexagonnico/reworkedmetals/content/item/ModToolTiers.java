@@ -2,15 +2,17 @@ package hexagonnico.reworkedmetals.content.item;
 
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
-import mcp.MethodsReturnNonnullByDefault;
-
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 
-@MethodsReturnNonnullByDefault
+/**
+ * Tool tier enum.
+ * 
+ * @author Nico
+ */
 public enum ModToolTiers implements IItemTier {
-    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(/*Items.COPPER_INGOT*/ Items.COMMAND_BLOCK)),
+    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(ItemsRegistry.COPPER_INGOT.get())),
     BRONZE(2, 250, 6.0f, 2.0f, 15, Ingredient.of(ItemsRegistry.BRONZE_INGOT.get())),
     IRON(2, 700, 7.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
     IRON_DIAMOND(3, 1125, 5.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
