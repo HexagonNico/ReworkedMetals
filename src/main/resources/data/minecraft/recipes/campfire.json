@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " / ",
+    "/ /",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:logs_that_burn"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "minecraft:campfire"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "requireCoalForCampfire"
+      }
+    }
+  ]
+}

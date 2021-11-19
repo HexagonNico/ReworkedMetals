@@ -1,14 +1,14 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 license="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0"
-issueTrackerURL=""
+#issueTrackerURL=""
 
 [[mods]]
 modId="reworkedmetals"
 version="1.2"
 displayName="ReworkedMetals"
 #displayURL=""
-#logoFile=""
+logoFile="ReworkedMetals.png"
 #credits=""
 authors="HexagonNico"
 description='''

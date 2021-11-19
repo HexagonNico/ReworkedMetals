@@ -1,0 +1,17 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:sand"
+    }
+  ],
+  "result": {
+    "item": "minecraft:glass"
+  },
+  "experience": 0.1,
+  "smelting_time": 200,
+  "stations": [
+    "smeltery",
+    "kiln"
+  ]
+}

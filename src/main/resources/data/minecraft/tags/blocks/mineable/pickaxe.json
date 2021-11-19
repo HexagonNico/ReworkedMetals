@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "reworkedmetals:smeltery",
+    "reworkedmetals:kiln",
+    "reworkedmetals:copper_ore",
+    "reworkedmetals:tin_ore",
+    "reworkedmetals:tungsten_ore",
+    "reworkedmetals:vanadium_ore",
+    "reworkedmetals:ruby_ore",
+    "reworkedmetals:raw_copper_block",
+    "reworkedmetals:raw_tin_block",
+    "reworkedmetals:raw_tungsten_block",
+    "reworkedmetals:raw_iron_block",
+    "reworkedmetals:raw_gold_block",
+    "reworkedmetals:raw_vanadium_block",
+    "reworkedmetals:copper_block",
+    "reworkedmetals:tin_block",
+    "reworkedmetals:tungsten_block",
+    "reworkedmetals:bronze_block",
+    "reworkedmetals:vanadium_block",
+    "reworkedmetals:steel_block",
+    "reworkedmetals:ruby_block"
+  ]
+}
