@@ -29,13 +29,13 @@ public class WorldGenRegistry {
             new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.TIN_ORE.get().defaultBlockState(), Config.getInt("tinOreVeinSize"))
     ).range(Config.getInt("tinOreMaxHeight")).squared().count(Config.getInt("tinOreAttempts"));
     
-    public static final ConfiguredFeature<?, ?> ORE_TUNGSTEN = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.TUNGSTEN_ORE.get().defaultBlockState(), Config.getInt("tungstenOreVeinSize"))
-    ).range(Config.getInt("tungstenOreMaxHeight")).squared().count(Config.getInt("tungstenOreAttempts"));
+    public static final ConfiguredFeature<?, ?> ORE_ALUMINUM = Feature.ORE.configured(
+            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.ALUMINUM_ORE.get().defaultBlockState(), Config.getInt("aluminumOreVeinSize"))
+    ).range(Config.getInt("aluminumOreMaxHeight")).squared().count(Config.getInt("aluminumOreAttempts"));
     
-    public static final ConfiguredFeature<?, ?> ORE_VANADIUM = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.VANADIUM_ORE.get().defaultBlockState(), Config.getInt("vanadiumOreVeinSize"))
-    ).range(Config.getInt("vanadiumOreMaxHeight")).squared().count(Config.getInt("vanadiumOreAttempts"));
+    public static final ConfiguredFeature<?, ?> ORE_NICKEL = Feature.ORE.configured(
+            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.NICKEL_ORE.get().defaultBlockState(), Config.getInt("nickelOreVeinSize"))
+    ).range(Config.getInt("nickelOreMaxHeight")).squared().count(Config.getInt("nickelOreAttempts"));
     
     public static final ConfiguredFeature<?, ?> ORE_RUBY = Feature.EMERALD_ORE.configured(
             new ReplaceBlockConfig(Blocks.STONE.defaultBlockState(), BlocksRegistry.RUBY_ORE.get().defaultBlockState())
@@ -58,8 +58,8 @@ public class WorldGenRegistry {
     public static void register() {
         register("copper_ore", ORE_COPPER);
         register("ore_tin", ORE_TIN);
-        register("ore_tungsten", ORE_TUNGSTEN);
-        register("ore_vanadium", ORE_VANADIUM);
+        register("ore_aluminum", ORE_ALUMINUM);
+        register("ore_nickel", ORE_NICKEL);
         register("ore_ruby", ORE_RUBY);
     }
 }

@@ -16,7 +16,7 @@ public class Config {
     
         configBuilder.comment("Reworked smelting options").push("smelting");
         createConfigValue(configBuilder, "ingotsRequireTwoOre", true, "When enabled, ingots require two raw ore materials to be smelted", "Default: true", "Set this to false to only require one raw ore per ingot");
-        createConfigValue(configBuilder, "allowSmeltingFromOreBlock", true, "Allows the player to smelt ingots from ore blocks, not just raw ores chunk", "Default: true", "This option is only needed for compatibility with other mods, it may be turned off if it is not needed");
+        createConfigValue(configBuilder, "allowSmeltingFromOreBlock", false, "Allows the player to smelt ingots from ore blocks, not just raw ores chunk", "Default: false", "Turn on in case it is needed by other mods");
         configBuilder.pop();
     
         configBuilder.comment("Vanilla crafting changes").push("crafting_changes");
@@ -29,12 +29,13 @@ public class Config {
         configBuilder.comment("Blocks crafting").push("blocks_crafting");
         createConfigValue(configBuilder, "enableTinBlock", true, "Enables crafting block of tin", "Default: true");
         createConfigValue(configBuilder, "enableRawTinBlock", true, "Enables crafting block of raw tin", "Default: true");
-        createConfigValue(configBuilder, "enableTungstenBlock", true, "Enables crafting block of tungsten", "Default: true");
-        createConfigValue(configBuilder, "enableRawTungstenBlock", true, "Enables crafting block of raw tungsten", "Default: true");
+        createConfigValue(configBuilder, "enableAluminumBlock", true, "Enables crafting block of aluminum", "Default: true");
+        createConfigValue(configBuilder, "enableRawAluminumBlock", true, "Enables crafting block of raw aluminum", "Default: true");
         createConfigValue(configBuilder, "enableBronzeBlock", true, "Enables crafting block of bronze", "Default: true");
+        createConfigValue(configBuilder, "enableNickelBlock", true, "Enables crafting block of nickel", "Default: true");
+        createConfigValue(configBuilder, "enableRawNickelBlock", true, "Enables crafting block of raw nickel", "Default: true");
+        createConfigValue(configBuilder, "enableInvarBlock", true, "Enables crafting block of invar", "Default: true");
         createConfigValue(configBuilder, "enableSteelBlock", true, "Enables crafting block of steel", "Default: true");
-        createConfigValue(configBuilder, "enableVanadiumBlock", true, "Enables crafting block of vanadium", "Default: true");
-        createConfigValue(configBuilder, "enableRawVanadiumBlock", true, "Enables crafting block of raw vanadium", "Default: true");
         createConfigValue(configBuilder, "enableRubyBlock", true, "Enables crafting block of ruby", "Default: true");
         configBuilder.pop();
     
@@ -49,28 +50,25 @@ public class Config {
         createConfigValue(configBuilder, "tinOreGenEnabled", true, "Enables natural generation of tin ore", "Default: true", "Set this to false to disable tin ore generation");
         createConfigValue(configBuilder, "tinOreVeinSize", 10, 1, 32, "Max size of a tin ore vein", "Default value: 10");
         createConfigValue(configBuilder, "tinOreMaxHeight", 96, 0, 256, "Max height at which tin can generate", "Default value: 96");
-        createConfigValue(configBuilder, "tinOreAttempts", 4, 0, 32, "Number of generation attempts for tin ore", "Default value: 4");
+        createConfigValue(configBuilder, "tinOreAttempts", 5, 0, 32, "Number of generation attempts for tin ore", "Default value: 5");
         configBuilder.pop();
     
-        configBuilder.comment("Tungsten ore generation").push("tungsten_ore_gen");
-        createConfigValue(configBuilder, "tungstenOreGenEnabled", true, "Enables natural generation of tungsten ore", "Default: true", "Set this to false to disable tungsten ore generation");
-        createConfigValue(configBuilder, "tungstenOreVeinSize", 9, 1, 32, "Max size of a tungsten ore vein", "Default value: 9");
-        createConfigValue(configBuilder, "tungstenOreMaxHeight", 96, 0, 256, "Max height at which tungsten can generate", "Default value: 96");
-        createConfigValue(configBuilder, "tungstenOreAttempts", 4, 0, 32, "Number of generation attempts for tungsten ore", "Default value: 4");
+        configBuilder.comment("Aluminum ore generation").push("aluminum_ore_gen");
+        createConfigValue(configBuilder, "aluminumOreGenEnabled", true, "Enables natural generation of aluminum ore", "Default: true", "Set this to false to disable aluminum ore generation");
+        createConfigValue(configBuilder, "aluminumOreVeinSize", 9, 1, 32, "Max size of a aluminum ore vein", "Default value: 9");
+        createConfigValue(configBuilder, "aluminumOreMaxHeight", 63, 0, 256, "Max height at which aluminum can generate", "Default value: 63");
+        createConfigValue(configBuilder, "aluminumOreAttempts", 4, 0, 32, "Number of generation attempts for aluminum ore", "Default value: 4");
         configBuilder.pop();
     
-        configBuilder.comment("Vanadium ore generation").push("vanadium_ore_gen");
-        createConfigValue(configBuilder, "vanadiumOreGenEnabled", true, "Enables natural generation of vanadium ore", "Default: true", "Set this to false to disable vanadium ore generation");
-        createConfigValue(configBuilder, "vanadiumOreVeinSize", 8, 1, 32, "Max size of a vanadium ore vein", "Default value: 8");
-        createConfigValue(configBuilder, "vanadiumOreMaxHeight", 15, 0, 256, "Max height at which vanadium can generate", "Default value: 15");
-        createConfigValue(configBuilder, "vanadiumOreAttempts", 1, 0, 32, "Number of generation attempts for vanadium ore", "Default value: 1");
+        configBuilder.comment("Nickel ore generation").push("nickel_ore_gen");
+        createConfigValue(configBuilder, "nickelOreGenEnabled", true, "Enables natural generation of nickel ore", "Default: true", "Set this to false to disable nickel ore generation");
+        createConfigValue(configBuilder, "nickelOreVeinSize", 8, 1, 32, "Max size of a nickel ore vein", "Default value: 8");
+        createConfigValue(configBuilder, "nickelOreMaxHeight", 24, 0, 256, "Max height at which nickel can generate", "Default value: 24");
+        createConfigValue(configBuilder, "nickelOreAttempts", 1, 0, 32, "Number of generation attempts for nickel ore", "Default value: 1");
         configBuilder.pop();
     
         configBuilder.comment("Ruby ore generation").push("ruby_ore_gen");
         createConfigValue(configBuilder, "rubyOreGenEnabled", true, "Enables natural generation of ruby ore", "Default: true", "Set this to false to disable ruby ore generation");
-        createConfigValue(configBuilder, "rubyOreVeinSize", 1, 1, 32, "Max size of a ruby ore vein", "Default value: 1");
-        createConfigValue(configBuilder, "rubyOreMaxHeight", 31, 0, 256, "Max height at which ruby can generate", "Default value: 31");
-        createConfigValue(configBuilder, "rubyOreAttempts", 6, 0, 32, "Number of generation attempts for ruby ore", "Default value: 6");
         configBuilder.pop();
     
         CONFIG = configBuilder.build();

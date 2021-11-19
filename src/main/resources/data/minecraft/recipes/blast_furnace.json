@@ -13,7 +13,7 @@
       "item": "minecraft:furnace"
     },
     "I": {
-      "tag": "forge:ingots/vanadium"
+      "tag": "forge:ingots/invar"
     }
   },
   "result": {

@@ -23,13 +23,13 @@ public class InitEventHandler {
         if(Config.getBoolean("tinOreGenEnabled")) {
             generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_TIN);
         }
-        if(Config.getBoolean("tungstenOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_TUNGSTEN);
+        if(Config.getBoolean("aluminumOreGenEnabled")) {
+            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_ALUMINUM);
         }
-        if(Config.getBoolean("vanadiumOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_VANADIUM);
+        if(Config.getBoolean("nickelOreGenEnabled")) {
+            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_NICKEL);
         }
-        if(Config.getBoolean("rubyOreGenEnabled") && event.getName() != null && event.getName().getPath().equals("shattered_savanna_plateau")) {
+        if(Config.getBoolean("rubyOreGenEnabled") && event.getName() != null && event.getName().getPath().contains("shattered_savanna")) {
             generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_RUBY);
         }
     }

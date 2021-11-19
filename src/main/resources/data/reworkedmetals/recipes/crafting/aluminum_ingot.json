@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:aluminum_block"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:aluminum_ingot",
+    "count": 9
+  }
+}

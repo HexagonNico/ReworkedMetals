@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:invar_block"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:invar_ingot",
+    "count": 9
+  }
+}
