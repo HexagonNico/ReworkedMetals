@@ -87,7 +87,7 @@ public class ItemsRegistry {
     public static final RegistryObject<Item> GOLD_RUBY_SWORD = REGISTER.register("gold_ruby_sword", () -> new SwordItem(ModToolTiers.GOLD_RUBY, 3, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
     public static final RegistryObject<Item> GOLD_RUBY_AXE = REGISTER.register("gold_ruby_axe", () -> new AxeItem(ModToolTiers.GOLD_RUBY, 5.0f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     public static final RegistryObject<Item> GOLD_RUBY_SHOVEL = REGISTER.register("gold_ruby_shovel", () -> new ShovelItem(ModToolTiers.GOLD_RUBY, 1.5f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
-    public static final RegistryObject<Item> GOLD_RUBY_HOE = REGISTER.register("gold_ruby_hoe", () -> new HoeItem(ModToolTiers.GOLD_RUBY, -3, -0.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
+    public static final RegistryObject<Item> GOLD_RUBY_HOE = REGISTER.register("gold_ruby_hoe", () -> new HoeItem(ModToolTiers.GOLD_RUBY, -2, -0.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS)));
     public static final RegistryObject<Item> COPPER_HELMET = REGISTER.register("copper_helmet", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlotType.HEAD, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
     public static final RegistryObject<Item> COPPER_CHESTPLATE = REGISTER.register("copper_chestplate", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlotType.CHEST, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
     public static final RegistryObject<Item> COPPER_LEGGINGS = REGISTER.register("copper_leggings", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlotType.LEGS, new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
