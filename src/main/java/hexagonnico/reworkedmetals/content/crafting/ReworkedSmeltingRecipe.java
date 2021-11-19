@@ -31,9 +31,9 @@ import net.minecraft.world.World;
  * 
  * @author Nico
  */
-public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity> {
+public class ReworkedSmeltingRecipe implements IRecipe<ReworkedFurnaceTileEntity> {
     
-    public static final IRecipeType<ReworkedFurnaceRecipe> TYPE = IRecipeType.register(ReworkedMetals.ID + ":smelting");
+    public static final IRecipeType<ReworkedSmeltingRecipe> TYPE = IRecipeType.register(ReworkedMetals.ID + ":smelting");
     
     public static final Serializer SERIALIZER = new Serializer();
     
@@ -50,7 +50,7 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
      * @param id ResourceLocation
      * @param recipeJson JsonObject
      */
-    public ReworkedFurnaceRecipe(ResourceLocation id, JsonObject recipeJson) {
+    public ReworkedSmeltingRecipe(ResourceLocation id, JsonObject recipeJson) {
         this.id = id;
         this.group = JSONUtils.getAsString(recipeJson, "group", "");
         this.ingredients = NonNullList.create();
@@ -74,7 +74,7 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
      * @param id ResourceLocation
      * @param buffer PacketBuffer
      */
-    public ReworkedFurnaceRecipe(ResourceLocation id, PacketBuffer buffer) {
+    public ReworkedSmeltingRecipe(ResourceLocation id, PacketBuffer buffer) {
         this.id = id;
         this.group = buffer.readUtf(32767);
         int i = buffer.readVarInt();
@@ -179,20 +179,20 @@ public class ReworkedFurnaceRecipe implements IRecipe<ReworkedFurnaceTileEntity>
         return SERIALIZER;
     }
     
-    private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ReworkedFurnaceRecipe> {
+    private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ReworkedSmeltingRecipe> {
     
         @Override
-        public ReworkedFurnaceRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
-            return new ReworkedFurnaceRecipe(recipeId, jsonObject);
+        public ReworkedSmeltingRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
+            return new ReworkedSmeltingRecipe(recipeId, jsonObject);
         }
     
         @Override
-        public ReworkedFurnaceRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-            return new ReworkedFurnaceRecipe(recipeId, buffer);
+        public ReworkedSmeltingRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
+            return new ReworkedSmeltingRecipe(recipeId, buffer);
         }
     
         @Override
-        public void toNetwork(PacketBuffer buffer, ReworkedFurnaceRecipe recipe) {
+        public void toNetwork(PacketBuffer buffer, ReworkedSmeltingRecipe recipe) {
             buffer.writeUtf(recipe.group);
             buffer.writeVarInt(recipe.ingredients.size());
             for(Ingredient ingredient : recipe.ingredients) {

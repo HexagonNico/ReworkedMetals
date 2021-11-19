@@ -2,7 +2,7 @@ package hexagonnico.reworkedmetals.content.tileentity;
 
 import hexagonnico.reworkedmetals.content.block.ReworkedFurnaceBlock;
 import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainer;
-import hexagonnico.reworkedmetals.content.crafting.ReworkedFurnaceRecipe;
+import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +175,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
     }
     
     /**
-     * Get station type. Needed by {@link ReworkedFurnaceRecipe}.
+     * Get station type. Needed by {@link ReworkedSmeltingRecipe}.
      * @return A value among ["smeltery", "furnace", "blast_furnace", "kiln"]
      */
     public abstract String stationType();
@@ -191,7 +191,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
             world.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe -> {
                 recipes.add(recipe);
-                float exp = (float) entry.getIntValue() * ((ReworkedFurnaceRecipe) recipe).getExperience();
+                float exp = (float) entry.getIntValue() * ((ReworkedSmeltingRecipe) recipe).getExperience();
                 int expInt = MathHelper.floor(exp);
                 float random = MathHelper.frac(exp);
                 if(random != 0.0f && Math.random() < (double) random)
@@ -211,7 +211,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
      * Adds a recipe to the stored recipes map
      * @param recipe ReworkedFurnaceRecipe
      */
-    public void setRecipeUsed(ReworkedFurnaceRecipe recipe) {
+    public void setRecipeUsed(ReworkedSmeltingRecipe recipe) {
         this.recipesUsed.addTo(recipe.getId(), 1);
     }
     
@@ -289,7 +289,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
 
         ItemStack fuel = this.inventory.get(4);
         if(this.litTime > 0 || !fuel.isEmpty()) {
-            Optional<ReworkedFurnaceRecipe> recipe = this.level.getRecipeManager().getRecipeFor(ReworkedFurnaceRecipe.TYPE, this, level);
+            Optional<ReworkedSmeltingRecipe> recipe = this.level.getRecipeManager().getRecipeFor(ReworkedSmeltingRecipe.TYPE, this, level);
             if(recipe.isPresent()) {
                 this.smeltingTime = recipe.get().getSmeltingTime();
                 if(this.litTime <= 0 && this.canSmelt(recipe.get(), this.level)) {
@@ -349,7 +349,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
      * @param world World
      * @return True if can smelt, false if not
      */
-    private boolean canSmelt(ReworkedFurnaceRecipe recipe, World world) {
+    private boolean canSmelt(ReworkedSmeltingRecipe recipe, World world) {
         ItemStack itemInOutputSlot = this.getItem(5);
         ItemStack expectedOutput = recipe.getResultItem();
         return recipe.getStations().contains(this.stationType()) && recipe.matches(this, world) &&
