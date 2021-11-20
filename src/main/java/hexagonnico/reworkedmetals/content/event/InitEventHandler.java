@@ -1,7 +1,5 @@
 package hexagonnico.reworkedmetals.content.event;
 
-import net.minecraft.world.gen.GenerationStage;
-
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.config.Config;
 import hexagonnico.reworkedmetals.registry.WorldGenRegistry;
@@ -18,19 +16,19 @@ public class InitEventHandler {
     public static void onBiomeLoad(BiomeLoadingEvent event) {
         BiomeGenerationSettingsBuilder generation = event.getGeneration();
         if(Config.getBoolean("copperOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_COPPER);
+            WorldGenRegistry.addCopperToGenSettings(generation);
         }
         if(Config.getBoolean("tinOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_TIN);
+            WorldGenRegistry.addTinToGenSettings(generation);
         }
         if(Config.getBoolean("aluminumOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_ALUMINUM);
+            WorldGenRegistry.addAluminumToGenSettings(generation);
         }
         if(Config.getBoolean("nickelOreGenEnabled")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_NICKEL);
+            WorldGenRegistry.addNickelToGenSettings(generation);
         }
         if(Config.getBoolean("rubyOreGenEnabled") && event.getName() != null && event.getName().getPath().contains("shattered_savanna")) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, WorldGenRegistry.ORE_RUBY);
+            WorldGenRegistry.addRubyToGenSettings(generation);
         }
     }
 }

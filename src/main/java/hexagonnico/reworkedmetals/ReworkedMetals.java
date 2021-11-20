@@ -40,6 +40,7 @@ public final class ReworkedMetals {
         TileEntitiesRegistry.REGISTER.register(eventBus);
         ContainersRegistry.REGISTER.register(eventBus);
         CraftingRegistry.REGISTER.register(eventBus);
+        WorldGenRegistry.REGISTER.register(eventBus);
         
         MinecraftForge.EVENT_BUS.register(this);
     }

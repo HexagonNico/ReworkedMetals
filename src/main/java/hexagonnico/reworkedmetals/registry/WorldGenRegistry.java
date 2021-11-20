@@ -2,16 +2,25 @@ package hexagonnico.reworkedmetals.registry;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.config.Config;
+import hexagonnico.reworkedmetals.content.event.InitEventHandler;
+import hexagonnico.reworkedmetals.content.world.OreRangePlacement;
+
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.ReplaceBlockConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
+import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 
 /**
@@ -21,25 +30,19 @@ import net.minecraft.world.gen.placement.Placement;
  */
 public class WorldGenRegistry {
 
-    public static final ConfiguredFeature<?, ?> ORE_COPPER = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.COPPER_ORE.get().defaultBlockState(), Config.getInt("copperOreVeinSize"))
-    ).range(Config.getInt("copperOreMaxHeight")).squared().count(Config.getInt("copperOreAttempts"));
-    
-    public static final ConfiguredFeature<?, ?> ORE_TIN = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.TIN_ORE.get().defaultBlockState(), Config.getInt("tinOreVeinSize"))
-    ).range(Config.getInt("tinOreMaxHeight")).squared().count(Config.getInt("tinOreAttempts"));
-    
-    public static final ConfiguredFeature<?, ?> ORE_ALUMINUM = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.ALUMINUM_ORE.get().defaultBlockState(), Config.getInt("aluminumOreVeinSize"))
-    ).range(Config.getInt("aluminumOreMaxHeight")).squared().count(Config.getInt("aluminumOreAttempts"));
-    
-    public static final ConfiguredFeature<?, ?> ORE_NICKEL = Feature.ORE.configured(
-            new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.NICKEL_ORE.get().defaultBlockState(), Config.getInt("nickelOreVeinSize"))
-    ).range(Config.getInt("nickelOreMaxHeight")).squared().count(Config.getInt("nickelOreAttempts"));
-    
-    public static final ConfiguredFeature<?, ?> ORE_RUBY = Feature.EMERALD_ORE.configured(
-            new ReplaceBlockConfig(Blocks.STONE.defaultBlockState(), BlocksRegistry.RUBY_ORE.get().defaultBlockState())
-    ).decorated(Placement.EMERALD_ORE.configured(IPlacementConfig.NONE));
+    public static final DeferredRegister<Placement<?>> REGISTER = DeferredRegister.create(ForgeRegistries.DECORATORS, ReworkedMetals.ID);
+
+    public static final RegistryObject<Placement<NoPlacementConfig>> COPPER_PLACEMENT = REGISTER.register("copper_ore", () -> new OreRangePlacement(Config.getInt("copperMinAttempts"), Config.getInt("copperMaxAttempts"), Config.getInt("copperMinHeight"), Config.getInt("copperMaxHeight")));
+    public static final RegistryObject<Placement<NoPlacementConfig>> TIN_PLACEMENT = REGISTER.register("tin_ore", () -> new OreRangePlacement(Config.getInt("tinMinAttempts"), Config.getInt("tinMaxAttempts"), Config.getInt("tinMinHeight"), Config.getInt("tinMaxHeight")));
+    public static final RegistryObject<Placement<NoPlacementConfig>> ALUMINUM_PLACEMENT = REGISTER.register("aluminum_ore", () -> new OreRangePlacement(Config.getInt("aluminumMinAttempts"), Config.getInt("aluminumMaxAttempts"), Config.getInt("aluminumMinHeight"), Config.getInt("aluminumMaxHeight")));
+    public static final RegistryObject<Placement<NoPlacementConfig>> NICKEL_PLACEMENT = REGISTER.register("nickel_ore", () -> new OreRangePlacement(Config.getInt("nickelMinAttempts"), Config.getInt("nickelMaxAttempts"), Config.getInt("nickelMinHeight"), Config.getInt("nickelMaxHeight")));
+    public static final RegistryObject<Placement<NoPlacementConfig>> RUBY_PLACEMENT = REGISTER.register("ruby_ore", () -> new OreRangePlacement(Config.getInt("rubyMinAttempts"), Config.getInt("rubyMaxAttempts"), Config.getInt("rubyMinHeight"), Config.getInt("rubyMaxHeight")));
+
+    private static ConfiguredFeature<?, ?> copperOreConfigured;
+    private static ConfiguredFeature<?, ?> tinOreConfigured;
+    private static ConfiguredFeature<?, ?> aluminumOreConfigured;
+    private static ConfiguredFeature<?, ?> nickelOreConfigured;
+    private static ConfiguredFeature<?, ?> rubyOreConfigured;
     
     /**
      * Registers a configured feature.
@@ -56,10 +59,55 @@ public class WorldGenRegistry {
      * Note that features need to be added to biomes with an event handler in order to generate.
      */
     public static void register() {
-        register("copper_ore", ORE_COPPER);
-        register("ore_tin", ORE_TIN);
-        register("ore_aluminum", ORE_ALUMINUM);
-        register("ore_nickel", ORE_NICKEL);
-        register("ore_ruby", ORE_RUBY);
+        register("copper_ore", copperOreConfigured = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.COPPER_ORE.get().defaultBlockState(), Config.getInt("copperVeinSize"))).decorated(COPPER_PLACEMENT.get().configured(IPlacementConfig.NONE)));
+        register("ore_tin", tinOreConfigured = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.TIN_ORE.get().defaultBlockState(), Config.getInt("tinVeinSize"))).decorated(TIN_PLACEMENT.get().configured(IPlacementConfig.NONE)));
+        register("ore_aluminum", aluminumOreConfigured = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.ALUMINUM_ORE.get().defaultBlockState(), Config.getInt("aluminumVeinSize"))).decorated(ALUMINUM_PLACEMENT.get().configured(IPlacementConfig.NONE)));
+        register("ore_nickel", nickelOreConfigured = Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BlocksRegistry.NICKEL_ORE.get().defaultBlockState(), Config.getInt("nickelVeinSize"))).decorated(NICKEL_PLACEMENT.get().configured(IPlacementConfig.NONE)));
+        register("ore_ruby", rubyOreConfigured = Feature.EMERALD_ORE.configured(new ReplaceBlockConfig(Blocks.STONE.defaultBlockState(), BlocksRegistry.RUBY_ORE.get().defaultBlockState())).decorated(RUBY_PLACEMENT.get().configured(IPlacementConfig.NONE)));
+    }
+
+    /**
+     * Adds ore generation to biome settings. Called in {@link InitEventHandler#onBiomeLoad}.
+     * We cannot use public static because of DeferredRegistry.
+     * @param generationSettings BiomeGenerationSettingsBuilder
+     */
+    public static void addCopperToGenSettings(BiomeGenerationSettingsBuilder generationSettings) {
+        if(copperOreConfigured != null) generationSettings.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, copperOreConfigured);
+    }
+
+    /**
+     * Adds ore generation to biome settings. Called in {@link InitEventHandler#onBiomeLoad}.
+     * We cannot use public static because of DeferredRegistry.
+     * @param generationSettings BiomeGenerationSettingsBuilder
+     */
+    public static void addTinToGenSettings(BiomeGenerationSettingsBuilder generationSettings) {
+        if(tinOreConfigured != null) generationSettings.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, tinOreConfigured);
+    }
+
+    /**
+     * Adds ore generation to biome settings. Called in {@link InitEventHandler#onBiomeLoad}.
+     * We cannot use public static because of DeferredRegistry.
+     * @param generationSettings BiomeGenerationSettingsBuilder
+     */
+    public static void addAluminumToGenSettings(BiomeGenerationSettingsBuilder generationSettings) {
+        if(aluminumOreConfigured != null) generationSettings.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, aluminumOreConfigured);
+    }
+
+    /**
+     * Adds ore generation to biome settings. Called in {@link InitEventHandler#onBiomeLoad}.
+     * We cannot use public static because of DeferredRegistry.
+     * @param generationSettings BiomeGenerationSettingsBuilder
+     */
+    public static void addNickelToGenSettings(BiomeGenerationSettingsBuilder generationSettings) {
+        if(nickelOreConfigured != null) generationSettings.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, nickelOreConfigured);
+    }
+
+    /**
+     * Adds ore generation to biome settings. Called in {@link InitEventHandler#onBiomeLoad}.
+     * We cannot use public static because of DeferredRegistry.
+     * @param generationSettings BiomeGenerationSettingsBuilder
+     */
+    public static void addRubyToGenSettings(BiomeGenerationSettingsBuilder generationSettings) {
+        if(rubyOreConfigured != null) generationSettings.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, rubyOreConfigured);
     }
 }

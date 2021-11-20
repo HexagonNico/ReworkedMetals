@@ -4,6 +4,11 @@ import java.util.HashMap;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+/**
+ * Config class. Handles common config.
+ * 
+ * @author Nico
+ */
 public class Config {
 
     public static final ForgeConfigSpec CONFIG;
@@ -41,52 +46,90 @@ public class Config {
     
         configBuilder.comment("Copper ore generation").push("copper_ore_gen");
         createConfigValue(configBuilder, "copperOreGenEnabled", true, "Enables natural generation of copper ore", "Default: true", "Set this to false to disable copper ore generation");
-        createConfigValue(configBuilder, "copperOreVeinSize", 10, 1, 32, "Max size of a copper ore vein", "Default value: 10");
-        createConfigValue(configBuilder, "copperOreMaxHeight", 96, 0, 256, "Max height at which copper can generate", "Default value: 96");
-        createConfigValue(configBuilder, "copperOreAttempts", 6, 0, 32, "Number of generation attempts for copper ore", "Default value: 6");
+        createConfigValue(configBuilder, "copperVeinSize", 10, 1, 32, "Max size of a copper ore vein", "Default value: 10");
+        createConfigValue(configBuilder, "copperMaxHeight", 96, 0, 256, "Max height at which copper can generate", "Default value: 96");
+        createConfigValue(configBuilder, "copperMinHeight", 32, 0, 256, "Min height at which copper can generate", "Default value: 32");
+        createConfigValue(configBuilder, "copperMinAttempts", 10, 0, 32, "Min number of generation attempts for copper ore", "Default value: 10");
+        createConfigValue(configBuilder, "copperMaxAttempts", 20, 0, 32, "Max number of generation attempts for copper ore", "Default value: 20");
         configBuilder.pop();
     
         configBuilder.comment("Tin ore generation").push("tin_ore_gen");
         createConfigValue(configBuilder, "tinOreGenEnabled", true, "Enables natural generation of tin ore", "Default: true", "Set this to false to disable tin ore generation");
-        createConfigValue(configBuilder, "tinOreVeinSize", 10, 1, 32, "Max size of a tin ore vein", "Default value: 10");
-        createConfigValue(configBuilder, "tinOreMaxHeight", 96, 0, 256, "Max height at which tin can generate", "Default value: 96");
-        createConfigValue(configBuilder, "tinOreAttempts", 5, 0, 32, "Number of generation attempts for tin ore", "Default value: 5");
+        createConfigValue(configBuilder, "tinVeinSize", 10, 1, 32, "Max size of a tin ore vein", "Default value: 10");
+        createConfigValue(configBuilder, "tinMaxHeight", 96, 0, 256, "Max height at which tin can generate", "Default value: 96");
+        createConfigValue(configBuilder, "tinMinHeight", 32, 0, 256, "Min height at which tin can generate", "Default value: 32");
+        createConfigValue(configBuilder, "tinMinAttempts", 5, 0, 32, "Min number of generation attempts for tin ore", "Default value: 5");
+        createConfigValue(configBuilder, "tinMaxAttempts", 15, 0, 32, "Max number of generation attempts for tin ore", "Default value: 15");
         configBuilder.pop();
     
         configBuilder.comment("Aluminum ore generation").push("aluminum_ore_gen");
         createConfigValue(configBuilder, "aluminumOreGenEnabled", true, "Enables natural generation of aluminum ore", "Default: true", "Set this to false to disable aluminum ore generation");
-        createConfigValue(configBuilder, "aluminumOreVeinSize", 9, 1, 32, "Max size of a aluminum ore vein", "Default value: 9");
-        createConfigValue(configBuilder, "aluminumOreMaxHeight", 63, 0, 256, "Max height at which aluminum can generate", "Default value: 63");
-        createConfigValue(configBuilder, "aluminumOreAttempts", 4, 0, 32, "Number of generation attempts for aluminum ore", "Default value: 4");
+        createConfigValue(configBuilder, "aluminumVeinSize", 9, 1, 32, "Max size of a aluminum ore vein", "Default value: 9");
+        createConfigValue(configBuilder, "aluminumMaxHeight", 64, 0, 256, "Max height at which aluminum can generate", "Default value: 64");
+        createConfigValue(configBuilder, "aluminumMinHeight", 0, 0, 256, "Min height at which aluminum can generate", "Default value: 0");
+        createConfigValue(configBuilder, "aluminumMinAttempts", 2, 0, 32, "Min number of generation attempts for aluminum ore", "Default value: 2");
+        createConfigValue(configBuilder, "aluminumMaxAttempts", 8, 0, 32, "Max number of generation attempts for aluminum ore", "Default value: 8");
         configBuilder.pop();
     
         configBuilder.comment("Nickel ore generation").push("nickel_ore_gen");
         createConfigValue(configBuilder, "nickelOreGenEnabled", true, "Enables natural generation of nickel ore", "Default: true", "Set this to false to disable nickel ore generation");
-        createConfigValue(configBuilder, "nickelOreVeinSize", 8, 1, 32, "Max size of a nickel ore vein", "Default value: 8");
-        createConfigValue(configBuilder, "nickelOreMaxHeight", 24, 0, 256, "Max height at which nickel can generate", "Default value: 24");
-        createConfigValue(configBuilder, "nickelOreAttempts", 1, 0, 32, "Number of generation attempts for nickel ore", "Default value: 1");
+        createConfigValue(configBuilder, "nickelVeinSize", 8, 1, 32, "Max size of a nickel ore vein", "Default value: 8");
+        createConfigValue(configBuilder, "nickelMaxHeight", 24, 0, 256, "Max height at which nickel can generate", "Default value: 24");
+        createConfigValue(configBuilder, "nickelMinHeight", 0, 0, 256, "Min height at which nickel can generate", "Default value: 0");
+        createConfigValue(configBuilder, "nickelMinAttempts", 1, 0, 32, "Min number of generation attempts for nickel ore", "Default value: 1");
+        createConfigValue(configBuilder, "nickelMaxAttempts", 2, 0, 32, "Max number of generation attempts for nickel ore", "Default value: 2");
         configBuilder.pop();
     
         configBuilder.comment("Ruby ore generation").push("ruby_ore_gen");
         createConfigValue(configBuilder, "rubyOreGenEnabled", true, "Enables natural generation of ruby ore", "Default: true", "Set this to false to disable ruby ore generation");
+        createConfigValue(configBuilder, "rubyMaxHeight", 32, 0, 256, "Max height at which ruby can generate", "Default value: 32");
+        createConfigValue(configBuilder, "rubyMinHeight", 4, 0, 256, "Min height at which ruby can generate", "Default value: 4");
+        createConfigValue(configBuilder, "rubyMinAttempts", 3, 0, 32, "Min number of generation attempts for ruby ore", "Default value: 3");
+        createConfigValue(configBuilder, "rubyMaxAttempts", 8, 0, 32, "Max number of generation attempts for ruby ore", "Default value: 8");
         configBuilder.pop();
     
         CONFIG = configBuilder.build();
     }
     
+    /**
+     * Creates a boolean config value
+     * @param builder ForgeConfigSpec.Builder
+     * @param key Name of config value
+     * @param defaultValue Default value
+     * @param comments # Comments
+     */
     private static void createConfigValue(ForgeConfigSpec.Builder builder, String key, boolean defaultValue, String... comments) {
         booleanValues.put(key, builder.comment(comments).define(key, defaultValue));
     }
     
+    /**
+     * Creates an int config value
+     * @param builder ForgeConfigSpec.Builder
+     * @param key Name of config value
+     * @param defaultValue Default value
+     * @param min Minimum value
+     * @param max Maximum value
+     * @param comments # Comments
+     */
     private static void createConfigValue(ForgeConfigSpec.Builder builder, String key, int defaultValue, int min, int max, String... comments) {
         intValues.put(key, builder.comment(comments).defineInRange(key, defaultValue, min, max));
     }
     
+    /**
+     * Gets a boolean config
+     * @param key Config key
+     * @return True or false config value
+     */
     public static boolean getBoolean(String key) {
-        return booleanValues.get(key).get();
+        return booleanValues.containsKey(key) ? booleanValues.get(key).get() : false;
     }
     
+    /**
+     * Gets an int config
+     * @param key Config key
+     * @return Config value
+     */
     public static int getInt(String key) {
-        return intValues.get(key).get();
+        return intValues.containsKey(key) ? intValues.get(key).get() : 0;
     }
 }
