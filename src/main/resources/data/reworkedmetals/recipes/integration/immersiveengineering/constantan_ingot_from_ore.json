@@ -1,0 +1,30 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/copper"
+    },
+    {
+      "tag": "forge:ores/nickel"
+    }
+  ],
+  "result": {
+    "item": "immersiveengineering:ingot_constantan"
+  },
+  "experience": 0.5,
+  "smelting_time": 200,
+  "stations": [
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "reworkedmetals:config",
+      "config": "allowSmeltingFromOreBlock"
+    }
+  ]
+}

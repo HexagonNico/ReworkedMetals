@@ -1,0 +1,33 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:raw_ores/copper"
+    },
+    {
+      "tag": "forge:raw_ores/copper"
+    },
+    {
+      "tag": "forge:raw_ores/copper"
+    },
+    {
+      "tag": "forge:raw_ores/gold"
+    }
+  ],
+  "result": {
+    "item": "tconstruct:rose_gold_ingot",
+    "count": 2
+  },
+  "experience": 0.7,
+  "smelting_time": 400,
+  "stations": [
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ]
+}
