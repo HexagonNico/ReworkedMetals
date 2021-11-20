@@ -8,5 +8,11 @@
   },
   "result": {
     "item": "reworkedmetals:diamonded_netherite_chestplate"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableDiamondedNetheriteArmor"
+    }
+  ]
 }

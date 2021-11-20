@@ -27,8 +27,13 @@ public class Config {
         configBuilder.comment("Vanilla crafting changes").push("crafting_changes");
         createConfigValue(configBuilder, "requireCampfireForSmeltery", true, "When enabled, crafting a smeltery will require a campfire and a block of clay", "Default: true", "Set this to false to make it equal to the vanilla furnace recipe");
         createConfigValue(configBuilder, "requireCoalForCampfire", false, "When set to false, the campfire crafting recipe will not require coal/charcoal", "Default: false", "Set this to true to reset the vanilla recipe");
+        createConfigValue(configBuilder, "changeBlastFurnaceCrafting", true, "Changes the blast furnace crafting to use invar instead of iron", "Default: true");
+        createConfigValue(configBuilder, "changeSmokerCrafting", true, "Changes the smoker crafting to be consistent with other furnaces", "Default: true");
         createConfigValue(configBuilder, "consistentNetheriteCrafting", true, "Makes netherite tools and armor craftable the same way as other tools and armor", "Default: true", "Set this to false to re-enable the vanilla crafting with the smithing table");
         createConfigValue(configBuilder, "disableDiamondsCrafting", true, "When enable, disables the crafting recipes for diamond tools", "Default: true, since ReworkedMetals replace diamond tools with steel tools", "Set this to false to make diamond tools craftable");
+        createConfigValue(configBuilder, "additionalCookingRecipes", true, "Adds more recipes to the campfire and the smoker so they don't need furnaces", "Default: true");
+        createConfigValue(configBuilder, "additionalStonecuttingRecipes", true, "Adds more recipes to the stonecutter so they don't need furnaces", "Default: true");
+        createConfigValue(configBuilder, "stonecutterAllowsAluminum", true, "Allows the stonecutter to be crafted with aluminum instead of iron", "Default: true");
         configBuilder.pop();
     
         configBuilder.comment("Blocks crafting").push("blocks_crafting");
@@ -87,7 +92,26 @@ public class Config {
         createConfigValue(configBuilder, "rubyMinAttempts", 3, 0, 32, "Min number of generation attempts for ruby ore", "Default value: 3");
         createConfigValue(configBuilder, "rubyMaxAttempts", 8, 0, 32, "Max number of generation attempts for ruby ore", "Default value: 8");
         configBuilder.pop();
-    
+
+        configBuilder.comment("Tools crafting").push("tools_crafting");
+        createConfigValue(configBuilder, "enableCopperTools", true, "Enables crafting for copper tools", "Default: true");
+        createConfigValue(configBuilder, "enableBronzeTools", true, "Enables crafting for bronze tools", "Default: true");
+        createConfigValue(configBuilder, "enableIronDiamondTools", true, "Enables upgrading iron tools with a diamond", "Default: true");
+        createConfigValue(configBuilder, "enableIronEmeraldTools", true, "Enables upgrading iron tools with an emerald", "Default: true");
+        createConfigValue(configBuilder, "enableSteelTools", true, "Enables crafting for steel tools", "Default: true");
+        createConfigValue(configBuilder, "enableSteelDiamondTools", true, "Enables upgrading steel tools with a diamond", "Default: true");
+        createConfigValue(configBuilder, "enableSteelEmeraldTools", true, "Enables upgrading steel tools with an emerald", "Default: true");
+        createConfigValue(configBuilder, "enableGoldRubyTools", true, "Enables upgrading gold tools with a ruby", "Default: true");
+        configBuilder.pop();
+
+        configBuilder.comment("Armor crafting").push("armor_crafting");
+        createConfigValue(configBuilder, "enableCopperArmor", true, "Enables crafting for copper armor");
+        createConfigValue(configBuilder, "enableBronzeArmor", true, "Enables crafting for bronze armor");
+        createConfigValue(configBuilder, "enableSteelArmor", true, "Enables crafting for steel armor");
+        createConfigValue(configBuilder, "enableDiamondedNetheriteArmor", true, "Enables upgrading netherite armor to diamonded netherite");
+        createConfigValue(configBuilder, "enableGildedNetheriteArmor", true, "Enables upgrading netherite armor to gilded netherite");
+        configBuilder.pop();
+
         CONFIG = configBuilder.build();
     }
     

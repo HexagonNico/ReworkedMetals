@@ -8,5 +8,11 @@
   },
   "result": {
     "item": "reworkedmetals:gilded_netherite_chestplate"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableGildedNetheriteArmor"
+    }
+  ]
 }

@@ -4,5 +4,11 @@
     "item": "minecraft:red_sandstone"
   },
   "result": "minecraft:smooth_red_sandstone",
-  "count": 1
+  "count": 1,
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "additionalStonecuttingRecipes"
+    }
+  ]
 }

@@ -8,5 +8,11 @@
   },
   "result": {
     "item": "reworkedmetals:gold_ruby_axe"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableGoldRubyTools"
+    }
+  ]
 }

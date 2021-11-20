@@ -15,5 +15,11 @@
   },
   "result": {
     "item": "reworkedmetals:bronze_shovel"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableBronzeTools"
+    }
+  ]
 }

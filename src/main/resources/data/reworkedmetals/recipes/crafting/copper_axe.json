@@ -15,5 +15,11 @@
   },
   "result": {
     "item": "reworkedmetals:copper_axe"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableCopperTools"
+    }
+  ]
 }

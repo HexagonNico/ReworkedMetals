@@ -4,5 +4,11 @@
     "item": "minecraft:polished_blackstone_bricks"
   },
   "result": "minecraft:cracked_polished_blackstone_bricks",
-  "count": 1
+  "count": 1,
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "additionalStonecuttingRecipes"
+    }
+  ]
 }

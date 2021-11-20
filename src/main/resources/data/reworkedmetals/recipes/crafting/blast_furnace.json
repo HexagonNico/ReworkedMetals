@@ -13,7 +13,7 @@
       "item": "minecraft:furnace"
     },
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "forge:ingots/invar"
     }
   },
   "result": {
@@ -21,11 +21,8 @@
   },
   "conditions": [
     {
-      "type": "forge:not",
-      "value": {
-        "type": "reworkedmetals:config",
-        "config": "changeBlastFurnaceCrafting"
-      }
+      "type": "reworkedmetals:config",
+      "config": "changeBlastFurnaceCrafting"
     }
   ]
 }

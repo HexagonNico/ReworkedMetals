@@ -4,5 +4,11 @@
     "item": "minecraft:cobblestone"
   },
   "result": "minecraft:stone",
-  "count": 1
+  "count": 1,
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "additionalStonecuttingRecipes"
+    }
+  ]
 }

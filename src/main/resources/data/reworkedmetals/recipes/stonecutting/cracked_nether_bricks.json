@@ -4,5 +4,11 @@
     "item": "minecraft:nether_bricks"
   },
   "result": "minecraft:cracked_nether_bricks",
-  "count": 1
+  "count": 1,
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "additionalStonecuttingRecipes"
+    }
+  ]
 }

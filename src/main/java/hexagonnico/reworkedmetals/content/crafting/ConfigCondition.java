@@ -62,6 +62,4 @@ public class ConfigCondition implements ICondition {
             return this.id;
         }
     }
-
-    // TODO - Blast furnace config, smoker config, campfire/smoker/stonecutting config, allowSmeltingFromOreBlock default to false
 }

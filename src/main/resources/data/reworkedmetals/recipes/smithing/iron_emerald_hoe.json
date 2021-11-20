@@ -8,5 +8,11 @@
   },
   "result": {
     "item": "reworkedmetals:iron_emerald_hoe"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableIronEmeraldTools"
+    }
+  ]
 }

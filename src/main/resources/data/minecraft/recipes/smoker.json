@@ -1,22 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "LSL",
-    "S S",
-    "LXL"
+    " L ",
+    "LFL",
+    " L "
   ],
   "key": {
     "L": {
       "tag": "minecraft:logs"
     },
-    "S": {
-      "tag": "minecraft:stone_crafting_materials"
-    },
-    "X": {
-      "item": "minecraft:campfire"
+    "F": {
+      "item": "reworkedmetals:smeltery"
     }
   },
   "result": {
     "item": "minecraft:smoker"
-  }
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "changeSmokerCrafting"
+      }
+    }
+  ]
 }

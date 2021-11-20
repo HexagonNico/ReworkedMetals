@@ -11,5 +11,11 @@
   },
   "result": {
     "item": "reworkedmetals:copper_helmet"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableCopperArmor"
+    }
+  ]
 }

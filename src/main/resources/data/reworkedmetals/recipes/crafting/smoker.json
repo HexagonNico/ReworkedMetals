@@ -1,24 +1,28 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " I ",
-    "###"
+    "LSL",
+    "S S",
+    "LXL"
   ],
   "key": {
-    "I": {
-      "tag": "forge:ingots/aluminum"
+    "L": {
+      "tag": "minecraft:logs"
     },
-    "#": {
+    "S": {
       "tag": "minecraft:stone_crafting_materials"
+    },
+    "X": {
+      "item": "minecraft:campfire"
     }
   },
   "result": {
-    "item": "minecraft:stonecutter"
+    "item": "minecraft:smoker"
   },
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "stonecutterAllowsAluminum"
+      "config": "changeSmokerCrafting"
     }
   ]
 }
