@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    " /",
+    " /"
+  ],
+  "key": {
+    "/": {
+      "tag": "forge:rods/wooden"
+    },
+    "#": {
+      "tag": "forge:ingots/silver"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:silver_hoe"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableSilverTools"
+    }
+  ]
+}

@@ -7,16 +7,16 @@
   ],
   "key": {
     "#": {
-      "item": "reworkedmetals:raw_iron"
+      "item": "reworkedmetals:silver_ingot"
     }
   },
   "result": {
-    "item": "reworkedmetals:raw_iron_block"
+    "item": "reworkedmetals:silver_block"
   },
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableRawIronBlock"
+      "config": "enableSilverBlock"
     }
   ]
 }

@@ -37,11 +37,15 @@ public class Config {
         configBuilder.pop();
     
         configBuilder.comment("Blocks crafting").push("blocks_crafting");
+        createConfigValue(configBuilder, "enableCopperBlock", true, "Enables crafting block of copper", "Default: true");
+        createConfigValue(configBuilder, "enableRawCopperBlock", true, "Enables crafting block of raw copper", "Default: true");
         createConfigValue(configBuilder, "enableTinBlock", true, "Enables crafting block of tin", "Default: true");
         createConfigValue(configBuilder, "enableRawTinBlock", true, "Enables crafting block of raw tin", "Default: true");
         createConfigValue(configBuilder, "enableAluminumBlock", true, "Enables crafting block of aluminum", "Default: true");
         createConfigValue(configBuilder, "enableRawAluminumBlock", true, "Enables crafting block of raw aluminum", "Default: true");
         createConfigValue(configBuilder, "enableBronzeBlock", true, "Enables crafting block of bronze", "Default: true");
+        createConfigValue(configBuilder, "enableSilverBlock", true, "Enables crafting block of silver", "Default: true");
+        createConfigValue(configBuilder, "enableRawSilverBlock", true, "Enables crafting block of raw silver", "Default: true");
         createConfigValue(configBuilder, "enableNickelBlock", true, "Enables crafting block of nickel", "Default: true");
         createConfigValue(configBuilder, "enableRawNickelBlock", true, "Enables crafting block of raw nickel", "Default: true");
         createConfigValue(configBuilder, "enableInvarBlock", true, "Enables crafting block of invar", "Default: true");
@@ -76,6 +80,15 @@ public class Config {
         createConfigValue(configBuilder, "aluminumMaxAttempts", 8, 0, 32, "Max number of generation attempts for aluminum ore", "Default value: 8");
         configBuilder.pop();
     
+        configBuilder.comment("Silver ore generation").push("silver_ore_gen");
+        createConfigValue(configBuilder, "silverOreGenEnabled", true, "Enables natural generation of silver ore", "Default: true", "Set this to false to disable silver ore generation");
+        createConfigValue(configBuilder, "silverVeinSize", 9, 1, 32, "Max size of a silver ore vein", "Default value: 9");
+        createConfigValue(configBuilder, "silverMaxHeight", 32, 0, 256, "Max height at which silver can generate", "Default value: 32");
+        createConfigValue(configBuilder, "silverMinHeight", 0, 0, 256, "Min height at which silver can generate", "Default value: 0");
+        createConfigValue(configBuilder, "silverMinAttempts", 1, 0, 32, "Min number of generation attempts for silver ore", "Default value: 1");
+        createConfigValue(configBuilder, "silverMaxAttempts", 3, 0, 32, "Max number of generation attempts for silver ore", "Default value: 3");
+        configBuilder.pop();
+    
         configBuilder.comment("Nickel ore generation").push("nickel_ore_gen");
         createConfigValue(configBuilder, "nickelOreGenEnabled", true, "Enables natural generation of nickel ore", "Default: true", "Set this to false to disable nickel ore generation");
         createConfigValue(configBuilder, "nickelVeinSize", 8, 1, 32, "Max size of a nickel ore vein", "Default value: 8");
@@ -98,6 +111,9 @@ public class Config {
         createConfigValue(configBuilder, "enableBronzeTools", true, "Enables crafting for bronze tools", "Default: true");
         createConfigValue(configBuilder, "enableIronDiamondTools", true, "Enables upgrading iron tools with a diamond", "Default: true");
         createConfigValue(configBuilder, "enableIronEmeraldTools", true, "Enables upgrading iron tools with an emerald", "Default: true");
+        createConfigValue(configBuilder, "enableSilverTools", true, "Enables crafting for silver tools", "Default: true");
+        createConfigValue(configBuilder, "enableSilverRubyTools", true, "Enables upgrading silver tools with a ruby", "Default: true");
+        createConfigValue(configBuilder, "enableSilverDiamondTools", true, "Enables upgrading silver tools with a diamond", "Default: true");
         createConfigValue(configBuilder, "enableSteelTools", true, "Enables crafting for steel tools", "Default: true");
         createConfigValue(configBuilder, "enableSteelDiamondTools", true, "Enables upgrading steel tools with a diamond", "Default: true");
         createConfigValue(configBuilder, "enableSteelEmeraldTools", true, "Enables upgrading steel tools with an emerald", "Default: true");

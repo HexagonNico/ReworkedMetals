@@ -24,6 +24,9 @@ public class InitEventHandler {
         if(Config.getBoolean("aluminumOreGenEnabled")) {
             WorldGenRegistry.addAluminumToGenSettings(generation);
         }
+        if(Config.getBoolean("silverOreGenEnabled")) {
+            WorldGenRegistry.addSilverToGenSettings(generation);
+        }
         if(Config.getBoolean("nickelOreGenEnabled")) {
             WorldGenRegistry.addNickelToGenSettings(generation);
         }

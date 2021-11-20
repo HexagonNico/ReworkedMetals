@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "reworkedmetals:silver_shovel"
+  },
+  "addition": {
+    "tag": "forge:gems/ruby"
+  },
+  "result": {
+    "item": "reworkedmetals:silver_ruby_shovel"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableSilverRubyTools"
+    }
+  ]
+}
