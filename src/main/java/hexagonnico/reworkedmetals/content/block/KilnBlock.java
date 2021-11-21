@@ -1,6 +1,8 @@
 package hexagonnico.reworkedmetals.content.block;
 
 import hexagonnico.reworkedmetals.content.blockentity.KilnBlockEntity;
+import hexagonnico.reworkedmetals.content.blockentity.ReworkedFurnaceBlockEntity;
+import hexagonnico.reworkedmetals.registry.BlockEntitiesRegistry;
 
 import java.util.Random;
 
@@ -11,6 +13,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -54,5 +58,10 @@ public class KilnBlock extends ReworkedFurnaceBlock {
             level.addParticle(ParticleTypes.SMOKE, x + dx, y + dy, z + dz, 0.0, 0.0, 0.0);
             level.addParticle(ParticleTypes.FLAME, x + dx, y + dy, z + dz, 0.0, 0.0, 0.0);
         }
+    }
+
+    @Override // Creates ticker for block entity
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, BlockEntitiesRegistry.KILN.get(), ReworkedFurnaceBlockEntity::serverTick);
     }
 }

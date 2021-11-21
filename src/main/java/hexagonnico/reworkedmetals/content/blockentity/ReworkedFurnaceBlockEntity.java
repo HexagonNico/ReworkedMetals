@@ -1,14 +1,17 @@
 package hexagonnico.reworkedmetals.content.blockentity;
 
+import hexagonnico.reworkedmetals.content.block.ReworkedFurnaceBlock;
 import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainerMenu;
 import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -40,6 +43,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -262,82 +266,74 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
             }
         };
     }
-    
-    // TODO
-    // @Override // Server tick, furnace logic
-    // public void tick() {
-    //     boolean wasLitInitially = this.litTime > 0;
-    //     boolean changed = false;
-    //     this.litTime = this.litTime > 0 ? this.litTime - 1 : this.litTime;
 
-    //     ItemStack fuel = this.inventory.get(4);
-    //     if(this.litTime > 0 || !fuel.isEmpty()) {
-    //         Optional<ReworkedSmeltingRecipe> recipe = this.level.getRecipeManager().getRecipeFor(ReworkedSmeltingRecipe.TYPE, this, level);
-    //         if(recipe.isPresent()) {
-    //             this.smeltingTime = recipe.get().getSmeltingTime();
-    //             if(this.litTime <= 0 && this.canSmelt(recipe.get(), this.level)) {
-    //                 this.litTime = ForgeHooks.getBurnTime(fuel, null);
-    //                 this.totalLitTime = this.litTime;
-    //                 if(this.litTime > 0) {
-    //                     changed = true;
-    //                     if(fuel.hasContainerItem()) {
-    //                         this.inventory.set(4, fuel.getContainerItem());
-    //                     } else if(!fuel.isEmpty()) {
-    //                         fuel.shrink(1);
-    //                         if(fuel.isEmpty()) {
-    //                             this.inventory.set(4, fuel.getContainerItem());
-    //                         }
-    //                     }
-    //                 }
-    //             }
+    public static void serverTick(Level level, BlockPos pos, BlockState state, ReworkedFurnaceBlockEntity blockEntity) {
+        boolean wasLitInitially = blockEntity.litTime > 0;
+        boolean changed = false;
+        blockEntity.litTime = blockEntity.litTime > 0 ? blockEntity.litTime - 1 : blockEntity.litTime;
 
-    //             if(this.litTime > 0 && this.canSmelt(recipe.get(), level)) {
-    //                 this.smeltingProgress++;
-    //                 if(this.smeltingProgress == this.smeltingTime) {
-    //                     this.smeltingProgress = 0;
-    //                     if(this.canSmelt(recipe.get(), level)) {
-    //                         recipe.get().getIngredients().forEach(this::removeIngredient);
-    //                         ItemStack outputSlotItem = this.getItem(5);
-    //                         ItemStack result = recipe.get().assemble(this);
-    //                         if(outputSlotItem.isEmpty()) {
-    //                             this.setItem(5, result);
-    //                         } else {
-    //                             outputSlotItem.grow(result.getCount());
-    //                         }
-    //                         this.setRecipeUsed(recipe.get());
-    //                     }
-    //                     changed = true;
-    //                 }
-    //             } else {
-    //                 this.smeltingProgress = 0;
-    //             }
-    //         }
-    //     } else if(this.litTime <= 0 && this.smeltingProgress > 0) {
-    //         this.smeltingProgress = MathHelper.clamp(this.smeltingProgress - 2, 0, this.smeltingTime);
-    //     }
+        ItemStack fuel = blockEntity.inventory.get(4);
+        if(blockEntity.litTime > 0 || !fuel.isEmpty()) {
+            Optional<ReworkedSmeltingRecipe> recipe = level.getRecipeManager().getRecipeFor(ReworkedSmeltingRecipe.TYPE, blockEntity, level);
+            if(recipe.isPresent()) {
+                blockEntity.smeltingTime = recipe.get().getSmeltingTime();
+                if(blockEntity.litTime <= 0 && canSmelt(blockEntity, recipe.get(), level)) {
+                    blockEntity.litTime = ForgeHooks.getBurnTime(fuel, null);
+                    blockEntity.totalLitTime = blockEntity.litTime;
+                    if(blockEntity.litTime > 0) {
+                        changed = true;
+                        if(fuel.hasContainerItem()) {
+                            blockEntity.inventory.set(4, fuel.getContainerItem());
+                        } else if(!fuel.isEmpty()) {
+                            fuel.shrink(1);
+                            if(fuel.isEmpty()) {
+                                blockEntity.inventory.set(4, fuel.getContainerItem());
+                            }
+                        }
+                    }
+                }
 
-    //     if(wasLitInitially != (this.litTime > 0)) {
-    //         changed = true;
-    //         this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(ReworkedFurnaceBlock.LIT, this.litTime > 0), 3);
-    //     }
+                if(blockEntity.litTime > 0 && canSmelt(blockEntity, recipe.get(), level)) {
+                    blockEntity.smeltingProgress++;
+                    if(blockEntity.smeltingProgress == blockEntity.smeltingTime) {
+                        blockEntity.smeltingProgress = 0;
+                        if(canSmelt(blockEntity, recipe.get(), level)) {
+                            recipe.get().getIngredients().forEach(blockEntity::removeIngredient);
+                            ItemStack outputSlotItem = blockEntity.getItem(5);
+                            ItemStack result = recipe.get().assemble(blockEntity);
+                            if(outputSlotItem.isEmpty()) {
+                                blockEntity.setItem(5, result);
+                            } else {
+                                outputSlotItem.grow(result.getCount());
+                            }
+                            blockEntity.setRecipeUsed(recipe.get());
+                        }
+                        changed = true;
+                    }
+                } else {
+                    blockEntity.smeltingProgress = 0;
+                }
+            }
+        } else if(blockEntity.litTime <= 0 && blockEntity.smeltingProgress > 0) {
+            blockEntity.smeltingProgress = Mth.clamp(blockEntity.smeltingProgress - 2, 0, blockEntity.smeltingTime);
+        }
+
+        if(wasLitInitially != (blockEntity.litTime > 0)) {
+            changed = true;
+            blockEntity.level.setBlock(blockEntity.worldPosition, blockEntity.level.getBlockState(blockEntity.worldPosition).setValue(ReworkedFurnaceBlock.LIT, blockEntity.litTime > 0), 3);
+        }
         
-    //     if(changed) {
-    //         this.setChanged();
-    //     }
-    // }
+        if(changed) {
+            blockEntity.setChanged();
+        }
+    }
 
-    // /**
-    //  * Checks if furnace has fuel, has a free output slot and the given recipe matches the input.
-    //  * @param recipe ReworkedFurnaceRecipe. Need to match input
-    //  * @param world World
-    //  * @return True if can smelt, false if not
-    //  */
-    // private boolean canSmelt(ReworkedSmeltingRecipe recipe, World world) {
-    //     ItemStack itemInOutputSlot = this.getItem(5);
-    //     ItemStack expectedOutput = recipe.getResultItem();
-    //     return recipe.getStations().contains(this.stationType()) && recipe.matches(this, world) &&
-    //             (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
-    // }
+    private static boolean canSmelt(ReworkedFurnaceBlockEntity blockEntity, ReworkedSmeltingRecipe recipe, Level level) {
+        ItemStack itemInOutputSlot = blockEntity.getItem(5);
+        ItemStack expectedOutput = recipe.getResultItem();
+        return recipe.getStations().contains(blockEntity.stationType()) && recipe.matches(blockEntity, level) &&
+                (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
+    }
     
     @Override // Slots for hopper interaction
     public int[] getSlotsForFace(Direction direction) {
