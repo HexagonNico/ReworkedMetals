@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#forge:raw_metals/copper",
-    "reworkedmetals:raw_copper"
+    "minecraft:raw_copper"
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "reworkedmetals:silver_ore",
+    "reworkedmetals:nickel_ore",
+    "reworkedmetals:ruby_ore",
+    "reworkedmetals:deepslate_silver_ore",
+    "reworkedmetals:deepslate_nickel_ore",
+    "reworkedmetals:deepslate_ruby_ore",
+    "reworkedmetals:raw_silver_block",
+    "reworkedmetals:raw_nickel_block",
+    "reworkedmetals:silver_block",
+    "reworkedmetals:nickel_block",
+    "reworkedmetals:invar_block",
+    "reworkedmetals:steel_block",
+    "reworkedmetals:ruby_block"
+  ]
+}

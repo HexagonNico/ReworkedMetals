@@ -1,9 +1,5 @@
 package hexagonnico.reworkedmetals.content.world;
 
-import java.util.Random;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
 /**
  * Placement configuration for ore generation.
  * Generates ore within a range and a number of attempts.

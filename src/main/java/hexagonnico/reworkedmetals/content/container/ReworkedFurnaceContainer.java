@@ -14,8 +14,6 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-import org.antlr.runtime.misc.IntArray;
-
 /**
  * Furnace container. All tile entities that contain items need one of this.
  * 

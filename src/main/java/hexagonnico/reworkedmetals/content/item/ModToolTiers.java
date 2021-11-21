@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
  * @author Nico
  */
 public enum ModToolTiers implements Tier {
-    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(ItemsRegistry.COPPER_INGOT.get())),
+    COPPER(1, 190, 5.0f, 1.5f, 12, Ingredient.of(Items.COPPER_INGOT)),
     BRONZE(2, 250, 6.0f, 2.0f, 15, Ingredient.of(ItemsRegistry.BRONZE_INGOT.get())),
     IRON(2, 700, 7.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
     IRON_DIAMOND(3, 1125, 5.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),

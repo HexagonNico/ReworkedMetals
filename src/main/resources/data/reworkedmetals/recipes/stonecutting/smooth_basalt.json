@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:basalt"
+  },
+  "result": "minecraft:smooth_basalt",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "additionalStonecuttingRecipes"
+    }
+  ]
+}

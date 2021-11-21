@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#forge:raw_metals/iron",
-    "reworkedmetals:raw_iron"
+    "minecraft:raw_iron"
   ]
 }

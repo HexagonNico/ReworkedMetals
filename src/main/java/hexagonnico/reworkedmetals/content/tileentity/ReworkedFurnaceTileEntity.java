@@ -6,8 +6,6 @@ import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mojang.math.Vector3d;
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
