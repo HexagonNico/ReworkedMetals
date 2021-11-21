@@ -48,7 +48,6 @@ public final class ReworkedMetals {
      * @param setupEvent FMLCommonSetupEvent.
      */
     private void commonSetup(final FMLCommonSetupEvent setupEvent) {
-        // WorldGenRegistry.register();
         CraftingRegistry.registerConditions();
         // TODO ReworkedMetalsVillagers.armorerFix();
     }

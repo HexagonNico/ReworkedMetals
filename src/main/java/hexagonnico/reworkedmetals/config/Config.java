@@ -53,15 +53,6 @@ public class Config {
         createConfigValue(configBuilder, "enableRubyBlock", true, "Enables crafting block of ruby", "Default: true");
         configBuilder.pop();
     
-        configBuilder.comment("Copper ore generation").push("copper_ore_gen");
-        createConfigValue(configBuilder, "copperOreGenEnabled", true, "Enables natural generation of copper ore", "Default: true", "Set this to false to disable copper ore generation");
-        createConfigValue(configBuilder, "copperVeinSize", 10, 1, 32, "Max size of a copper ore vein", "Default value: 10");
-        createConfigValue(configBuilder, "copperMaxHeight", 96, 0, 256, "Max height at which copper can generate", "Default value: 96");
-        createConfigValue(configBuilder, "copperMinHeight", 32, 0, 256, "Min height at which copper can generate", "Default value: 32");
-        createConfigValue(configBuilder, "copperMinAttempts", 10, 0, 32, "Min number of generation attempts for copper ore", "Default value: 10");
-        createConfigValue(configBuilder, "copperMaxAttempts", 20, 0, 32, "Max number of generation attempts for copper ore", "Default value: 20");
-        configBuilder.pop();
-    
         configBuilder.comment("Tin ore generation").push("tin_ore_gen");
         createConfigValue(configBuilder, "tinOreGenEnabled", true, "Enables natural generation of tin ore", "Default: true", "Set this to false to disable tin ore generation");
         createConfigValue(configBuilder, "tinVeinSize", 10, 1, 32, "Max size of a tin ore vein", "Default value: 10");
