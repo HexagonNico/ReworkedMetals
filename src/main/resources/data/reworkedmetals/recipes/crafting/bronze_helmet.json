@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/bronze"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:bronze_helmet"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableBronzeArmor"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "result": {
+    "item": "minecraft:brick"
+  },
+  "experience": 0.3,
+  "smelting_time": 200,
+  "stations": [
+    "smeltery",
+    "kiln"
+  ]
+}

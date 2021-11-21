@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "reworkedmetals:raw_aluminum"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:raw_aluminum_block"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableRawAluminumBlock"
+    }
+  ]
+}

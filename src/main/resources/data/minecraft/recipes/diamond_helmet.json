@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_helmet"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "disableDiamondsCrafting"
+      }
+    }
+  ]
+}

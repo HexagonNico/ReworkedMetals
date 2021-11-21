@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/netherite"
+    }
+  },
+  "result": {
+    "item": "minecraft:netherite_chestplate"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "consistentNetheriteCrafting"
+    }
+  ]
+}

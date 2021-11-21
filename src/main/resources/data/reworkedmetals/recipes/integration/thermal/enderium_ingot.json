@@ -1,0 +1,38 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/lead"
+    },
+    {
+      "tag": "forge:ores/lead"
+    },
+    {
+      "tag": "forge:ores/lead"
+    },
+    {
+      "tag": "forge:dusts/diamond"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
+  ],
+  "result": {
+    "item": "thermal:enderium_ingot",
+    "count": 2
+  },
+  "experience": 0.5,
+  "smelting_time": 400,
+  "stations": [
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_ores/raw_copper",
+    "reworkedmetals:raw_copper"
+  ]
+}

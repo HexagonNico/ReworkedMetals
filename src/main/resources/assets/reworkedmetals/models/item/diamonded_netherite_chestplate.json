@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "reworkedmetals:item/diamonded_netherite_chestplate"
+  }
+}

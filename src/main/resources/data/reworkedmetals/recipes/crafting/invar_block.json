@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "reworkedmetals:invar_ingot"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:invar_block"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableInvarBlock"
+    }
+  ]
+}

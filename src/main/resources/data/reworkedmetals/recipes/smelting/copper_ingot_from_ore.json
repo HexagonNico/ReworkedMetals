@@ -1,0 +1,24 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/copper"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:copper_ingot"
+  },
+  "experience": 0.7,
+  "smelting_time": 200,
+  "stations": [
+    "smeltery",
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "allowSmeltingFromOreBlock"
+    }
+  ]
+}

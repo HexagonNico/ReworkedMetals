@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:netherite_boots"
+  },
+  "addition": {
+    "tag": "forge:ingots/gold"
+  },
+  "result": {
+    "item": "reworkedmetals:gilded_netherite_boots"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableGildedNetheriteArmor"
+    }
+  ]
+}

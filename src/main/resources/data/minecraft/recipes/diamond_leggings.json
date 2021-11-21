@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "minecraft:diamond_leggings"
+  },
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "disableDiamondsCrafting"
+      }
+    }
+  ]
+}

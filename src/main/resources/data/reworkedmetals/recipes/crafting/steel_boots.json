@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:steel_boots"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableSteelArmor"
+    }
+  ]
+}

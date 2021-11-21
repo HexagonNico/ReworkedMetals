@@ -1,0 +1,22 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:ores/uranium"
+    }
+  ],
+  "result": {
+    "item": "immersiveengineering:ingot_uranium"
+  },
+  "experience": 1.0,
+  "smelting_time": 200,
+  "stations": [
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ]
+}
