@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals.content.block;
 
-import hexagonnico.reworkedmetals.content.tileentity.SmelteryTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.SmelteryBlockEntity;
 
 import java.util.Random;
 
@@ -15,14 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Class for smeltery block.
- * 
  * @author Nico
  */
 public class SmelteryBlock extends ReworkedFurnaceBlock {
 
-    @Override // Get the right block entity
+    @Override // Create block entity
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SmelteryTileEntity(pos, state);
+        return new SmelteryBlockEntity(pos, state);
     }
     
     @Override // Block sounds and particles

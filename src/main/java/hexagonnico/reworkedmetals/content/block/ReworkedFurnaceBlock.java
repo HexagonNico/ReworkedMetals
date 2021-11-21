@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals.content.block;
 
-import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.ReworkedFurnaceBlockEntity;
 
 import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
@@ -34,8 +34,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Reworked Furnace Block. All furnaces in ReworkedMetals extend this class.
- * 
+ * Reworked Furnace Block.
+ * All furnaces in ReworkedMetals extend this class.
  * @author Nico
  */
 public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
@@ -68,8 +68,8 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity entity, ItemStack item) {
         if(item.hasCustomHoverName()) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if(blockEntity instanceof ReworkedFurnaceTileEntity) {
-                ((ReworkedFurnaceTileEntity) blockEntity).setCustomName(item.getHoverName());
+            if(blockEntity instanceof ReworkedFurnaceBlockEntity) {
+                ((ReworkedFurnaceBlockEntity) blockEntity).setCustomName(item.getHoverName());
             }
         }
     }
@@ -98,7 +98,7 @@ public abstract class ReworkedFurnaceBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) {
         if(!state.is(newState.getBlock())) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
-            if(blockEntity instanceof ReworkedFurnaceTileEntity reworkedFurnaceBlockEntity) {
+            if(blockEntity instanceof ReworkedFurnaceBlockEntity reworkedFurnaceBlockEntity) {
                 reworkedFurnaceBlockEntity.popExperience(null, (ServerLevel) level, Vec3.atCenterOf(pos));
                 Containers.dropContents(level, pos, reworkedFurnaceBlockEntity);
             }

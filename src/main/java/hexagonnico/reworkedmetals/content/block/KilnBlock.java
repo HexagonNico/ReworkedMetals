@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals.content.block;
 
-import hexagonnico.reworkedmetals.content.tileentity.KilnTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.KilnBlockEntity;
 
 import java.util.Random;
 
@@ -19,7 +19,6 @@ import net.minecraft.world.level.material.MaterialColor;
 
 /**
  * Class for kiln block.
- * 
  * @author Nico
  */
 public class KilnBlock extends ReworkedFurnaceBlock {
@@ -31,9 +30,9 @@ public class KilnBlock extends ReworkedFurnaceBlock {
         super(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(3.5F).lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0));
     }
 
-    @Override
+    @Override // Create block entity
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new KilnTileEntity(pos, state);
+        return new KilnBlockEntity(pos, state);
     }
     
     @Override // Block sounds and particles

@@ -8,7 +8,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 /**
  * Tool tier enum.
- * 
  * @author Nico
  */
 public enum ModToolTiers implements Tier {

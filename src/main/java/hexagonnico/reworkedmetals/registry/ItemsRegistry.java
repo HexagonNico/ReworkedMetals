@@ -20,8 +20,8 @@ import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 
 /**
- * Items registry. Contains all items and block-items in ReworkedMetals.
- * 
+ * Items registry.
+ * Contains all items and block-items in ReworkedMetals.
  * @author Nico
  */
 public class ItemsRegistry {

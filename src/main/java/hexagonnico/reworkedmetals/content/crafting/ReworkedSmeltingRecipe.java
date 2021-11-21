@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.content.crafting;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.ReworkedFurnaceBlockEntity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,10 +28,9 @@ import net.minecraft.world.level.Level;
 
 /**
  * Recipe for the reworked furnace.
- * 
  * @author Nico
  */
-public class ReworkedSmeltingRecipe implements Recipe<ReworkedFurnaceTileEntity> {
+public class ReworkedSmeltingRecipe implements Recipe<ReworkedFurnaceBlockEntity> {
     
     public static final RecipeType<ReworkedSmeltingRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":smelting");
     
@@ -113,7 +112,7 @@ public class ReworkedSmeltingRecipe implements Recipe<ReworkedFurnaceTileEntity>
     }
     
     @Override
-    public ItemStack assemble(ReworkedFurnaceTileEntity recipeWrapper) {
+    public ItemStack assemble(ReworkedFurnaceBlockEntity recipeWrapper) {
         return this.output.copy();
     }
     
@@ -130,7 +129,7 @@ public class ReworkedSmeltingRecipe implements Recipe<ReworkedFurnaceTileEntity>
     }
     
     @Override
-    public boolean matches(ReworkedFurnaceTileEntity recipeWrapper, Level world) {
+    public boolean matches(ReworkedFurnaceBlockEntity recipeWrapper, Level world) {
         List<ItemStack> inputItems = IntStream.range(0, 4)
                 .mapToObj(i -> recipeWrapper.getItem(i).copy())
                 .filter(itemStack -> !itemStack.isEmpty())

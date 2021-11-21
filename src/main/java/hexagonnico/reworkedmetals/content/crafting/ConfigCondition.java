@@ -13,7 +13,6 @@ import net.minecraft.util.GsonHelper;
 
 /**
  * Allows to enable/disable recipes depending on config files.
- * 
  * @author Nico
  */
 public class ConfigCondition implements ICondition {

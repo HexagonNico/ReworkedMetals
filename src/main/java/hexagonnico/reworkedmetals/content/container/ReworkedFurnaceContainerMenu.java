@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.content.container;
 
-import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
-import hexagonnico.reworkedmetals.registry.ContainersRegistry;
+import hexagonnico.reworkedmetals.content.blockentity.ReworkedFurnaceBlockEntity;
+import hexagonnico.reworkedmetals.registry.ContainerMenusRegistry;
 
 import net.minecraftforge.common.ForgeHooks;
 
@@ -15,37 +15,37 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Furnace container. All tile entities that contain items need one of this.
- * 
+ * Furnace container menu.
+ * All block entities that contain items need one of this.
  * @author Nico
  */
-public class ReworkedFurnaceContainer extends AbstractContainerMenu {
+public class ReworkedFurnaceContainerMenu extends AbstractContainerMenu {
     
-    private final ReworkedFurnaceTileEntity tileEntity;
+    private final ReworkedFurnaceBlockEntity blockEntity;
     private final ContainerData containerData;
     
     /**
      * Get container data and create slots
      * @param id Window id
      * @param playerInventory player inventory
-     * @param tileEntity ReworkedFurnaceTileEntity
+     * @param blockEntity ReworkedFurnaceBlockEntity
      * @param containerData Needed to pass data from block to gui
      */
-    public ReworkedFurnaceContainer(int id, Inventory playerInventory, ReworkedFurnaceTileEntity tileEntity, ContainerData containerData) {
-        super(ContainersRegistry.FURNACE.get(), id);
-        this.tileEntity = tileEntity;
+    public ReworkedFurnaceContainerMenu(int id, Inventory playerInventory, ReworkedFurnaceBlockEntity blockEntity, ContainerData containerData) {
+        super(ContainerMenusRegistry.FURNACE.get(), id);
+        this.blockEntity = blockEntity;
         this.containerData = containerData;
-        checkContainerSize(tileEntity, 6);
-        tileEntity.startOpen(playerInventory.player);
+        checkContainerSize(blockEntity, 6);
+        blockEntity.startOpen(playerInventory.player);
         
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
-                this.addSlot(new Slot(tileEntity, j + i * 2, 38 + j * 18, 17 + i * 18));
+                this.addSlot(new Slot(blockEntity, j + i * 2, 38 + j * 18, 17 + i * 18));
             }
         }
         
-        this.addSlot(new ReworkedFurnaceFuelSlot(tileEntity, 4, 47, 71));
-        this.addSlot(new ReworkedFurnaceResultSlot(tileEntity, playerInventory.player, 5, 118, 26));
+        this.addSlot(new ReworkedFurnaceFuelSlot(blockEntity, 4, 47, 71));
+        this.addSlot(new ReworkedFurnaceResultSlot(blockEntity, playerInventory.player, 5, 118, 26));
         
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 9; j++) {
@@ -63,15 +63,15 @@ public class ReworkedFurnaceContainer extends AbstractContainerMenu {
      * Constructor needed to register container type.
      * @param id Window id
      * @param playerInventory PlayerInventory
-     * @param buffer PacketBuffer
+     * @param buffer FriendlyByteBuf
      */
-    public ReworkedFurnaceContainer(int id, Inventory playerInventory, FriendlyByteBuf buffer) {
-        this(id, playerInventory, (ReworkedFurnaceTileEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
+    public ReworkedFurnaceContainerMenu(int id, Inventory playerInventory, FriendlyByteBuf buffer) {
+        this(id, playerInventory, (ReworkedFurnaceBlockEntity) playerInventory.player.level.getBlockEntity(buffer.readBlockPos()), new SimpleContainerData(4));
     }
     
     @Override // Container is accessible
     public boolean stillValid(Player player) {
-        return this.tileEntity.stillValid(player);
+        return this.blockEntity.stillValid(player);
     }
     
     /**

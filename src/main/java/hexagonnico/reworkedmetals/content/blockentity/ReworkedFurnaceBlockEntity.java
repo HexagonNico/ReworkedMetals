@@ -1,6 +1,6 @@
-package hexagonnico.reworkedmetals.content.tileentity;
+package hexagonnico.reworkedmetals.content.blockentity;
 
-import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainer;
+import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainerMenu;
 import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
 
 import java.util.ArrayList;
@@ -47,11 +47,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Reworked Furnace Block Entity. All furnaces in ReworkedMetals extend this class.
- * 
+ * Reworked Furnace Block Entity.
+ * All furnaces in ReworkedMetals extend this class.
  * @author Nico
  */
-public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
+public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, RecipeHolder, StackedContentsCompatible {
     
     protected int litTime;
     protected int totalLitTime;
@@ -64,12 +64,12 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     
     /**
-     * Create tile entity
-     * @param tileEntityType BlockEntityType
+     * Create block entity
+     * @param blockEntityType BlockEntityType
      * @param pos BlockPos
      * @param state BlockState
      */
-    public ReworkedFurnaceTileEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
+    public ReworkedFurnaceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
         super(blockEntityType, pos, state);
         this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
     }
@@ -105,7 +105,7 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     
     @Override // Create container menu
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new ReworkedFurnaceContainer(id, playerInventory, this, this.getContainerData());
+        return new ReworkedFurnaceContainerMenu(id, playerInventory, this, this.getContainerData());
     }
     
     @Override // Inventory size
@@ -163,7 +163,7 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     }
     
     /**
-     * Get station type. Needed by {@link ReworkedSmeltingRecipe}.
+     * Gets station type. Needed by {@link ReworkedSmeltingRecipe}.
      * @return A value among ["smeltery", "furnace", "blast_furnace", "kiln"]
      */
     public abstract String stationType();
@@ -200,7 +200,7 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     }
     
     /**
-     * Remove item according by given ingredient.
+     * Removes item according by given ingredient.
      * @param ingredient Ingredient
      */
     public void removeIngredient(Ingredient ingredient) {
@@ -214,17 +214,17 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
         }
     }
     
-    @Override
+    @Override // Networking
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return new ClientboundBlockEntityDataPacket(this.worldPosition, 1, this.getUpdateTag());
     }
     
-    @Override
+    @Override // Networking
     public CompoundTag getUpdateTag() {
         return this.save(new CompoundTag());
     }
     
-    @Override
+    @Override // Networking
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         this.load(pkt.getTag());
     }
@@ -238,10 +238,10 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> ReworkedFurnaceTileEntity.this.litTime;
-                    case 1 -> ReworkedFurnaceTileEntity.this.totalLitTime;
-                    case 2 -> ReworkedFurnaceTileEntity.this.smeltingProgress;
-                    case 3 -> ReworkedFurnaceTileEntity.this.smeltingTime;
+                    case 0 -> ReworkedFurnaceBlockEntity.this.litTime;
+                    case 1 -> ReworkedFurnaceBlockEntity.this.totalLitTime;
+                    case 2 -> ReworkedFurnaceBlockEntity.this.smeltingProgress;
+                    case 3 -> ReworkedFurnaceBlockEntity.this.smeltingTime;
                     default -> 0;
                 };
             }
@@ -249,10 +249,10 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> ReworkedFurnaceTileEntity.this.litTime = value;
-                    case 1 -> ReworkedFurnaceTileEntity.this.totalLitTime = value;
-                    case 2 -> ReworkedFurnaceTileEntity.this.smeltingProgress = value;
-                    case 3 -> ReworkedFurnaceTileEntity.this.smeltingTime = value;
+                    case 0 -> ReworkedFurnaceBlockEntity.this.litTime = value;
+                    case 1 -> ReworkedFurnaceBlockEntity.this.totalLitTime = value;
+                    case 2 -> ReworkedFurnaceBlockEntity.this.smeltingProgress = value;
+                    case 3 -> ReworkedFurnaceBlockEntity.this.smeltingTime = value;
                 }
             }
             
@@ -263,6 +263,7 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
         };
     }
     
+    // TODO
     // @Override // Server tick, furnace logic
     // public void tick() {
     //     boolean wasLitInitially = this.litTime > 0;
@@ -340,11 +341,11 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     
     @Override // Slots for hopper interaction
     public int[] getSlotsForFace(Direction direction) {
-        switch(direction) {
-            case DOWN: return new int[] {5, 4};
-            case UP: return new int[] {0, 1, 2, 3};
-            default: return new int[] {4};
-        }
+        return switch (direction) {
+            case DOWN -> new int[] {5, 4};
+            case UP -> new int[] {0, 1, 2, 3};
+            default -> new int[] {4};
+        };
     }
     
     @Override // Hopper interaction
@@ -366,13 +367,11 @@ public abstract class ReworkedFurnaceTileEntity extends BaseContainerBlockEntity
     
     @Override // Hopper interaction
     public boolean canPlaceItem(int slot, ItemStack item) {
-        if(slot == 5) {
-            return false;
-        } else if(slot == 4) {
-            return AbstractFurnaceBlockEntity.isFuel(item);
-        } else {
-            return true;
-        }
+        return switch (slot) {
+            case 5 -> false;
+            case 4 -> AbstractFurnaceBlockEntity.isFuel(item);
+            default -> true;
+        };
     }
     
     @Override // Recipe stuff

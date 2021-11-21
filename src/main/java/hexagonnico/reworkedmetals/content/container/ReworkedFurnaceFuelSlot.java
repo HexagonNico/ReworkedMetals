@@ -6,8 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 
 /**
- * Fuel slot for {@link ReworkedFurnaceContainer}.
- * 
+ * Fuel slot for {@link ReworkedFurnaceContainerMenu}.
  * @author Nico
  */
 public class ReworkedFurnaceFuelSlot extends Slot {

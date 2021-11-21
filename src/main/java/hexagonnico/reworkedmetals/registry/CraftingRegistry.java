@@ -12,8 +12,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 /**
- * Crafting registry. Handles registration for recipe serializers.
- * 
+ * Crafting registry.
+ * Handles registration for recipe serializers.
  * @author Nico
  */
 public class CraftingRegistry {
@@ -22,7 +22,8 @@ public class CraftingRegistry {
     public static final RegistryObject<RecipeSerializer<?>> SMELTING = REGISTER.register("smelting", () -> ReworkedSmeltingRecipe.SERIALIZER);
     
     /**
-     * Registers crafting condition. Called in {@link ReworkedMetals#commonSetup}.
+     * Registers crafting condition.
+     * Called in {@link ReworkedMetals#commonSetup}.
      */
     public static void registerConditions() {
         CraftingHelper.register(ConfigCondition.SERIALIZER);

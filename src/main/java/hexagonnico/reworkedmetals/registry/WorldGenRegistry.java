@@ -2,8 +2,8 @@ package hexagonnico.reworkedmetals.registry;
 
 
 /**
- * World generation registry. Handles world generation for ReworkedMetals.
- * 
+ * World generation registry.
+ * Handles world generation for ReworkedMetals.
  * @author Nico
  */
 public class WorldGenRegistry {

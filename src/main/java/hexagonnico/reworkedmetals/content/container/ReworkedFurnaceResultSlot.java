@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals.content.container;
 
-import hexagonnico.reworkedmetals.content.tileentity.ReworkedFurnaceTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.ReworkedFurnaceBlockEntity;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
@@ -9,8 +9,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Result slot for {@link ReworkedFurnaceContainer}.
- * 
+ * Result slot for {@link ReworkedFurnaceContainerMenu}.
  * @author Nico
  */
 public class ReworkedFurnaceResultSlot extends Slot {
@@ -49,7 +48,7 @@ public class ReworkedFurnaceResultSlot extends Slot {
     @Override // Pop experience
     protected void checkTakeAchievements(ItemStack itemStack) {
         super.checkTakeAchievements(itemStack);
-        if(this.player instanceof ServerPlayer serverPlayer && this.container instanceof ReworkedFurnaceTileEntity blockEntity) {
+        if(this.player instanceof ServerPlayer serverPlayer && this.container instanceof ReworkedFurnaceBlockEntity blockEntity) {
             blockEntity.popExperience(serverPlayer, serverPlayer.getLevel(), serverPlayer.position());
         }
     }

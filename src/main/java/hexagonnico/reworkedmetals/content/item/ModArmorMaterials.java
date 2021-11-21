@@ -11,7 +11,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 /**
  * Armor tier enum.
- * 
  * @author Nico
  */
 public enum ModArmorMaterials implements ArmorMaterial {

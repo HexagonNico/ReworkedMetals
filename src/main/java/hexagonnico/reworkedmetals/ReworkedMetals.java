@@ -1,11 +1,11 @@
 package hexagonnico.reworkedmetals;
 
 import hexagonnico.reworkedmetals.config.Config;
+import hexagonnico.reworkedmetals.registry.BlockEntitiesRegistry;
 import hexagonnico.reworkedmetals.registry.BlocksRegistry;
-import hexagonnico.reworkedmetals.registry.ContainersRegistry;
+import hexagonnico.reworkedmetals.registry.ContainerMenusRegistry;
 import hexagonnico.reworkedmetals.registry.CraftingRegistry;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
-import hexagonnico.reworkedmetals.registry.TileEntitiesRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,8 +36,8 @@ public final class ReworkedMetals {
         BlocksRegistry.OVERRIDES.register(eventBus);
         ItemsRegistry.REGISTER.register(eventBus);
         ItemsRegistry.OVERRIDES.register(eventBus);
-        TileEntitiesRegistry.REGISTER.register(eventBus);
-        ContainersRegistry.REGISTER.register(eventBus);
+        BlockEntitiesRegistry.REGISTER.register(eventBus);
+        ContainerMenusRegistry.REGISTER.register(eventBus);
         CraftingRegistry.REGISTER.register(eventBus);
         
         MinecraftForge.EVENT_BUS.register(this);
@@ -58,6 +58,6 @@ public final class ReworkedMetals {
      * @param setupEvent FMLClientSetupEvent.
      */
     private void clientSetup(final FMLClientSetupEvent setupEvent) {
-        ContainersRegistry.registerGuis();
+        ContainerMenusRegistry.registerGuis();
     }
 }

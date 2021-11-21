@@ -14,7 +14,6 @@ import net.minecraft.world.item.ItemStack;
 
 /**
  * Armor item override need to apply custom attributes.
- * 
  * @author Nico
  */
 public class ModArmorItem extends ArmorItem {
@@ -25,7 +24,7 @@ public class ModArmorItem extends ArmorItem {
     /**
      * Puts custom attributes in map
      * @param material ModArmorMaterials
-     * @param slot EquipmentSlotType
+     * @param slot EquipmentSlot
      * @param properties Item.Properties
      */
     public ModArmorItem(ModArmorMaterials material, EquipmentSlot slot, Item.Properties properties) {

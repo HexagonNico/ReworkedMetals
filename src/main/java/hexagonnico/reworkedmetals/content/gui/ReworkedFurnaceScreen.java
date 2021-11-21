@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.content.gui;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainer;
+import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainerMenu;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,20 +13,19 @@ import net.minecraft.world.entity.player.Inventory;
 
 /**
  * Furnace gui screen.
- * 
  * @author Nico
  */
-public class ReworkedFurnaceGui extends AbstractContainerScreen<ReworkedFurnaceContainer> {
+public class ReworkedFurnaceScreen extends AbstractContainerScreen<ReworkedFurnaceContainerMenu> {
     
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(ReworkedMetals.ID, "textures/gui/furnace.png");
     
     /**
      * Constructor needed to register gui.
-     * @param container ReworkedFurnaceContainer
+     * @param container ReworkedFurnaceContainerMenu
      * @param playerInventory PlayerInventory
      * @param title Gui title
      */
-    public ReworkedFurnaceGui(ReworkedFurnaceContainer container, Inventory playerInventory, Component title) {
+    public ReworkedFurnaceScreen(ReworkedFurnaceContainerMenu container, Inventory playerInventory, Component title) {
         super(container, playerInventory, title);
         this.leftPos = 0;
         this.topPos = 0;

@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals.content.block;
 
-import hexagonnico.reworkedmetals.content.tileentity.BlastFurnaceTileEntity;
+import hexagonnico.reworkedmetals.content.blockentity.BlastFurnaceBlockEntity;
 
 import java.util.Random;
 
@@ -15,14 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Class for blast furnace block.
- * 
  * @author Nico
  */
 public class BlastFurnaceBlock extends ReworkedFurnaceBlock {
     
-    @Override
+    @Override // Create block entity
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BlastFurnaceTileEntity(pos, state);
+        return new BlastFurnaceBlockEntity(pos, state);
     }
     
     @Override // Block sounds and particles

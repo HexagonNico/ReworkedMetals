@@ -19,8 +19,8 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 
 /**
- * Blocks registry. Contains all ReworkedMetals blocks.
- * 
+ * Blocks registry.
+ * Contains all ReworkedMetals blocks.
  * @author Nico
  */
 public class BlocksRegistry {
