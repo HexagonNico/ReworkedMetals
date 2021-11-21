@@ -1,13 +1,13 @@
 modLoader="javafml"
 loaderVersion="[36,)"
 license="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0"
-#issueTrackerURL=""
+issueTrackerURL="https://github.com/HexagonNico/ReworkedMetals/issues"
 
 [[mods]]
 modId="reworkedmetals"
-version="1.2"
-displayName="ReworkedMetals"
-#displayURL=""
+version="2.0"
+displayName="Reworked Metals"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
 logoFile="ReworkedMetals.png"
 #credits=""
 authors="HexagonNico"
