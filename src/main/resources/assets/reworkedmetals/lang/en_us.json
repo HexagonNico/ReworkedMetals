@@ -111,5 +111,6 @@
   "item.reworkedmetals.diamonded_netherite_leggings": "Diamonded Netherite Leggings",
   "item.reworkedmetals.diamonded_netherite_boots": "Diamonded Netherite Boots",
   "container.reworkedmetals.smeltery": "Smeltery",
-  "container.reworkedmetals.kiln": "Kiln"
+  "container.reworkedmetals.kiln": "Kiln",
+  "reworkedmetals.jei_category": "Reworked Smelting"
 }
