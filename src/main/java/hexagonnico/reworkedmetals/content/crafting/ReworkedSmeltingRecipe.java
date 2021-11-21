@@ -149,6 +149,7 @@ public class ReworkedSmeltingRecipe implements IRecipe<ReworkedFurnaceTileEntity
                     if(!input.isEmpty() && ingredient.test(input)) {
                         input.shrink(1);
                         ingredientIterator.remove();
+                        break;
                     }
                 }
             }

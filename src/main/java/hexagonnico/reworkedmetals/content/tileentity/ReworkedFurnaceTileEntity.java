@@ -281,11 +281,9 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
     
     @Override // Server tick, furnace logic
     public void tick() {
-        boolean flag = this.litTime > 0;
-        boolean flag1 = false;
-        if(this.litTime > 0) {
-            this.litTime--;
-        }
+        boolean wasLitInitially = this.litTime > 0;
+        boolean changed = false;
+        this.litTime = this.litTime > 0 ? this.litTime - 1 : this.litTime;
 
         ItemStack fuel = this.inventory.get(4);
         if(this.litTime > 0 || !fuel.isEmpty()) {
@@ -296,7 +294,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
                     this.litTime = ForgeHooks.getBurnTime(fuel, null);
                     this.totalLitTime = this.litTime;
                     if(this.litTime > 0) {
-                        flag1 = true;
+                        changed = true;
                         if(fuel.hasContainerItem()) {
                             this.inventory.set(4, fuel.getContainerItem());
                         } else if(!fuel.isEmpty()) {
@@ -323,7 +321,7 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
                             }
                             this.setRecipeUsed(recipe.get());
                         }
-                        flag1 = true;
+                        changed = true;
                     }
                 } else {
                     this.smeltingProgress = 0;
@@ -333,12 +331,12 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
             this.smeltingProgress = MathHelper.clamp(this.smeltingProgress - 2, 0, this.smeltingTime);
         }
 
-        if(flag != (this.litTime > 0)) {
-            flag1 = true;
+        if(wasLitInitially != (this.litTime > 0)) {
+            changed = true;
             this.level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition).setValue(ReworkedFurnaceBlock.LIT, this.litTime > 0), 3);
         }
         
-        if(flag1) {
+        if(changed) {
             this.setChanged();
         }
     }
