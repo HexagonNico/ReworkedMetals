@@ -1,0 +1,29 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "simpleores:raw_mythril"
+    }
+  ],
+  "result": {
+    "item": "simpleores:mythril_ingot"
+  },
+  "experience": 0.7,
+  "smelting_time": 200,
+  "stations": [
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "simpleores"
+    }
+  ]
+}

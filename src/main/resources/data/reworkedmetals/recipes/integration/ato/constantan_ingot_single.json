@@ -1,0 +1,34 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "tag": "forge:raw_ores/copper"
+    },
+    {
+      "tag": "forge:raw_ores/nickel"
+    }
+  ],
+  "result": {
+    "item": "alltheores:constantan_ingot",
+    "count": 2
+  },
+  "experience": 0.2,
+  "smelting_time": 400,
+  "stations": [
+    "furnace",
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "reworkedmetals:config",
+        "config": "ingotsRequireTwoOre"
+      }
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
+    }
+  ]
+}

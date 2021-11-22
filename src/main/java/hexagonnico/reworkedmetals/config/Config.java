@@ -21,7 +21,6 @@ public class Config {
     
         configBuilder.comment("Reworked smelting options").push("smelting");
         createConfigValue(configBuilder, "ingotsRequireTwoOre", true, "When enabled, ingots require two raw ore materials to be smelted", "Default: true", "Set this to false to only require one raw ore per ingot");
-        createConfigValue(configBuilder, "allowSmeltingFromOreBlock", false, "Allows the player to smelt ingots from ore blocks, not just raw ores chunk", "Default: false", "Turn on in case it is needed by other mods");
         configBuilder.pop();
     
         configBuilder.comment("Vanilla crafting changes").push("crafting_changes");
@@ -37,8 +36,6 @@ public class Config {
         configBuilder.pop();
     
         configBuilder.comment("Blocks crafting").push("blocks_crafting");
-        createConfigValue(configBuilder, "enableCopperBlock", true, "Enables crafting block of copper", "Default: true");
-        createConfigValue(configBuilder, "enableRawCopperBlock", true, "Enables crafting block of raw copper", "Default: true");
         createConfigValue(configBuilder, "enableTinBlock", true, "Enables crafting block of tin", "Default: true");
         createConfigValue(configBuilder, "enableRawTinBlock", true, "Enables crafting block of raw tin", "Default: true");
         createConfigValue(configBuilder, "enableAluminumBlock", true, "Enables crafting block of aluminum", "Default: true");

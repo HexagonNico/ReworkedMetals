@@ -2,26 +2,28 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:ores/silver"
+      "item": "simpleores:raw_adamantium"
     },
     {
-      "tag": "forge:ores/silver"
+      "item": "simpleores:raw_adamantium"
     }
   ],
   "result": {
-    "item": "reworkedmetals:silver_ingot"
+    "item": "simpleores:adamantium_ingot"
   },
   "experience": 0.7,
   "smelting_time": 200,
   "stations": [
-    "smeltery",
-    "furnace",
     "blast_furnace"
   ],
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "allowSmeltingFromOreBlock"
+      "config": "ingotsRequireTwoOre"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "simpleores"
     }
   ]
 }

@@ -2,16 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:ores/nickel"
+      "item": "alltheores:raw_lead"
     },
     {
-      "tag": "forge:ores/nickel"
+      "item": "alltheores:raw_lead"
     }
   ],
   "result": {
-    "item": "reworkedmetals:nickel_ingot"
+    "item": "alltheores:lead_ingot"
   },
-  "experience": 0.7,
+  "experience": 0.2,
   "smelting_time": 200,
   "stations": [
     "furnace",
@@ -20,7 +20,11 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "allowSmeltingFromOreBlock"
+      "config": "ingotsRequireTwoOre"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
     }
   ]
 }

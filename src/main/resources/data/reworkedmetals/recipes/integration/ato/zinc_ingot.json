@@ -2,16 +2,16 @@
   "type": "reworkedmetals:smelting",
   "ingredients": [
     {
-      "tag": "forge:ores/gold"
+      "item": "alltheores:raw_zinc"
     },
     {
-      "tag": "forge:ores/gold"
+      "item": "alltheores:raw_zinc"
     }
   ],
   "result": {
-    "item": "minecraft:gold_ingot"
+    "item": "alltheores:zinc_ingot"
   },
-  "experience": 1,
+  "experience": 0.2,
   "smelting_time": 200,
   "stations": [
     "furnace",
@@ -20,7 +20,11 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "allowSmeltingFromOreBlock"
+      "config": "ingotsRequireTwoOre"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "alltheores"
     }
   ]
 }
