@@ -340,13 +340,21 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
         return switch (direction) {
             case DOWN -> new int[] {5, 4};
             case UP -> new int[] {0, 1, 2, 3};
-            default -> new int[] {4};
+            default -> new int[] {4, 0, 1, 2, 3};
         };
     }
     
     @Override // Hopper interaction
     public boolean canPlaceItemThroughFace(int slot, ItemStack item, Direction direction) {
-        return this.canPlaceItem(slot, item);
+        if(direction == Direction.UP || direction == Direction.DOWN) {
+            return this.canPlaceItem(slot, item);
+        } else {
+            return switch (slot) {
+                case 5 -> false;
+                case 4 -> AbstractFurnaceBlockEntity.isFuel(item);
+                default -> !AbstractFurnaceBlockEntity.isFuel(item);
+            };
+        }
     }
     
     @Override // Hopper interaction
