@@ -1,0 +1,22 @@
+{
+  "type": "reworkedmetals:smelting",
+  "ingredients": [
+    {
+      "item": "simpleores:adamantium_ore"
+    }
+  ],
+  "result": {
+    "item": "simpleores:adamantium_ingot"
+  },
+  "experience": 0.7,
+  "smelting_time": 200,
+  "stations": [
+    "blast_furnace"
+  ],
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "simpleores"
+    }
+  ]
+}
