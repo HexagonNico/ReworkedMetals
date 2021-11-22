@@ -359,13 +359,23 @@ public abstract class ReworkedFurnaceTileEntity extends LockableLootTileEntity i
         switch(direction) {
             case DOWN: return new int[] {5, 4};
             case UP: return new int[] {0, 1, 2, 3};
-            default: return new int[] {4};
+            default: return new int[] {4, 0, 1, 2, 3};
         }
     }
     
     @Override // Hopper interaction
     public boolean canPlaceItemThroughFace(int slot, ItemStack item, Direction direction) {
-        return this.canPlaceItem(slot, item);
+        if(direction == Direction.UP || direction == Direction.DOWN) {
+            return this.canPlaceItem(slot, item);
+        } else {
+            if(slot == 5) {
+                return false;
+            } else if(slot == 4) {
+                return AbstractFurnaceTileEntity.isFuel(item);
+            } else {
+                return !AbstractFurnaceTileEntity.isFuel(item);
+            }
+        }
     }
     
     @Override // Hopper interaction
