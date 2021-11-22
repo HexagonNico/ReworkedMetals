@@ -11,11 +11,10 @@ import net.minecraft.util.SoundEvents;
 
 /**
  * Armor tier enum.
- * 
  * @author Nico
  */
 public enum ModArmorMaterials implements IArmorMaterial {
-    COPPER("copper", 15, new int[] {1, 4, 5, 2}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f, 0.0f, Ingredient.of(/*Items.COPPER_INGOT*/ Items.COMMAND_BLOCK), false),
+    COPPER("copper", 15, new int[] {1, 4, 5, 2}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 1.0f, 0.0f, 0.0f, Ingredient.of(ItemsRegistry.COPPER_INGOT.get()), false),
     BRONZE("bronze", 15, new int[] {2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 0.0f, 0.0f, 0.0f, Ingredient.of(ItemsRegistry.BRONZE_INGOT.get()), false),
     IRON("iron", 20, new int[] {2, 5, 6, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0f, 0.0f, 0.0f, Ingredient.of(Items.IRON_INGOT), false),
     STEEL("steel", 33, new int[] {3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0f, 0.0f, 0.0f, Ingredient.of(ItemsRegistry.STEEL_INGOT.get()), false),
