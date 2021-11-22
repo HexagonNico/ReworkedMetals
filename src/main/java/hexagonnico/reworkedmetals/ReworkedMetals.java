@@ -6,6 +6,7 @@ import hexagonnico.reworkedmetals.registry.ContainersRegistry;
 import hexagonnico.reworkedmetals.registry.CraftingRegistry;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 import hexagonnico.reworkedmetals.registry.TileEntitiesRegistry;
+import hexagonnico.reworkedmetals.registry.VillagersRegistry;
 import hexagonnico.reworkedmetals.registry.WorldGenRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -41,6 +42,8 @@ public final class ReworkedMetals {
         ContainersRegistry.REGISTER.register(eventBus);
         CraftingRegistry.REGISTER.register(eventBus);
         WorldGenRegistry.REGISTER.register(eventBus);
+        VillagersRegistry.POI_OVERRIDES.register(eventBus);
+        VillagersRegistry.PROFESSIONS_OVERRIDES.register(eventBus);
         
         MinecraftForge.EVENT_BUS.register(this);
     }
