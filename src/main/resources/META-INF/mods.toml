@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/HexagonNico/ReworkedMetals/issues"
 
 [[mods]]
 modId="reworkedmetals"
-version="2.0"
+version="2.0.1"
 displayName="Reworked Metals"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
 logoFile="ReworkedMetals.png"
