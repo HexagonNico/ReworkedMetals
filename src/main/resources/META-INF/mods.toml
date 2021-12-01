@@ -6,10 +6,9 @@ license="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0"
 modId="reworkedmetals"
 version="2.0.1"
 displayName="Reworked Metals"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
+displayURL="\n    https://www.curseforge.com/minecraft/mc-mods/reworked-metals\n"
 logoFile="ReworkedMetals.png"
-#credits=""
-authors="HexagonNico"
+credits="\n    Author: HexagonNico \n    Russian translation: Remivy12345\n"
 description='''
 A rework of Minecraft's metalworking system
 '''
