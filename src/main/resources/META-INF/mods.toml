@@ -5,14 +5,13 @@ issueTrackerURL="https://github.com/HexagonNico/ReworkedMetals/issues"
 
 [[mods]]
 modId="reworkedmetals"
-version="2.0.1"
+version="2.0.2"
 displayName="Reworked Metals"
-displayURL="\n    https://www.curseforge.com/minecraft/mc-mods/reworked-metals\n"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
 logoFile="ReworkedMetals.png"
-credits="\n    Author: HexagonNico \n    Russian translation: Remivy12345\n"
-description='''
-A rework of Minecraft's metalworking system
-'''
+authors="HexagonNico"
+credits="Remyvi (Russian translation)"
+description="A rework of Minecraft's metalworking system"
 
 [[dependencies.reworkedmetals]]
     modId="forge"
