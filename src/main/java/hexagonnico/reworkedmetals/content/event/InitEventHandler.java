@@ -18,13 +18,22 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = ReworkedMetals.ID)
 public class InitEventHandler {
 
-	@SubscribeEvent
+	@SubscribeEvent // Event fired when loading biomes
 	public static void onBiomeLoadEvent(BiomeLoadingEvent event) {
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TEST_ORE_PLACED);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE_LOWER);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE_LOWER);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_MOUNTAINS);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE);
+		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE_ABOVE);
+		if(event.getName() != null && event.getName().getPath().contains("windswept_savanna"))
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.RUBY_ORE);
 	}
 
-	@SubscribeEvent // Event run when loading villager professions
+	@SubscribeEvent // Event fired when loading villager professions
 	public static void onVillagerLoad(VillagerTradesEvent event) {
 		if(event.getType() == VillagersRegistry.ARMORER.get()) {
 			event.getTrades().put(1, Arrays.asList(VillagerTrades.TRADES.get(VillagerProfession.ARMORER).get(1)));
