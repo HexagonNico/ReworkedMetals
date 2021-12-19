@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "#F#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/brick"
+    },
+    "F": {
+      "item": "minecraft:campfire"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:kiln"
+  }
+}

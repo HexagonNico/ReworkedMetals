@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/bronze"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:bronze_leggings"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableBronzeArmor"
+    }
+  ]
+}

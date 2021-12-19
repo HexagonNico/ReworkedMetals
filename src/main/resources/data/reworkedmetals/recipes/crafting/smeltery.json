@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#O#",
+    "# #",
+    "#F#"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "F": {
+      "item": "minecraft:campfire"
+    },
+    "O": {
+      "item": "minecraft:clay"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:smeltery"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "requireCampfireForSmeltery"
+    }
+  ]
+}

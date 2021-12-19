@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IXI",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone"
+    },
+    "X": {
+      "item": "reworkedmetals:smeltery"
+    },
+    "I": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "result": {
+    "item": "minecraft:furnace"
+  }
+}

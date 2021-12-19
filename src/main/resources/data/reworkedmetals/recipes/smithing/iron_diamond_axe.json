@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:iron_axe"
+  },
+  "addition": {
+    "tag": "forge:gems/diamond"
+  },
+  "result": {
+    "item": "reworkedmetals:iron_diamond_axe"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableIronDiamondTools"
+    }
+  ]
+}

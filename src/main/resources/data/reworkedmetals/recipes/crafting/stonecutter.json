@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "###"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "#": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "result": {
+    "item": "minecraft:stonecutter"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "stonecutterAllowsAluminum"
+    }
+  ]
+}

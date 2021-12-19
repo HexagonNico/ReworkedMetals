@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:golden_pickaxe"
+  },
+  "addition": {
+    "tag": "forge:gems/ruby"
+  },
+  "result": {
+    "item": "reworkedmetals:gold_ruby_pickaxe"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableGoldRubyTools"
+    }
+  ]
+}

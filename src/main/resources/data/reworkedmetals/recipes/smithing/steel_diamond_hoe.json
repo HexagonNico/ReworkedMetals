@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "reworkedmetals:steel_hoe"
+  },
+  "addition": {
+    "tag": "forge:gems/diamond"
+  },
+  "result": {
+    "item": "reworkedmetals:steel_diamond_hoe"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableSteelDiamondTools"
+    }
+  ]
+}

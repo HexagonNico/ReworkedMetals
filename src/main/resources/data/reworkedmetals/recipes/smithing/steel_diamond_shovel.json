@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "reworkedmetals:steel_shovel"
+  },
+  "addition": {
+    "tag": "forge:gems/diamond"
+  },
+  "result": {
+    "item": "reworkedmetals:steel_diamond_shovel"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "enableSteelDiamondTools"
+    }
+  ]
+}

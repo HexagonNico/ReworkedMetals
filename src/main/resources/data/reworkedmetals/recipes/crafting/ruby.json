@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:ruby_block"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:ruby",
+    "count": 9
+  }
+}
