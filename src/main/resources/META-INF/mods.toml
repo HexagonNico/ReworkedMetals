@@ -1,0 +1,30 @@
+
+modLoader="javafml"
+loaderVersion="[39,)"
+license="Creative Commons Attribution-NonCommercial-NoDerivatives 4.0"
+issueTrackerURL="https://github.com/HexagonNico/ReworkedMetals/issues"
+
+[[mods]]
+    modId="reworkedmetals"
+    version="3.0"
+    displayName="Reworked Metals"
+    #updateJSONURL="https://change.me.example.invalid/updates.json"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
+    logoFile="ReworkedMetals.png"
+    credits="Remyvi (russian translation)"
+    authors="HexagonNico"
+    description="A rework of Minecraft's metalworking system"
+
+[[dependencies.reworkedmetals]]
+    modId="forge"
+    mandatory=true
+    versionRange="[39,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.reworkedmetals]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.1,1.19)"
+    ordering="AFTER"
+    side="BOTH"
