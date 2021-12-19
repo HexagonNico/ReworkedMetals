@@ -3,6 +3,7 @@ package hexagonnico.reworkedmetals.content.event;
 import java.util.Arrays;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
+import hexagonnico.reworkedmetals.config.CommonConfig;
 import hexagonnico.reworkedmetals.content.worldgen.ModdedOreFeatures;
 import hexagonnico.reworkedmetals.registry.VillagersRegistry;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -21,16 +22,25 @@ public class InitEventHandler {
 	@SubscribeEvent // Event fired when loading biomes
 	public static void onBiomeLoadEvent(BiomeLoadingEvent event) {
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE_LOWER);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE_LOWER);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_MOUNTAINS);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE);
-		generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE_ABOVE);
-		if(event.getName() != null && event.getName().getPath().contains("windswept_savanna"))
+		if(CommonConfig.getBoolean("tin")) {
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE_LOWER);
+		}
+		if(CommonConfig.getBoolean("aluminum")) {
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE_LOWER);
+		}
+		if(CommonConfig.getBoolean("silver")) {
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_MOUNTAINS);
+		}
+		if(CommonConfig.getBoolean("nickel")) {
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE_ABOVE);
+		}
+		if(CommonConfig.getBoolean("ruby") && event.getName() != null && event.getName().getPath().contains("windswept_savanna")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.RUBY_ORE);
+		}
 	}
 
 	@SubscribeEvent // Event fired when loading villager professions

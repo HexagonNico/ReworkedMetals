@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.content.crafting;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.config.Config;
+import hexagonnico.reworkedmetals.config.CommonConfig;
 
 import com.google.gson.JsonObject;
 
@@ -39,7 +39,7 @@ public class ConfigCondition implements ICondition {
 
 	@Override
 	public boolean test() {
-		return Config.getBoolean(this.condition);
+		return CommonConfig.getBoolean(this.condition);
 	}
 
 	public static class Serializer implements IConditionSerializer<ConfigCondition> {

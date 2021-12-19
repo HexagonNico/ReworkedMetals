@@ -1,6 +1,6 @@
 package hexagonnico.reworkedmetals;
 
-import hexagonnico.reworkedmetals.config.Config;
+import hexagonnico.reworkedmetals.config.CommonConfig;
 import hexagonnico.reworkedmetals.registry.BlockEntitiesRegistry;
 import hexagonnico.reworkedmetals.registry.BlocksRegistry;
 import hexagonnico.reworkedmetals.registry.ContainerMenusRegistry;
@@ -31,7 +31,7 @@ public class ReworkedMetals {
 		eventBus.addListener(this::commonSetup);
 		eventBus.addListener(this::clientSetup);
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG);
 
 		BlocksRegistry.REGISTER.register(eventBus);
 		BlocksRegistry.OVERRIDES.register(eventBus);
