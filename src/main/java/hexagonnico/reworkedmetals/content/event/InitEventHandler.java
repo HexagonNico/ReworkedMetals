@@ -22,23 +22,23 @@ public class InitEventHandler {
 	@SubscribeEvent // Event fired when loading biomes
 	public static void onBiomeLoadEvent(BiomeLoadingEvent event) {
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
-		if(CommonConfig.getBoolean("tin")) {
+		if(CommonConfig.getBoolean("tinOre")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.TIN_ORE_LOWER);
 		}
-		if(CommonConfig.getBoolean("aluminum")) {
+		if(CommonConfig.getBoolean("aluminumOre")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.ALUMINUM_ORE_LOWER);
 		}
-		if(CommonConfig.getBoolean("silver")) {
+		if(CommonConfig.getBoolean("silverOre")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_MOUNTAINS);
 		}
-		if(CommonConfig.getBoolean("nickel")) {
+		if(CommonConfig.getBoolean("nickelOre")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.NICKEL_ORE_ABOVE);
 		}
-		if(CommonConfig.getBoolean("ruby") && event.getName() != null && event.getName().getPath().contains("windswept_savanna")) {
+		if(CommonConfig.getBoolean("rubyOre") && event.getName() != null && event.getName().getPath().contains("windswept_savanna")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.RUBY_ORE);
 		}
 	}

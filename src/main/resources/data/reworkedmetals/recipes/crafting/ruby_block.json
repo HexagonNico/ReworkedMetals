@@ -16,7 +16,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableRubyBlock"
+      "config": "rubyBlock"
     }
   ]
 }

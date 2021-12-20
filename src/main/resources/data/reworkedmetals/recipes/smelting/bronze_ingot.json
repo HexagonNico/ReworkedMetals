@@ -24,11 +24,5 @@
     "smeltery",
     "furnace",
     "blast_furnace"
-  ],
-  "conditions": [
-    {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
-    }
   ]
 }

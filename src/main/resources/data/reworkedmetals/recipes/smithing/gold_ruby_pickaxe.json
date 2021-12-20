@@ -12,7 +12,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableGoldRubyTools"
+      "config": "goldRuby"
     }
   ]
 }

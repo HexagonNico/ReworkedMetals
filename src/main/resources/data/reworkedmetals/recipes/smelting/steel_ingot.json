@@ -21,11 +21,5 @@
   "smelting_time": 400,
   "stations": [
     "blast_furnace"
-  ],
-  "conditions": [
-    {
-      "type": "reworkedmetals:config",
-      "config": "ingotsRequireTwoOre"
-    }
   ]
 }

@@ -19,7 +19,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableSilverTools"
+      "config": "silverTools"
     }
   ]
 }

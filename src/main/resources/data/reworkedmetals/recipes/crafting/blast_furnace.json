@@ -18,11 +18,5 @@
   },
   "result": {
     "item": "minecraft:blast_furnace"
-  },
-  "conditions": [
-    {
-      "type": "reworkedmetals:config",
-      "config": "changeBlastFurnaceCrafting"
-    }
-  ]
+  }
 }

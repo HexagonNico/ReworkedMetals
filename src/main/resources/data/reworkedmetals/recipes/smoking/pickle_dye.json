@@ -9,7 +9,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "additionalCookingRecipes"
+      "config": "additionalCooking"
     }
   ]
 }

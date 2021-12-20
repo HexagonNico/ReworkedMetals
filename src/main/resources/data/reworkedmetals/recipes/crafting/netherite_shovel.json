@@ -19,7 +19,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "consistentNetheriteCrafting"
+      "config": "consistentNetherite"
     }
   ]
 }

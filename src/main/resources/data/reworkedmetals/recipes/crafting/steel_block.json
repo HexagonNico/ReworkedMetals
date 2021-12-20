@@ -16,7 +16,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableSteelBlock"
+      "config": "steelBlock"
     }
   ]
 }

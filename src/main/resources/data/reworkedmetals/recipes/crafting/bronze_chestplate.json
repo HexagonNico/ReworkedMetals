@@ -16,7 +16,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableBronzeArmor"
+      "config": "bronzeArmor"
     }
   ]
 }

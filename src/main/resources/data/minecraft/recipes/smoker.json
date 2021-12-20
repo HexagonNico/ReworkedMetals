@@ -15,14 +15,5 @@
   },
   "result": {
     "item": "minecraft:smoker"
-  },
-  "conditions": [
-    {
-      "type": "forge:not",
-      "value": {
-        "type": "reworkedmetals:config",
-        "config": "changeSmokerCrafting"
-      }
-    }
-  ]
+  }
 }

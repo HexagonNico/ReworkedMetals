@@ -14,11 +14,5 @@
   },
   "result": {
     "item": "minecraft:stonecutter"
-  },
-  "conditions": [
-    {
-      "type": "reworkedmetals:config",
-      "config": "stonecutterAllowsAluminum"
-    }
-  ]
+  }
 }

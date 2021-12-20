@@ -12,7 +12,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableDiamondedNetheriteArmor"
+      "config": "diamondedNetherite"
     }
   ]
 }

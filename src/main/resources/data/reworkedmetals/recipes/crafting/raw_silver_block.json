@@ -12,5 +12,11 @@
   },
   "result": {
     "item": "reworkedmetals:raw_silver_block"
-  }
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "rawSilverBlock"
+    }
+  ]
 }

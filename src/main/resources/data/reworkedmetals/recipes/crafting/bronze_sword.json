@@ -19,7 +19,7 @@
   "conditions": [
     {
       "type": "reworkedmetals:config",
-      "config": "enableBronzeTools"
+      "config": "bronzeTools"
     }
   ]
 }
