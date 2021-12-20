@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    " /",
+    " /"
+  ],
+  "key": {
+    "/": {
+      "tag": "forge:rods/blaze"
+    },
+    "#": {
+      "tag": "forge:ingots/end_metal"
+    }
+  },
+  "result": {
+    "item": "reworkedmetals:end_metal_hoe"
+  },
+  "conditions": [
+    {
+      "type": "reworkedmetals:config",
+      "config": "endMetalTools"
+    }
+  ]
+}

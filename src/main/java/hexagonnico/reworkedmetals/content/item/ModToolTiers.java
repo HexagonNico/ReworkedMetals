@@ -22,7 +22,9 @@ public enum ModToolTiers implements Tier {
 	STEEL(3, 1561, 8.0f, 3.0f, 10, Ingredient.of(ItemsRegistry.STEEL_INGOT.get())),
 	STEEL_DIAMOND(4, 1970, 6.0f, 3.0f, 10, Ingredient.of(ItemsRegistry.STEEL_INGOT.get())),
 	STEEL_EMERALD(3, 1000, 9.5f, 3.0f, 14, Ingredient.of(ItemsRegistry.STEEL_INGOT.get())),
-	GOLD_RUBY(1, 200, 12.0F, 2.0F, 22, Ingredient.of(Items.GOLD_INGOT));
+	GOLD_RUBY(1, 200, 12.0f, 2.0F, 22, Ingredient.of(Items.GOLD_INGOT)),
+	END_METAL(4, 450, 10.0f, 4.0f, 17, Ingredient.of(ItemsRegistry.END_METAL_INGOT.get())),
+	END_GEM_METAL(5, 2640, 10.0f, 5.0f, 5, Ingredient.of(ItemsRegistry.END_METAL_INGOT.get()));
 
 	private final int level;
 	private final int uses;

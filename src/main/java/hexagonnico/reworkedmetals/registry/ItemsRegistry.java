@@ -135,6 +135,20 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> GOLD_RUBY_SHOVEL = REGISTER.register("gold_ruby_shovel", () -> new ShovelItem(ModToolTiers.GOLD_RUBY, 1.5f, -3.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
 	public static final RegistryObject<Item> GOLD_RUBY_HOE = REGISTER.register("gold_ruby_hoe", () -> new HoeItem(ModToolTiers.GOLD_RUBY, -2, -0.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
 
+	// End metal tools
+	public static final RegistryObject<Item> END_METAL_PICKAXE = REGISTER.register("end_metal_pickaxe", () -> new PickaxeItem(ModToolTiers.END_METAL, 1, -2.8f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_METAL_SWORD = REGISTER.register("end_metal_sword", () -> new SwordItem(ModToolTiers.END_METAL, 3, -2.4f, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+	public static final RegistryObject<Item> END_METAL_AXE = REGISTER.register("end_metal_axe", () -> new AxeItem(ModToolTiers.END_METAL, 5.0f, -3.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_METAL_SHOVEL = REGISTER.register("end_metal_shovel", () -> new ShovelItem(ModToolTiers.END_METAL, 1.5f, -3.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_METAL_HOE = REGISTER.register("end_metal_hoe", () -> new HoeItem(ModToolTiers.END_METAL, -4, 0.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	
+	// End metal + gem tools
+	public static final RegistryObject<Item> END_GEM_PICKAXE = REGISTER.register("end_gem_pickaxe", () -> new PickaxeItem(ModToolTiers.END_GEM_METAL, 1, -2.8f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_GEM_SWORD = REGISTER.register("end_gem_sword", () -> new SwordItem(ModToolTiers.END_GEM_METAL, 3, -2.4f, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+	public static final RegistryObject<Item> END_GEM_AXE = REGISTER.register("end_gem_axe", () -> new AxeItem(ModToolTiers.END_GEM_METAL, 5.0f, -3.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_GEM_SHOVEL = REGISTER.register("end_gem_shovel", () -> new ShovelItem(ModToolTiers.END_GEM_METAL, 1.5f, -3.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+	public static final RegistryObject<Item> END_GEM_HOE = REGISTER.register("end_gem_hoe", () -> new HoeItem(ModToolTiers.END_GEM_METAL, -5, 0.0f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+
 	// Copper armor
 	public static final RegistryObject<Item> COPPER_HELMET = REGISTER.register("copper_helmet", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.HEAD, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 	public static final RegistryObject<Item> COPPER_CHESTPLATE = REGISTER.register("copper_chestplate", () -> new ModArmorItem(ModArmorMaterials.COPPER, EquipmentSlot.CHEST, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));

@@ -33,6 +33,7 @@ public class CommonConfig {
 		createConfigValue(configBuilder, "bronzeTools", true, "Enables crafting for bronze tools");
 		createConfigValue(configBuilder, "silverTools", true, "Enables crafting for silver tools");
 		createConfigValue(configBuilder, "steelTools", true, "Enables crafting for steel tools");
+		createConfigValue(configBuilder, "endMetalTools", true, "Enables crafting for endor tools");
 		configBuilder.pop();
 
 		configBuilder.comment("Enables or disables armor crafting").push("armorCrafting");
@@ -66,6 +67,7 @@ public class CommonConfig {
 		createConfigValue(configBuilder, "silverRuby", true, "Enables upgrading silver tools with a ruby");
 		createConfigValue(configBuilder, "gildedNetherite", true, "Enables upgrading netherite armor with gold");
 		createConfigValue(configBuilder, "diamondedNetherite", true, "Enables upgrading netherite armor with a diamond");
+		createConfigValue(configBuilder, "endGem", true, "Enables upgrading endor tools with an endor gem");
 		configBuilder.pop();
 
 		CONFIG = configBuilder.build();

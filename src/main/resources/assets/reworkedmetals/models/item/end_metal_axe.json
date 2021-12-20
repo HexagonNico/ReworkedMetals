@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "reworkedmetals:item/end_metal_axe"
+  }
+}
