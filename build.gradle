@@ -27,9 +27,7 @@ minecraft {
     runs {
         client {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -41,9 +39,7 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -55,9 +51,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
 
             args '--mod', 'reworkedmetals', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
@@ -74,13 +68,16 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-
+    maven {
+        name = "Progwml6 maven" // JEI
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 dependencies {
-
     minecraft 'net.minecraftforge:forge:1.18.1-39.0.5'
-
+    compileOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.1:9.1.1.48")
 }
 
 jar {

@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "minecraft:bricks"
+      "item": "minecraft:bricks"
     },
     "F": {
       "item": "reworkedmetals:smeltery"
