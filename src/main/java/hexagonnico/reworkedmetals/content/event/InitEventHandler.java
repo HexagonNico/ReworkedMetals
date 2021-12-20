@@ -41,6 +41,10 @@ public class InitEventHandler {
 		if(CommonConfig.getBoolean("rubyOre") && event.getName() != null && event.getName().getPath().contains("windswept_savanna")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.RUBY_ORE);
 		}
+		if(CommonConfig.getBoolean("endOre") && event.getName() != null && event.getName().getPath().contains("end")) {
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.END_METAL_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.END_GEM_ORE);
+		}
 	}
 
 	@SubscribeEvent // Event fired when loading villager professions

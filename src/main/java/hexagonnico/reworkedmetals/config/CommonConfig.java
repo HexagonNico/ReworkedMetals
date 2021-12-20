@@ -26,6 +26,7 @@ public class CommonConfig {
 		createConfigValue(configBuilder, "silverOre", true, "Enables generation of silver");
 		createConfigValue(configBuilder, "nickelOre", true, "Enables generation of nickel");
 		createConfigValue(configBuilder, "rubyOre", true, "Enables generation of ruby");
+		createConfigValue(configBuilder, "endOre", true, "Enables generation of end metal and end gems");
 		configBuilder.pop();
 
 		configBuilder.comment("Enables or disables tools crafting").push("toolsCrafting");

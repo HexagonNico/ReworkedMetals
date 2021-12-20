@@ -36,4 +36,10 @@ public class ModdedOreFeatures {
 	// Ruby
 	private static final ConfiguredFeature<?, ?> RUBY_CONFIGURATION = FeatureUtils.register("ruby", Feature.ORE.configured(ModdedOres.configuration(BlocksRegistry.RUBY_ORE.get(), BlocksRegistry.DEEPSLATE_RUBY_ORE.get(), 3)));
 	public static final PlacedFeature RUBY_ORE = PlacementUtils.register("ruby_ore", RUBY_CONFIGURATION.placed(ModdedOres.trianglePlacement(100, -16, 480)));
+
+	// End
+	private static final ConfiguredFeature<?, ?> END_METAL_CONFIGURATION = FeatureUtils.register("end_metal", Feature.ORE.configured(ModdedOres.configurationEnd(BlocksRegistry.END_METAL_ORE.get(), 8, 0.1f)));
+	private static final ConfiguredFeature<?, ?> END_GEM_CONFIGURED = FeatureUtils.register("end_gem", Feature.ORE.configured(ModdedOres.configurationEnd(BlocksRegistry.END_GEM_ORE.get(), 4, 0.1f)));
+	public static final PlacedFeature END_METAL_ORE = PlacementUtils.register("end_metal_ore", END_METAL_CONFIGURATION.placed(ModdedOres.uniformPlacement(0, 2, 1, 200)));
+	public static final PlacedFeature END_GEM_ORE = PlacementUtils.register("end_gem_ore", END_GEM_CONFIGURED.placed(ModdedOres.uniformPlacement(0, 2, 1, 200)));
 }
