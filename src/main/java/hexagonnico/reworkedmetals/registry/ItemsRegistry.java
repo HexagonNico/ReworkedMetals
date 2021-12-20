@@ -35,6 +35,7 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> RAW_ALUMINUM = REGISTER.register("raw_aluminum", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> RAW_SILVER = REGISTER.register("raw_silver", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> RAW_NICKEL = REGISTER.register("raw_nickel", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistryObject<Item> RAW_END_METAL = REGISTER.register("raw_end_metal", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 	// Ingots
 	public static final RegistryObject<Item> TIN_INGOT = REGISTER.register("tin_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
@@ -44,9 +45,11 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> NICKEL_INGOT = REGISTER.register("nickel_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> INVAR_INGOT = REGISTER.register("invar_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 	public static final RegistryObject<Item> STEEL_INGOT = REGISTER.register("steel_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistryObject<Item> END_METAL_INGOT = REGISTER.register("end_metal_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 	// Gems
 	public static final RegistryObject<Item> RUBY = REGISTER.register("ruby", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+	public static final RegistryObject<Item> END_GEM = REGISTER.register("end_gem", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 	// Copper tools
 	public static final RegistryObject<Item> COPPER_PICKAXE = REGISTER.register("copper_pickaxe", () -> new PickaxeItem(ModToolTiers.COPPER, 1, -2.8f, new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
@@ -172,6 +175,7 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> SMELTERY = REGISTER.register("smeltery", () -> new BlockItem(BlocksRegistry.SMELTERY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 	public static final RegistryObject<Item> FURNACE = OVERRIDES.register("furnace", () -> new BlockItem(BlocksRegistry.FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 	public static final RegistryObject<Item> BLAST_FURNACE = OVERRIDES.register("blast_furnace", () -> new BlockItem(BlocksRegistry.BLAST_FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> NETHER_FORGE = REGISTER.register("nether_forge", () -> new BlockItem(BlocksRegistry.NETHER_FORGE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 	public static final RegistryObject<Item> KILN = REGISTER.register("kiln", () -> new BlockItem(BlocksRegistry.KILN.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 	// Ores block items
@@ -188,11 +192,16 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> DEEPSLATE_NICKEL_ORE = REGISTER.register("deepslate_nickel_ore", () -> new BlockItem(BlocksRegistry.DEEPSLATE_NICKEL_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> DEEPSLATE_RUBY_ORE = REGISTER.register("deepslate_ruby_ore", () -> new BlockItem(BlocksRegistry.DEEPSLATE_RUBY_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
+	// End ores
+	public static final RegistryObject<Item> END_METAL_ORE = REGISTER.register("end_metal_ore", () -> new BlockItem(BlocksRegistry.END_METAL_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final RegistryObject<Item> END_GEM_ORE = REGISTER.register("end_gem_ore", () -> new BlockItem(BlocksRegistry.END_GEM_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+
 	// Raw metals block items
 	public static final RegistryObject<Item> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new BlockItem(BlocksRegistry.RAW_TIN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> RAW_ALUMINUM_BLOCK = REGISTER.register("raw_aluminum_block", () -> new BlockItem(BlocksRegistry.RAW_ALUMINUM_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> RAW_SILVER_BLOCK = REGISTER.register("raw_silver_block", () -> new BlockItem(BlocksRegistry.RAW_SILVER_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> RAW_NICKEL_BLOCK = REGISTER.register("raw_nickel_block", () -> new BlockItem(BlocksRegistry.RAW_NICKEL_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final RegistryObject<Item> RAW_END_METAL_BLOCK = REGISTER.register("raw_end_metal_block", () -> new BlockItem(BlocksRegistry.RAW_END_METAL_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 
 	// Metal block items
 	public static final RegistryObject<Item> TIN_BLOCK = REGISTER.register("tin_block", () -> new BlockItem(BlocksRegistry.TIN_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
@@ -203,4 +212,6 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> INVAR_BLOCK = REGISTER.register("invar_block", () -> new BlockItem(BlocksRegistry.INVAR_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> STEEL_BLOCK = REGISTER.register("steel_block", () -> new BlockItem(BlocksRegistry.STEEL_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final RegistryObject<Item> RUBY_BLOCK = REGISTER.register("ruby_block", () -> new BlockItem(BlocksRegistry.RUBY_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final RegistryObject<Item> END_METAL_BLOCK = REGISTER.register("end_metal_block", () -> new BlockItem(BlocksRegistry.END_METAL_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final RegistryObject<Item> END_GEM_BLOCK = REGISTER.register("end_gem_block", () -> new BlockItem(BlocksRegistry.END_GEM_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 }

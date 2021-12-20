@@ -18,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -128,8 +129,9 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingR
                 case "smeltery" -> new ItemStack(ItemsRegistry.SMELTERY.get());
                 case "furnace" -> new ItemStack(ItemsRegistry.FURNACE.get());
                 case "blast_furnace" -> new ItemStack(ItemsRegistry.BLAST_FURNACE.get());
+                case "nether_forge" -> new ItemStack(ItemsRegistry.NETHER_FORGE.get());
                 case "kiln" -> new ItemStack(ItemsRegistry.KILN.get());
-                default -> ItemStack.EMPTY;
+                default -> new ItemStack(Items.BEDROCK);
             };
         }).collect(Collectors.toList());
     }

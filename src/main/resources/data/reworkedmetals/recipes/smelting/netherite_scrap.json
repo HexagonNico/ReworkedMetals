@@ -11,6 +11,7 @@
   "experience": 1.5,
   "smelting_time": 200,
   "stations": [
-    "kiln"
+    "kiln",
+    "nether_forge"
   ]
 }

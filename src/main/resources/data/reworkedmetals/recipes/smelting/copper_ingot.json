@@ -16,6 +16,7 @@
   "stations": [
     "smeltery",
     "furnace",
-    "blast_furnace"
+    "blast_furnace",
+    "nether_forge"
   ]
 }

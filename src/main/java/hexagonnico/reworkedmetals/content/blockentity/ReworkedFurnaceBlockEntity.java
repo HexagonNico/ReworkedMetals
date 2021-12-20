@@ -168,7 +168,7 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
 
 	/**
 	 * Gets station type. Needed by {@link ReworkedSmeltingRecipe}.
-	 * @return A value among ["smeltery", "furnace", "blast_furnace", "kiln"]
+	 * @return A value among ["smeltery", "furnace", "blast_furnace", "nether_forge", "kiln"]
 	 */
 	public abstract String stationType();
 

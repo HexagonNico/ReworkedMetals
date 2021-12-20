@@ -3,6 +3,7 @@
   "values": [
     "reworkedmetals:smeltery",
     "reworkedmetals:kiln",
+    "reworkedmetals:nether_forge",
     "reworkedmetals:tin_ore",
     "reworkedmetals:aluminum_ore",
     "reworkedmetals:silver_ore",
@@ -13,10 +14,13 @@
     "reworkedmetals:deepslate_silver_ore",
     "reworkedmetals:deepslate_nickel_ore",
     "reworkedmetals:deepslate_ruby_ore",
+    "reworkedmetals:end_metal_ore",
+    "reworkedmetals:end_gem_ore",
     "reworkedmetals:raw_tin_block",
     "reworkedmetals:raw_aluminum_block",
     "reworkedmetals:raw_silver_block",
     "reworkedmetals:raw_nickel_block",
+    "reworkedmetals:raw_end_metal_block",
     "reworkedmetals:tin_block",
     "reworkedmetals:bronze_block",
     "reworkedmetals:aluminum_block",
@@ -24,6 +28,8 @@
     "reworkedmetals:nickel_block",
     "reworkedmetals:invar_block",
     "reworkedmetals:steel_block",
-    "reworkedmetals:ruby_block"
+    "reworkedmetals:ruby_block",
+    "reworkedmetals:end_metal_block",
+    "reworkedmetals:end_gem_block"
   ]
 }

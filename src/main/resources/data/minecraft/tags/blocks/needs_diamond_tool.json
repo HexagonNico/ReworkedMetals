@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+	  "reworkedmetals:end_metal_ore",
+	  "reworkedmetals:end_gem_ore",
+	  "reworkedmetals:end_metal_block",
+	  "reworkedmetals:end_gem_block"
+	]
+  }

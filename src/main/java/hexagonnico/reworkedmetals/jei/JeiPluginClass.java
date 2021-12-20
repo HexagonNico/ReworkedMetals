@@ -48,6 +48,7 @@ public class JeiPluginClass implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.SMELTERY.get()), SmeltingRecipeCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.FURNACE.get()), SmeltingRecipeCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.BLAST_FURNACE.get()), SmeltingRecipeCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.NETHER_FORGE.get()), SmeltingRecipeCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.KILN.get()), SmeltingRecipeCategory.ID);
     }
 

@@ -20,6 +20,7 @@
   "experience": 1,
   "smelting_time": 400,
   "stations": [
-    "blast_furnace"
+    "blast_furnace",
+    "nether_forge"
   ]
 }

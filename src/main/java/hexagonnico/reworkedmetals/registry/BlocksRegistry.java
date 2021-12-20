@@ -4,6 +4,7 @@ import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.content.block.BlastFurnaceBlock;
 import hexagonnico.reworkedmetals.content.block.FurnaceBlock;
 import hexagonnico.reworkedmetals.content.block.KilnBlock;
+import hexagonnico.reworkedmetals.content.block.NetherForgeBlock;
 import hexagonnico.reworkedmetals.content.block.SmelteryBlock;
 
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +34,7 @@ public class BlocksRegistry {
 	public static final RegistryObject<Block> SMELTERY = REGISTER.register("smeltery", SmelteryBlock::new);
 	public static final RegistryObject<Block> FURNACE = OVERRIDES.register("furnace", FurnaceBlock::new);
 	public static final RegistryObject<Block> BLAST_FURNACE = OVERRIDES.register("blast_furnace", BlastFurnaceBlock::new);
+	public static final RegistryObject<Block> NETHER_FORGE = REGISTER.register("nether_forge", NetherForgeBlock::new);
 	public static final RegistryObject<Block> KILN = REGISTER.register("kiln", KilnBlock::new);
 
 	// Ores
@@ -49,11 +51,16 @@ public class BlocksRegistry {
 	public static final RegistryObject<Block> DEEPSLATE_NICKEL_ORE = REGISTER.register("deepslate_nickel_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(NICKEL_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE)));
 	public static final RegistryObject<Block> DEEPSLATE_RUBY_ORE = REGISTER.register("deepslate_ruby_ore", () -> new OreBlock(BlockBehaviour.Properties.copy(RUBY_ORE.get()).color(MaterialColor.DEEPSLATE).strength(4.5F, 3.0F).sound(SoundType.DEEPSLATE), UniformInt.of(3, 7)));
 
+	// End ores
+	public static final RegistryObject<Block> END_METAL_ORE = REGISTER.register("end_metal_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.SAND).requiresCorrectToolForDrops().strength(3.0f, 9.0f)));
+	public static final RegistryObject<Block> END_GEM_ORE = REGISTER.register("end_gem_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.SAND).requiresCorrectToolForDrops().strength(3.0f, 9.0f), UniformInt.of(5, 10)));
+
 	// Raw metal blocks
 	public static final RegistryObject<Block> RAW_TIN_BLOCK = REGISTER.register("raw_tin_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
 	public static final RegistryObject<Block> RAW_ALUMINUM_BLOCK = REGISTER.register("raw_aluminum_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.RAW_IRON).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
 	public static final RegistryObject<Block> RAW_SILVER_BLOCK = REGISTER.register("raw_silver_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.METAL).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
 	public static final RegistryObject<Block> RAW_NICKEL_BLOCK = REGISTER.register("raw_nickel_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.RAW_IRON).requiresCorrectToolForDrops().strength(5.0f, 6.0f)));
+	public static final RegistryObject<Block> RAW_END_METAL_BLOCK = REGISTER.register("raw_end_metal_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.EMERALD).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.ANCIENT_DEBRIS)));
 
 	// Metal blocks
 	public static final RegistryObject<Block> TIN_BLOCK = REGISTER.register("tin_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.COPPER)));
@@ -64,4 +71,6 @@ public class BlocksRegistry {
 	public static final RegistryObject<Block> INVAR_BLOCK = REGISTER.register("invar_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
 	public static final RegistryObject<Block> STEEL_BLOCK = REGISTER.register("steel_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
 	public static final RegistryObject<Block> RUBY_BLOCK = REGISTER.register("ruby_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_RED).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.METAL)));
+	public static final RegistryObject<Block> END_METAL_BLOCK = REGISTER.register("end_metal_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.EMERALD).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.NETHERITE_BLOCK)));
+	public static final RegistryObject<Block> END_GEM_BLOCK = REGISTER.register("end_gem_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_PURPLE).requiresCorrectToolForDrops().strength(5.0f, 6.0f).sound(SoundType.NETHERITE_BLOCK)));
 }

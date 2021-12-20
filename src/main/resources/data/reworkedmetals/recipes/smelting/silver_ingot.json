@@ -15,6 +15,7 @@
   "smelting_time": 200,
   "stations": [
     "furnace",
-    "blast_furnace"
+    "blast_furnace",
+    "nether_forge"
   ]
 }

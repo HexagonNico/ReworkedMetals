@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "reworkedmetals:block/nether_forge_top",
+    "front": "reworkedmetals:block/nether_forge_front",
+    "side": "reworkedmetals:block/nether_forge_side"
+  }
+}
