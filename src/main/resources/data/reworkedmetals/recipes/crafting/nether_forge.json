@@ -10,7 +10,7 @@
       "item": "minecraft:polished_blackstone"
     },
     "X": {
-      "item": "minecraft:blast_furnace"
+      "tag": "reworkedmetals:nether_forge_upgrade"
     },
     "I": {
       "tag": "forge:ingots/netherite"

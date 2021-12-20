@@ -10,7 +10,7 @@
       "item": "minecraft:stone"
     },
     "X": {
-      "item": "reworkedmetals:smeltery"
+      "tag": "reworkedmetals:furnace_upgrade"
     },
     "I": {
       "tag": "forge:ingots/aluminum"

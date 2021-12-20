@@ -10,7 +10,7 @@
       "item": "minecraft:smooth_stone"
     },
     "X": {
-      "item": "minecraft:furnace"
+      "tag": "reworkedmetals:blast_furnace_upgrade"
     },
     "I": {
       "tag": "forge:ingots/invar"
