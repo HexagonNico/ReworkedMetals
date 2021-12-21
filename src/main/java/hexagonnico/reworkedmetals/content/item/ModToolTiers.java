@@ -17,7 +17,7 @@ public enum ModToolTiers implements Tier {
 	IRON_DIAMOND(3, 1125, 5.0f, 2.5f, 12, Ingredient.of(Items.IRON_INGOT)),
 	IRON_EMERALD(2, 450, 8.5f, 2.5f, 16, Ingredient.of(Items.IRON_INGOT)),
 	SILVER(1, 100, 10.0f, 1.0f, 18, Ingredient.of(ItemsRegistry.SILVER_INGOT.get())),
-	SILVER_RUBY(2, 250, 10.0f, 3.0f, 18, Ingredient.of(ItemsRegistry.SILVER_INGOT.get())),
+	SILVER_RUBY(2, 250, 10.0f, 2.0f, 18, Ingredient.of(ItemsRegistry.SILVER_INGOT.get())),
 	SILVER_DIAMOND(2, 300, 8.0f, 1.0f, 18, Ingredient.of(ItemsRegistry.SILVER_INGOT.get())),
 	STEEL(3, 1561, 8.0f, 3.0f, 10, Ingredient.of(ItemsRegistry.STEEL_INGOT.get())),
 	STEEL_DIAMOND(4, 1970, 6.0f, 3.0f, 10, Ingredient.of(ItemsRegistry.STEEL_INGOT.get())),

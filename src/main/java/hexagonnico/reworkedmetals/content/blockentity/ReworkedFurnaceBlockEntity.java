@@ -93,8 +93,8 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
 	}
 
 	@Override // Saves data to NBT
-	public CompoundTag save(CompoundTag compoundTag) {
-		super.save(compoundTag);
+	protected void saveAdditional(CompoundTag compoundTag) {
+		super.saveAdditional(compoundTag);
 		compoundTag.putInt("LitTime", this.litTime);
 		compoundTag.putInt("TotalLitTime", this.totalLitTime);
 		compoundTag.putInt("SmeltingProgress", this.smeltingProgress);
@@ -104,7 +104,6 @@ public abstract class ReworkedFurnaceBlockEntity extends BaseContainerBlockEntit
 		CompoundTag recipesTag = new CompoundTag();
 		this.recipesUsed.forEach((resourceLocation, integer) -> recipesTag.putInt(resourceLocation.toString(), integer));
 		compoundTag.put("RecipesUsed", recipesTag);
-		return compoundTag;
 	}
 
 	@Override // Create container menu
