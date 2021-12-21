@@ -31,7 +31,7 @@ public class NetherForgeBlock extends ReworkedFurnaceBlock {
 			double y = pos.getY();
 			double z = pos.getZ() + 0.5;
 			if(random.nextDouble() < 0.1) {
-				world.playLocalSound(x, y, z, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+				world.playLocalSound(x, y, z, SoundEvents.SOUL_ESCAPE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
 			}
 
 			Direction facing = state.getValue(FACING);
@@ -41,11 +41,12 @@ public class NetherForgeBlock extends ReworkedFurnaceBlock {
 			double dy = random.nextDouble() * 6.0 / 16.0;
 			double dz = axis == Direction.Axis.Z ? (double) facing.getStepZ() * 0.52 : d;
 			world.addParticle(ParticleTypes.SMOKE, x + dx, y + dy, z + dz, 0.0, 0.0, 0.0);
+			world.addParticle(ParticleTypes.SOUL, x + dx, y + dy, z + dz, 0.0, 0.0, 0.0);
 		}
 	}
 
 	@Override // Creates ticker for block entity
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType) {
-		return level.isClientSide ? null : createTickerHelper(blockEntityType, BlockEntitiesRegistry.BLAST_FURNACE.get(), ReworkedFurnaceBlockEntity::serverTick);
+		return level.isClientSide ? null : createTickerHelper(blockEntityType, BlockEntitiesRegistry.NETHER_FORGE.get(), ReworkedFurnaceBlockEntity::serverTick);
 	}
 }

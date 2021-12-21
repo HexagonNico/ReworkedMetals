@@ -20,7 +20,7 @@ public class NetherForgeBlockEntity extends ReworkedFurnaceBlockEntity {
 
 	@Override // Text title
 	protected Component getDefaultName() {
-		return new TranslatableComponent("container.nether_forge");
+		return new TranslatableComponent("container.reworkedmetals.nether_forge");
 	}
 
 	@Override // Reworked furnace recipe
