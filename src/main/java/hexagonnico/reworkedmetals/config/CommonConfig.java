@@ -57,6 +57,9 @@ public class CommonConfig {
 		createConfigValue(configBuilder, "invarBlock", true, "Enables crafting for invar block");
 		createConfigValue(configBuilder, "steelBlock", true, "Enables crafting for steel block");
 		createConfigValue(configBuilder, "rubyBlock", true, "Enables crafting for ruby block");
+		createConfigValue(configBuilder, "rawEndMetalBlock", true, "Enables crafting for raw end metal block");
+		createConfigValue(configBuilder, "endMetalBlock", true, "Enables crafting for end metal block");
+		createConfigValue(configBuilder, "endGemBlock", true, "Enables crafting for end gem block");
 		configBuilder.pop();
 
 		configBuilder.comment("Enables or disables smithing upgrades").push("smithingUpgrades");

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "reworkedmetals:raw_end_metal_block"
+    }
+  ],
+  "result": {
+    "item": "reworkedmetals:raw_end_metal",
+    "count": 9
+  }
+}
