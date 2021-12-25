@@ -1,8 +1,8 @@
 package hexagonnico.reworkedmetals.registry;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.container.ReworkedFurnaceContainerMenu;
-import hexagonnico.reworkedmetals.content.gui.ReworkedFurnaceScreen;
+import hexagonnico.reworkedmetals.content.container.AlloyingFurnaceContainerMenu;
+import hexagonnico.reworkedmetals.content.gui.AlloyingFurnaceScreen;
 
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.RegistryObject;
@@ -21,13 +21,13 @@ public class ContainerMenusRegistry {
 
 	public static DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.CONTAINERS, ReworkedMetals.ID);
 
-	public static RegistryObject<MenuType<ReworkedFurnaceContainerMenu>> FURNACE = REGISTER.register("furnace", () -> IForgeMenuType.create(ReworkedFurnaceContainerMenu::new));
+	public static RegistryObject<MenuType<AlloyingFurnaceContainerMenu>> FURNACE = REGISTER.register("furnace", () -> IForgeMenuType.create(AlloyingFurnaceContainerMenu::new));
 
 	/**
 	 * Registers GUIs. Called in {@link ReworkedMetals#clientSetup}.
 	 * Registers all container-guis in ReworkedMetals.
 	 */
 	public static void registerGuis() {
-		MenuScreens.register(FURNACE.get(), ReworkedFurnaceScreen::new);
+		MenuScreens.register(FURNACE.get(), AlloyingFurnaceScreen::new);
 	}
 }

@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.jei;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
+import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 
-public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingRecipe> {
+public class SmeltingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
     
     public static final ResourceLocation ID = new ResourceLocation(ReworkedMetals.ID, "smelting");
 
@@ -40,7 +40,7 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingR
     public SmeltingRecipeCategory(IGuiHelper guiHelper) {
         ResourceLocation texture = new ResourceLocation(ReworkedMetals.ID, "textures/gui/jei_gui.png");
         this.background = guiHelper.createDrawable(texture, 0, 0, 102, 57);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ItemsRegistry.FURNACE.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ItemsRegistry.RAW_NICKEL.get())); // TODO
         this.arrow = guiHelper.drawableBuilder(texture, 102, 0, 24, 17).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
     }
     
@@ -50,8 +50,8 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingR
     }
 
     @Override
-    public Class<? extends ReworkedSmeltingRecipe> getRecipeClass() {
-        return ReworkedSmeltingRecipe.class;
+    public Class<? extends AlloyingRecipe> getRecipeClass() {
+        return AlloyingRecipe.class;
     }
 
     @Override
@@ -70,13 +70,13 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingR
     }
 
     @Override
-    public void setIngredients(ReworkedSmeltingRecipe recipe, IIngredients ingredients) {
+    public void setIngredients(AlloyingRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());        
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ReworkedSmeltingRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, AlloyingRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
         List<ItemStack[]> ingredientItems = recipe.getIngredients().stream()
                 .map(ingredient -> Arrays.stream(ingredient.getItems()).map(ItemStack::copy).toArray(ItemStack[]::new))
@@ -123,21 +123,17 @@ public class SmeltingRecipeCategory implements IRecipeCategory<ReworkedSmeltingR
         }
     }
     
-    private List<ItemStack> getStations(ReworkedSmeltingRecipe recipe) {
+    private List<ItemStack> getStations(AlloyingRecipe recipe) {
         return recipe.getStations().stream().map(string -> {
             return switch (string) {
-                case "smeltery" -> new ItemStack(ItemsRegistry.SMELTERY.get());
-                case "furnace" -> new ItemStack(ItemsRegistry.FURNACE.get());
-                case "blast_furnace" -> new ItemStack(ItemsRegistry.BLAST_FURNACE.get());
-                case "nether_forge" -> new ItemStack(ItemsRegistry.NETHER_FORGE.get());
-                case "kiln" -> new ItemStack(ItemsRegistry.KILN.get());
+                // TODO
                 default -> new ItemStack(Items.BEDROCK);
             };
         }).collect(Collectors.toList());
     }
     
     @Override
-    public void draw(ReworkedSmeltingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(AlloyingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
         this.arrow.draw(stack, 44, 31);
     }
 }

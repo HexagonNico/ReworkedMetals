@@ -2,7 +2,7 @@ package hexagonnico.reworkedmetals.registry;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.content.crafting.ConfigCondition;
-import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
+import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
 
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.RegistryObject;
@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 public class CraftingRegistry {
 
 	public static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ReworkedMetals.ID);
-	public static final RegistryObject<RecipeSerializer<?>> SMELTING = REGISTER.register("smelting", () -> ReworkedSmeltingRecipe.SERIALIZER);
+	public static final RegistryObject<RecipeSerializer<?>> SMELTING = REGISTER.register("smelting", () -> AlloyingRecipe.SERIALIZER);
 
 	/**
 	 * Registers crafting condition.

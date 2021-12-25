@@ -1,11 +1,8 @@
 package hexagonnico.reworkedmetals.registry;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.block.BlastFurnaceBlock;
-import hexagonnico.reworkedmetals.content.block.FurnaceBlock;
-import hexagonnico.reworkedmetals.content.block.KilnBlock;
-import hexagonnico.reworkedmetals.content.block.NetherForgeBlock;
-import hexagonnico.reworkedmetals.content.block.SmelteryBlock;
+import hexagonnico.reworkedmetals.content.block.AlloyingBlastFurnaceBlock;
+import hexagonnico.reworkedmetals.content.block.AlloyingFurnaceBlock;
 
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,11 +28,8 @@ public class BlocksRegistry {
 	public static final DeferredRegister<Block> OVERRIDES = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
 
 	// Furnaces
-	public static final RegistryObject<Block> SMELTERY = REGISTER.register("smeltery", SmelteryBlock::new);
-	public static final RegistryObject<Block> FURNACE = OVERRIDES.register("furnace", FurnaceBlock::new);
-	public static final RegistryObject<Block> BLAST_FURNACE = OVERRIDES.register("blast_furnace", BlastFurnaceBlock::new);
-	public static final RegistryObject<Block> NETHER_FORGE = REGISTER.register("nether_forge", NetherForgeBlock::new);
-	public static final RegistryObject<Block> KILN = REGISTER.register("kiln", KilnBlock::new);
+	public static final RegistryObject<Block> ALLOYING_FURNACE = REGISTER.register("alloying_furnace", AlloyingFurnaceBlock::new);
+	public static final RegistryObject<Block> ALLOYING_BLAST_FURNACE = REGISTER.register("alloying_blast_furnace", AlloyingBlastFurnaceBlock::new);
 
 	// Ores
 	public static final RegistryObject<Block> TIN_ORE = REGISTER.register("tin_ore", () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0f, 3.0f)));

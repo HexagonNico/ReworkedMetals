@@ -1,15 +1,13 @@
 package hexagonnico.reworkedmetals.jei;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.crafting.ReworkedSmeltingRecipe;
-import hexagonnico.reworkedmetals.content.gui.ReworkedFurnaceScreen;
-import hexagonnico.reworkedmetals.registry.ItemsRegistry;
+import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
+import hexagonnico.reworkedmetals.content.gui.AlloyingFurnaceScreen;
 
 import java.util.stream.Collectors;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -32,7 +30,7 @@ public class JeiPluginClass implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(
             MINECRAFT.level.getRecipeManager().getRecipes().stream()
-                .filter(r -> r.getType() == ReworkedSmeltingRecipe.TYPE)
+                .filter(r -> r.getType() == AlloyingRecipe.TYPE)
                 .collect(Collectors.toList()),
             SmeltingRecipeCategory.ID
         );
@@ -40,16 +38,12 @@ public class JeiPluginClass implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(ReworkedFurnaceScreen.class, 81, 26, 24, 17, SmeltingRecipeCategory.ID);
+		registration.addRecipeClickArea(AlloyingFurnaceScreen.class, 81, 26, 24, 17, SmeltingRecipeCategory.ID);
 	}
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.SMELTERY.get()), SmeltingRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.FURNACE.get()), SmeltingRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.BLAST_FURNACE.get()), SmeltingRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.NETHER_FORGE.get()), SmeltingRecipeCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.KILN.get()), SmeltingRecipeCategory.ID);
+        // TODO
     }
 
     @Override

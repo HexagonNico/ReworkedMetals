@@ -186,11 +186,8 @@ public class ItemsRegistry {
 	public static final RegistryObject<Item> DIAMONDED_NETHERITE_BOOTS = REGISTER.register("diamonded_netherite_boots", () -> new ModArmorItem(ModArmorMaterials.DIAMONDED_NETHERITE, EquipmentSlot.FEET, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT).fireResistant()));
 
 	// Furnaces block items
-	public static final RegistryObject<Item> SMELTERY = REGISTER.register("smeltery", () -> new BlockItem(BlocksRegistry.SMELTERY.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> FURNACE = OVERRIDES.register("furnace", () -> new BlockItem(BlocksRegistry.FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> BLAST_FURNACE = OVERRIDES.register("blast_furnace", () -> new BlockItem(BlocksRegistry.BLAST_FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> NETHER_FORGE = REGISTER.register("nether_forge", () -> new BlockItem(BlocksRegistry.NETHER_FORGE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
-	public static final RegistryObject<Item> KILN = REGISTER.register("kiln", () -> new BlockItem(BlocksRegistry.KILN.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> ALLOYING_FURNACE = REGISTER.register("alloying_furnace", () -> new BlockItem(BlocksRegistry.ALLOYING_FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+	public static final RegistryObject<Item> ALLOYING_BLAST_FURNACE = REGISTER.register("alloying_blast_furnace", () -> new BlockItem(BlocksRegistry.ALLOYING_BLAST_FURNACE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 	// Ores block items
 	public static final RegistryObject<Item> TIN_ORE = REGISTER.register("tin_ore", () -> new BlockItem(BlocksRegistry.TIN_ORE.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
