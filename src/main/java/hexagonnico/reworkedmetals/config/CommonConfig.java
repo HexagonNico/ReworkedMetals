@@ -17,8 +17,6 @@ public class CommonConfig {
 		createConfigValue(configBuilder, "campfire", true, "Changes the campfire recipe to not use coal");
 		createConfigValue(configBuilder, "disableDiamond", true, "Disables the crafting for diamond tools");
 		createConfigValue(configBuilder, "consistentNetherite", true, "Changes netherite tools recipe to make it more consistent");
-		createConfigValue(configBuilder, "additionalCooking", true, "Adds some recipes to the smoker/campfire that don't fit in other furnaces");
-		createConfigValue(configBuilder, "additionalStonecutting", true, "Adds some recipes to the stonecutter that don't fit in furnaces");
 		configBuilder.pop();
 
 		configBuilder.comment("Enables or disables ore generation").push("oreGeneration");
