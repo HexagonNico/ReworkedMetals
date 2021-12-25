@@ -316,7 +316,8 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 
 		if(wasLitInitially != (blockEntity.litTime > 0)) {
 			changed = true;
-			blockEntity.level.setBlock(blockEntity.worldPosition, blockEntity.level.getBlockState(blockEntity.worldPosition).setValue(AbstractAlloyingFurnaceBlock.LIT, blockEntity.litTime > 0), 3);
+			state = state.setValue(AbstractAlloyingFurnaceBlock.LIT, blockEntity.litTime > 0);
+			blockEntity.level.setBlock(blockEntity.worldPosition, state, 3);
 		}
 		
 		if(changed) {

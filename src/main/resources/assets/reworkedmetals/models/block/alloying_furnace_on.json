@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "top": "reworkedmetals:block/alloying_furnace_top",
+    "top": "minecraft:block/furnace_top",
     "front": "reworkedmetals:block/alloying_furnace_front_on",
     "side": "reworkedmetals:block/alloying_furnace_side"
   }

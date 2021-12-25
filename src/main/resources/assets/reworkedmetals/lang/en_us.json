@@ -1,7 +1,6 @@
 {
-  "block.reworkedmetals.smeltery": "Smeltery",
-  "block.reworkedmetals.nether_forge": "Nether Forge",
-  "block.reworkedmetals.kiln": "Kiln",
+  "block.reworkedmetals.alloying_furnace": "Alloying Furnace",
+  "block.reworkedmetals.alloying_blast_furnace": "Alloying Blast Furnace",
   "block.reworkedmetals.tin_ore": "Tin Ore",
   "block.reworkedmetals.aluminum_ore": "Bauxite Ore",
   "block.reworkedmetals.silver_ore": "Silver Ore",
@@ -129,8 +128,8 @@
   "item.reworkedmetals.diamonded_netherite_chestplate": "Diamonded Netherite Chestplate",
   "item.reworkedmetals.diamonded_netherite_leggings": "Diamonded Netherite Leggings",
   "item.reworkedmetals.diamonded_netherite_boots": "Diamonded Netherite Boots",
-  "container.reworkedmetals.smeltery": "Smeltery",
-  "container.reworkedmetals.kiln": "Kiln",
-  "container.reworkedmetals.nether_forge": "Nether Forge",
-  "reworkedmetals.jei_category": "Reworked Smelting"
+  "container.reworkedmetals.alloying_furnace": "Alloying Furnace",
+  "container.reworkedmetals.alloying_blast_furnace": "Alloying Blast Furnace",
+  "gui.reworkedmetals.jei_alloying": "Alloying",
+  "gui.reworkedmetals.jei_blast_alloying": "Blast Alloying"
 }
