@@ -1,0 +1,23 @@
+{
+	"type": "reworkedmetals:blast_alloying",
+	"ingredients": [
+		{
+			"tag": "forge:raw_ores/gold"
+		},
+		{
+			"tag": "forge:raw_ores/gold"
+		},
+		{
+			"item": "minecraft:netherite_scrap"
+		},
+		{
+			"item": "minecraft:netherite_scrap"
+		}
+	],
+	"result": {
+		"item": "minecraft:netherite_ingot",
+		"count": 2
+	},
+	"experience": 1.5,
+	"smelting_time": 800
+}

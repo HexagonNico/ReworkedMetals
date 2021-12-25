@@ -9,16 +9,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-public class AlloyingRecipe extends AbstractAlloyingRecipe {
-
-	public static final RecipeType<AlloyingRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":alloying");
+public class BlastAlloyingRecipe extends AbstractAlloyingRecipe {
+	
+	public static final RecipeType<BlastAlloyingRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":blast_alloying");
 	public static final Serializer SERIALIZER = new Serializer();
 
-	public AlloyingRecipe(ResourceLocation id, JsonObject recipeJson) {
+	public BlastAlloyingRecipe(ResourceLocation id, JsonObject recipeJson) {
 		super(id, recipeJson);
 	}
 
-	public AlloyingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
+	public BlastAlloyingRecipe(ResourceLocation id, FriendlyByteBuf buffer) {
 		super(id, buffer);
 	}
 
@@ -36,12 +36,12 @@ public class AlloyingRecipe extends AbstractAlloyingRecipe {
 
 		@Override
 		public AbstractAlloyingRecipe fromJson(ResourceLocation id, JsonObject recipeJson) {
-			return new AlloyingRecipe(id, recipeJson);
+			return new BlastAlloyingRecipe(id, recipeJson);
 		}
 
 		@Override
 		public AbstractAlloyingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-			return new AlloyingRecipe(id, buffer);
+			return new BlastAlloyingRecipe(id, buffer);
 		}
 	}
 }

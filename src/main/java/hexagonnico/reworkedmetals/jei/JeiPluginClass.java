@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.jei;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
+import hexagonnico.reworkedmetals.content.crafting.AbstractAlloyingRecipe;
 import hexagonnico.reworkedmetals.content.gui.AlloyingFurnaceScreen;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
@@ -30,12 +30,12 @@ public class JeiPluginClass implements IModPlugin {
     
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(
+        /*registration.addRecipes(
             MINECRAFT.level.getRecipeManager().getRecipes().stream()
-                .filter(r -> r.getType() == AlloyingRecipe.TYPE)
+                .filter(r -> r.getType() == AbstractAlloyingRecipe.TYPE)
                 .collect(Collectors.toList()),
             AlloyingRecipeCategory.ID
-        );
+        );*/
     }
 
 	@Override

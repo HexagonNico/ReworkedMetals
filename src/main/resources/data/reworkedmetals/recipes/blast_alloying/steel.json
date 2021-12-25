@@ -1,0 +1,23 @@
+{
+	"type": "reworkedmetals:blast_alloying",
+	"ingredients": [
+		{
+			"tag": "forge:raw_ores/iron"
+		},
+		{
+			"tag": "forge:raw_ores/iron"
+		},
+		{
+			"item": "minecraft:charcoal"
+		},
+		{
+			"item": "minecraft:charcoal"
+		}
+	],
+	"result": {
+		"item": "reworkedmetals:steel_ingot",
+		"count": 2
+	},
+	"experience": 1.0,
+	"smelting_time": 800
+}

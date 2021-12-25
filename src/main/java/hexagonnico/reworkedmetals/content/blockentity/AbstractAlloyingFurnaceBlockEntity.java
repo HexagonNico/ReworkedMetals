@@ -2,7 +2,7 @@ package hexagonnico.reworkedmetals.content.blockentity;
 
 import hexagonnico.reworkedmetals.content.block.AbstractAlloyingFurnaceBlock;
 import hexagonnico.reworkedmetals.content.container.AlloyingFurnaceContainerMenu;
-import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
+import hexagonnico.reworkedmetals.content.crafting.AbstractAlloyingRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +43,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -63,6 +64,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 	protected int smeltingTime;
 	protected float storedExp;
 
+	private final RecipeType<? extends AbstractAlloyingRecipe> recipeType;
 	protected NonNullList<ItemStack> inventory;
 
 	private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
@@ -73,8 +75,9 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 	 * @param pos BlockPos
 	 * @param state BlockState
 	 */
-	public AbstractAlloyingFurnaceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos pos, BlockState state) {
+	public AbstractAlloyingFurnaceBlockEntity(BlockEntityType<?> blockEntityType, RecipeType<? extends AbstractAlloyingRecipe> recipeType, BlockPos pos, BlockState state) {
 		super(blockEntityType, pos, state);
+		this.recipeType = recipeType;
 		this.inventory = NonNullList.withSize(6, ItemStack.EMPTY);
 	}
 
@@ -166,12 +169,6 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 	}
 
 	/**
-	 * Gets station type. Needed by {@link AlloyingRecipe}.
-	 * @return A value among ["smeltery", "furnace", "blast_furnace", "nether_forge", "kiln"]
-	 */
-	public abstract String stationType();
-
-	/**
 	 * Adds experience to world when block is broken or output item is taken.
 	 * @param player ServerPlayer
 	 * @param level ServerLevel
@@ -182,7 +179,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 		for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
 			level.getRecipeManager().byKey(entry.getKey()).ifPresent((recipe -> {
 				recipes.add(recipe);
-				float exp = (float) entry.getIntValue() * ((AlloyingRecipe) recipe).getExperience();
+				float exp = (float) entry.getIntValue() * ((AbstractAlloyingRecipe) recipe).getExperience();
 				int expInt = Mth.floor(exp);
 				float random = Mth.frac(exp);
 				if(random != 0.0f && Math.random() < (double) random)
@@ -198,7 +195,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 	 * Adds a recipe to the stored recipes map
 	 * @param recipe ReworkedFurnaceRecipe
 	 */
-	public void setRecipeUsed(AlloyingRecipe recipe) {
+	public void setRecipeUsed(AbstractAlloyingRecipe recipe) {
 		this.recipesUsed.addTo(recipe.getId(), 1);
 	}
 
@@ -273,7 +270,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 
 		ItemStack fuel = blockEntity.inventory.get(4);
 		if(blockEntity.litTime > 0 || !fuel.isEmpty()) {
-			Optional<AlloyingRecipe> recipe = level.getRecipeManager().getRecipeFor(AlloyingRecipe.TYPE, blockEntity, level);
+			Optional<AbstractAlloyingRecipe> recipe = level.getRecipeManager().getRecipeFor((RecipeType<AbstractAlloyingRecipe>) blockEntity.recipeType, blockEntity, level);
 			if(recipe.isPresent()) {
 				blockEntity.smeltingTime = recipe.get().getSmeltingTime();
 				if(blockEntity.litTime <= 0 && canSmelt(blockEntity, recipe.get(), level)) {
@@ -327,7 +324,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 		}
 	}
 
-	private static boolean canSmelt(AbstractAlloyingFurnaceBlockEntity blockEntity, AlloyingRecipe recipe, Level level) {
+	private static boolean canSmelt(AbstractAlloyingFurnaceBlockEntity blockEntity, AbstractAlloyingRecipe recipe, Level level) {
 		ItemStack itemInOutputSlot = blockEntity.getItem(5);
 		ItemStack expectedOutput = recipe.getResultItem();
 		return recipe.matches(blockEntity, level) && (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));

@@ -1,7 +1,7 @@
 package hexagonnico.reworkedmetals.jei;
 
 import hexagonnico.reworkedmetals.ReworkedMetals;
-import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
+import hexagonnico.reworkedmetals.content.crafting.AbstractAlloyingRecipe;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 
-public class AlloyingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
+public class AlloyingRecipeCategory implements IRecipeCategory<AbstractAlloyingRecipe> {
     
     public static final ResourceLocation ID = new ResourceLocation(ReworkedMetals.ID, "alloying");
 
@@ -49,8 +49,8 @@ public class AlloyingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
     }
 
     @Override
-    public Class<? extends AlloyingRecipe> getRecipeClass() {
-        return AlloyingRecipe.class;
+    public Class<? extends AbstractAlloyingRecipe> getRecipeClass() {
+        return AbstractAlloyingRecipe.class;
     }
 
     @Override
@@ -69,13 +69,13 @@ public class AlloyingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
     }
 
     @Override
-    public void setIngredients(AlloyingRecipe recipe, IIngredients ingredients) {
+    public void setIngredients(AbstractAlloyingRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
         ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());        
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, AlloyingRecipe recipe, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, AbstractAlloyingRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
         List<ItemStack[]> ingredientItems = recipe.getIngredients().stream()
                 .map(ingredient -> Arrays.stream(ingredient.getItems()).map(ItemStack::copy).toArray(ItemStack[]::new))
@@ -122,7 +122,7 @@ public class AlloyingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
     }
     
     @Override
-    public void draw(AlloyingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
+    public void draw(AbstractAlloyingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
         this.arrow.draw(stack, 44, 31);
     }
 }
