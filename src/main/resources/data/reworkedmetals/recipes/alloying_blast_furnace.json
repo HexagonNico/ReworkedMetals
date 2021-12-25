@@ -7,7 +7,7 @@
 	],
 	"key": {
 		"O": {
-			"tag": "forge:ingots/aluminum"
+			"tag": "forge:ingots/invar"
 		},
 		"w": {
 			"item": "minecraft:campfire"
@@ -17,6 +17,6 @@
 		}
 	},
 	"result": {
-		"item": "minecraft:blast_furnace"
+		"item": "reworkedmetals:alloying_blast_furnace"
 	}
 }

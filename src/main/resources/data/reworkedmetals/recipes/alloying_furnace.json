@@ -7,16 +7,16 @@
 	],
 	"key": {
 		"O": {
-			"tag": "forge:ingots/aluminum"
+			"tag": "forge:ingots/tin"
 		},
 		"w": {
 			"item": "minecraft:campfire"
 		},
 		"#": {
-			"item": "minecraft:smooth_stone"
+			"item": "minecraft:stone"
 		}
 	},
 	"result": {
-		"item": "minecraft:blast_furnace"
+		"item": "reworkedmetals:alloying_furnace"
 	}
 }
