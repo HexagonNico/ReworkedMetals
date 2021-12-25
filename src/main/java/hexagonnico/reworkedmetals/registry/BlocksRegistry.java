@@ -25,7 +25,6 @@ public class BlocksRegistry {
 
 	// Deferred register
 	public static final DeferredRegister<Block> REGISTER = DeferredRegister.create(ForgeRegistries.BLOCKS, ReworkedMetals.ID);
-	public static final DeferredRegister<Block> OVERRIDES = DeferredRegister.create(ForgeRegistries.BLOCKS, "minecraft");
 
 	// Furnaces
 	public static final RegistryObject<Block> ALLOYING_FURNACE = REGISTER.register("alloying_furnace", AlloyingFurnaceBlock::new);

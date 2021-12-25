@@ -5,7 +5,6 @@ import hexagonnico.reworkedmetals.config.CommonConfig;
 import hexagonnico.reworkedmetals.content.worldgen.ModdedOreFeatures;
 
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +27,7 @@ public class InitEventHandler {
 		}
 		if(CommonConfig.getBoolean("silverOre")) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_LOWER);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.SILVER_ORE_MOUNTAINS);
 		}
 		if(CommonConfig.getBoolean("nickelOre")) {
@@ -41,10 +41,5 @@ public class InitEventHandler {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.END_METAL_ORE);
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModdedOreFeatures.END_GEM_ORE);
 		}
-	}
-
-	@SubscribeEvent // Event fired when loading villager professions
-	public static void onVillagerLoad(VillagerTradesEvent event) {
-		// TODO
 	}
 }

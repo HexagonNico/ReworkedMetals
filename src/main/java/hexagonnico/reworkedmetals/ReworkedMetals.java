@@ -6,7 +6,6 @@ import hexagonnico.reworkedmetals.registry.BlocksRegistry;
 import hexagonnico.reworkedmetals.registry.ContainerMenusRegistry;
 import hexagonnico.reworkedmetals.registry.CraftingRegistry;
 import hexagonnico.reworkedmetals.registry.ItemsRegistry;
-import hexagonnico.reworkedmetals.registry.VillagersRegistry;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -34,14 +33,11 @@ public class ReworkedMetals {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.CONFIG);
 
 		BlocksRegistry.REGISTER.register(eventBus);
-		BlocksRegistry.OVERRIDES.register(eventBus);
 		ItemsRegistry.REGISTER.register(eventBus);
 		ItemsRegistry.OVERRIDES.register(eventBus);
 		BlockEntitiesRegistry.REGISTER.register(eventBus);
 		ContainerMenusRegistry.REGISTER.register(eventBus);
 		CraftingRegistry.REGISTER.register(eventBus);
-		VillagersRegistry.POI_OVERRIDES.register(eventBus);
-		VillagersRegistry.PROFESSIONS_OVERRIDES.register(eventBus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
