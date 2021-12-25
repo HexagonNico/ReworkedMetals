@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 public class CraftingRegistry {
 
 	public static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ReworkedMetals.ID);
-	public static final RegistryObject<RecipeSerializer<?>> SMELTING = REGISTER.register("smelting", () -> AlloyingRecipe.SERIALIZER);
+	public static final RegistryObject<RecipeSerializer<?>> ALLOYING = REGISTER.register("alloying", () -> AlloyingRecipe.SERIALIZER);
 
 	/**
 	 * Registers crafting condition.

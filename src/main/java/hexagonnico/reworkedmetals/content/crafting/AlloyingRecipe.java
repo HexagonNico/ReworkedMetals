@@ -32,7 +32,7 @@ import net.minecraft.world.level.Level;
  */
 public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity> {
 
-	public static final RecipeType<AlloyingRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":smelting"); // TODO - Rename
+	public static final RecipeType<AlloyingRecipe> TYPE = RecipeType.register(ReworkedMetals.ID + ":alloying");
 
 	public static final Serializer SERIALIZER = new Serializer();
 
@@ -42,7 +42,6 @@ public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity
 	private final ItemStack output;
 	private final float experience;
 	private final int smeltingTime;
-	private final NonNullList<String> stations;
 
 	/**
 	 * Create recipe from JSON object
@@ -61,11 +60,6 @@ public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity
 		this.output = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(recipeJson, "result"), true);
 		this.experience = GsonHelper.getAsFloat(recipeJson, "experience", 0.0f);
 		this.smeltingTime = GsonHelper.getAsInt(recipeJson, "smelting_time", 200);
-		this.stations = NonNullList.create();
-		JsonArray stationsArray = GsonHelper.getAsJsonArray(recipeJson, "stations");
-		for(int i = 0; i < stationsArray.size(); i++) {
-			this.stations.add(stationsArray.get(i).getAsString());
-		}
 	}
 
 	/**
@@ -84,11 +78,6 @@ public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity
 		this.output = buffer.readItem();
 		this.experience = buffer.readFloat();
 		this.smeltingTime = buffer.readVarInt();
-		i = buffer.readVarInt();
-		this.stations = NonNullList.withSize(i, "");
-		for(int j = 0; j < this.stations.size(); j++) {
-			this.stations.set(j, buffer.readUtf());
-		}
 	}
 
 	@Override
@@ -122,10 +111,6 @@ public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity
 
 	public int getSmeltingTime() {
 		return this.smeltingTime;
-	}
-
-	public NonNullList<String> getStations() {
-		return this.stations;
 	}
 
 	@Override
@@ -201,10 +186,6 @@ public class AlloyingRecipe implements Recipe<AbstractAlloyingFurnaceBlockEntity
 			buffer.writeItem(recipe.output);
 			buffer.writeFloat(recipe.experience);
 			buffer.writeVarInt(recipe.smeltingTime);
-			buffer.writeVarInt(recipe.stations.size());
-			for(String string : recipe.stations) {
-				buffer.writeUtf(string);
-			}
 		}
 	}
 }

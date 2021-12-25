@@ -1,0 +1,20 @@
+{
+	"type": "reworkedmetals:alloying",
+	"ingredients": [
+		{
+			"tag": "forge:ores/nickel"
+		},
+		{
+			"tag": "forge:ores/iron"
+		},
+		{
+			"tag": "forge:ores/iron"
+		}
+	],
+	"result": {
+		"item": "reworkedmetals:invar_ingot",
+		"count": 3
+	},
+	"experience": 0.7,
+	"smelting_time": 600
+}

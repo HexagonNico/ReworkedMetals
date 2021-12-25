@@ -18,7 +18,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -29,18 +28,18 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 
-public class SmeltingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
+public class AlloyingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
     
-    public static final ResourceLocation ID = new ResourceLocation(ReworkedMetals.ID, "smelting");
+    public static final ResourceLocation ID = new ResourceLocation(ReworkedMetals.ID, "alloying");
 
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated arrow;
     
-    public SmeltingRecipeCategory(IGuiHelper guiHelper) {
+    public AlloyingRecipeCategory(IGuiHelper guiHelper) {
         ResourceLocation texture = new ResourceLocation(ReworkedMetals.ID, "textures/gui/jei_gui.png");
         this.background = guiHelper.createDrawable(texture, 0, 0, 102, 57);
-        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ItemsRegistry.RAW_NICKEL.get())); // TODO
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ItemsRegistry.ALLOYING_FURNACE.get()));
         this.arrow = guiHelper.drawableBuilder(texture, 102, 0, 24, 17).buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
     }
     
@@ -83,7 +82,6 @@ public class SmeltingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
                 .collect(Collectors.toList());
         groupLists(ingredientItems);
         itemStacks.init(0, false, 9, 0);
-        itemStacks.set(0, getStations(recipe));
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 2; j++) {
                 int item = i * 2 + j;
@@ -121,15 +119,6 @@ public class SmeltingRecipeCategory implements IRecipeCategory<AlloyingRecipe> {
             }
             i++;
         }
-    }
-    
-    private List<ItemStack> getStations(AlloyingRecipe recipe) {
-        return recipe.getStations().stream().map(string -> {
-            return switch (string) {
-                // TODO
-                default -> new ItemStack(Items.BEDROCK);
-            };
-        }).collect(Collectors.toList());
     }
     
     @Override

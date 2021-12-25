@@ -330,8 +330,7 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 	private static boolean canSmelt(AbstractAlloyingFurnaceBlockEntity blockEntity, AlloyingRecipe recipe, Level level) {
 		ItemStack itemInOutputSlot = blockEntity.getItem(5);
 		ItemStack expectedOutput = recipe.getResultItem();
-		return recipe.getStations().contains(blockEntity.stationType()) && recipe.matches(blockEntity, level) &&
-				(itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
+		return recipe.matches(blockEntity, level) && (itemInOutputSlot.isEmpty() || (itemInOutputSlot.sameItem(expectedOutput) && (itemInOutputSlot.getCount() + expectedOutput.getCount() <= itemInOutputSlot.getMaxStackSize())));
 	}
 
 	@Override // Slots for hopper interaction

@@ -3,11 +3,13 @@ package hexagonnico.reworkedmetals.jei;
 import hexagonnico.reworkedmetals.ReworkedMetals;
 import hexagonnico.reworkedmetals.content.crafting.AlloyingRecipe;
 import hexagonnico.reworkedmetals.content.gui.AlloyingFurnaceScreen;
+import hexagonnico.reworkedmetals.registry.ItemsRegistry;
 
 import java.util.stream.Collectors;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -23,7 +25,7 @@ public class JeiPluginClass implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new SmeltingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new AlloyingRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
     
     @Override
@@ -32,18 +34,18 @@ public class JeiPluginClass implements IModPlugin {
             MINECRAFT.level.getRecipeManager().getRecipes().stream()
                 .filter(r -> r.getType() == AlloyingRecipe.TYPE)
                 .collect(Collectors.toList()),
-            SmeltingRecipeCategory.ID
+            AlloyingRecipeCategory.ID
         );
     }
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(AlloyingFurnaceScreen.class, 81, 26, 24, 17, SmeltingRecipeCategory.ID);
+		registration.addRecipeClickArea(AlloyingFurnaceScreen.class, 81, 26, 24, 17, AlloyingRecipeCategory.ID);
 	}
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        // TODO
+        registration.addRecipeCatalyst(new ItemStack(ItemsRegistry.ALLOYING_FURNACE.get()), AlloyingRecipeCategory.ID);
     }
 
     @Override
