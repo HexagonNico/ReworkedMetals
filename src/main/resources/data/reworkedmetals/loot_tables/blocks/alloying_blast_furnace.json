@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "reworkedmetals:nether_forge"
+          "name": "reworkedmetals:alloying_blast_furnace"
         }
       ],
       "conditions": [

@@ -1,0 +1,14 @@
+{
+	"replace": false,
+	"values": [
+		"reworkedmetals:tin_ore",
+		"reworkedmetals:aluminum_ore",
+		"reworkedmetals:deepslate_tin_ore",
+		"reworkedmetals:deepslate_aluminum_ore",
+		"reworkedmetals:raw_tin_block",
+		"reworkedmetals:raw_aluminum_block",
+		"reworkedmetals:tin_block",
+		"reworkedmetals:bronze_block",
+		"reworkedmetals:aluminum_block"
+	]
+}

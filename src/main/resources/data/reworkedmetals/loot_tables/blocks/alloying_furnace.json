@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "reworkedmetals:smeltery"
+          "name": "reworkedmetals:alloying_furnace"
         }
       ],
       "conditions": [
