@@ -65,7 +65,7 @@ public abstract class AbstractAlloyingRecipeCategory<T extends AbstractAlloyingR
 				}
 			}
 		}
-		itemStacks.init(4, false, 82, 11);
+		itemStacks.init(4, false, 81, 10);
 		itemStacks.set(4, recipe.getResultItem());
 	}
 
@@ -97,7 +97,7 @@ public abstract class AbstractAlloyingRecipeCategory<T extends AbstractAlloyingR
 
 	@Override
 	public void draw(AbstractAlloyingRecipe recipe, PoseStack stack, double mouseX, double mouseY) {
-		this.arrow.draw(stack, 45, 12);
+		this.arrow.draw(stack, 45, 11);
 		this.fire.draw(stack, 12, 40);
 	}
 }

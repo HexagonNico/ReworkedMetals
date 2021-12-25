@@ -1,0 +1,20 @@
+{
+	"type": "reworkedmetals:blast_alloying",
+	"ingredients": [
+		{
+			"tag": "forge:raw_ores/nickel"
+		},
+		{
+			"tag": "forge:raw_ores/iron"
+		},
+		{
+			"tag": "forge:raw_ores/iron"
+		}
+	],
+	"result": {
+		"item": "reworkedmetals:invar_ingot",
+		"count": 3
+	},
+	"experience": 0.7,
+	"smelting_time": 300
+}

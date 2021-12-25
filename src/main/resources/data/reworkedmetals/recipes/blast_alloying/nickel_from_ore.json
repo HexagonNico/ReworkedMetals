@@ -1,0 +1,13 @@
+{
+	"type": "reworkedmetals:blast_alloying",
+	"ingredients": [
+		{
+			"tag": "forge:ores/nickel"
+		}
+	],
+	"result": {
+		"item": "reworkedmetals:nickel_ingot"
+	},
+	"experience": 1.0,
+	"smelting_time": 200
+}
