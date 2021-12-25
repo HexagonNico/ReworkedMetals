@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '3.0-Pre1'
+version = '3.0-Pre2'
 group = 'hexagonnico.reworkedmetals'
 archivesBaseName = 'reworkedmetals'
 
