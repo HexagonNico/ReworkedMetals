@@ -49,7 +49,7 @@ public final class ModToolTiers {
 	public static final Tier STEEL_EMERALD; // (3, 1000, 9.5f, 3.0f, 14)
 	public static final Tier GOLD_RUBY; // (1, 200, 12.0f, 2.0F, 22)
 	public static final Tier END_METAL; // (4, 450, 8.0f, 3.0f, 17)
-	public static final Tier END_GEM_METAL; // (4, 1970, 10.0f, 4.0f, 5)
+	public static final Tier END_GEM_METAL; // (4, 1850, 12.0f, 4.0f, 5)
 
 	static {
 		GOLD_RUBY = TierSortingRegistry.registerTier(
@@ -118,7 +118,7 @@ public final class ModToolTiers {
 				List.of(Tiers.NETHERITE), List.of()
 		);
 		END_GEM_METAL = TierSortingRegistry.registerTier(
-				new ForgeTier(4, 1970, 10.0f, 4.0f, 5, END_GEM_METAL_TIER_TAG, () -> Ingredient.of(ItemsRegistry.END_METAL_INGOT.get())),
+				new ForgeTier(4, 1850, 12.0f, 4.0f, 5, END_GEM_METAL_TIER_TAG, () -> Ingredient.of(ItemsRegistry.END_METAL_INGOT.get())),
 				new ResourceLocation(ReworkedMetals.ID, "end_gem_metal"),
 				List.of(Tiers.NETHERITE), List.of()
 		);
