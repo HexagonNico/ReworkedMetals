@@ -221,7 +221,9 @@ public abstract class AbstractAlloyingFurnaceBlockEntity extends BaseContainerBl
 
 	@Override // Networking
 	public CompoundTag getUpdateTag() {
-		return this.save(new CompoundTag());
+		CompoundTag tag = new CompoundTag();
+		this.saveAdditional(tag);
+		return tag;
 	}
 
 	@Override // Networking

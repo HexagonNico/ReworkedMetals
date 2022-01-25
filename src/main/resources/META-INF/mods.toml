@@ -6,7 +6,7 @@ issueTrackerURL="https://github.com/HexagonNico/ReworkedMetals/issues"
 
 [[mods]]
     modId="reworkedmetals"
-    version="3.1"
+    version="3.1.1"
     displayName="Reworked Metals"
     #updateJSONURL=""
     displayURL="https://www.curseforge.com/minecraft/mc-mods/reworked-metals"
