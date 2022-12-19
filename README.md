@@ -34,6 +34,6 @@ Reworked Metals is being developed by a single peron, but any help is always app
 
 Copyright (c) 2021 HexagonNico
 
-Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0
 
 See LICENSE
